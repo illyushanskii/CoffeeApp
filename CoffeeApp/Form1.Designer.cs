@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             button1 = new Button();
+            label1 = new Label();
             SuspendLayout();
             // 
             // button1
@@ -40,19 +41,32 @@
             button1.Text = "kukushka";
             button1.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Showcard Gothic", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(372, 111);
+            label1.Name = "label1";
+            label1.Size = new Size(229, 74);
+            label1.TabIndex = 1;
+            label1.Text = "WINER";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(button1);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button button1;
+        private Label label1;
     }
 }
