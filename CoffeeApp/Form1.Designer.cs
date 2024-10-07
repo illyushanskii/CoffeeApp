@@ -34,12 +34,13 @@
             // 
             // button1
             // 
-            button1.BackColor = Color.Red;
+            button1.BackColor = Color.DarkCyan;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(323, 206);
+            button1.Location = new Point(484, 309);
+            button1.Margin = new Padding(4, 4, 4, 4);
             button1.Name = "button1";
-            button1.Size = new Size(128, 29);
+            button1.Size = new Size(192, 44);
             button1.TabIndex = 0;
             button1.Text = "KARPENKO";
             button1.UseVisualStyleBackColor = false;
@@ -48,19 +49,21 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Showcard Gothic", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(267, 99);
+            label1.Location = new Point(416, 378);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(229, 74);
+            label1.Size = new Size(325, 103);
             label1.TabIndex = 1;
             label1.Text = "WINER";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1200, 675);
             Controls.Add(label1);
             Controls.Add(button1);
+            Margin = new Padding(4, 4, 4, 4);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
