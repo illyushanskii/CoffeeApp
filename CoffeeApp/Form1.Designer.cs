@@ -34,12 +34,15 @@
             // 
             // button1
             // 
-            button1.Location = new Point(433, 205);
+            button1.BackColor = Color.Red;
+            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            button1.ForeColor = Color.White;
+            button1.Location = new Point(419, 207);
             button1.Name = "button1";
-            button1.Size = new Size(94, 29);
+            button1.Size = new Size(128, 29);
             button1.TabIndex = 0;
             button1.Text = "KARPENKO";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
