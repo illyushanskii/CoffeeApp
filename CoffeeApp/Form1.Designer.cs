@@ -37,7 +37,7 @@
             button1.BackColor = Color.Red;
             button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(419, 207);
+            button1.Location = new Point(323, 206);
             button1.Name = "button1";
             button1.Size = new Size(128, 29);
             button1.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Showcard Gothic", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(372, 111);
+            label1.Location = new Point(267, 99);
             label1.Name = "label1";
             label1.Size = new Size(229, 74);
             label1.TabIndex = 1;
