@@ -54,7 +54,7 @@
             label1.Name = "label1";
             label1.Size = new Size(325, 103);
             label1.TabIndex = 1;
-            label1.Text = "WINER";
+            label1.Text = "pod zalypoi tvorog sobralsa rebyata";
             // 
             // Form1
             // 
