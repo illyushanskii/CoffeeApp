@@ -12,6 +12,7 @@ namespace CoffeeApp
 {
     public partial class MainForm : Form
     {
+        int time = 0;
         public MainForm()
         {
             InitializeComponent();
@@ -30,6 +31,32 @@ namespace CoffeeApp
         private void TextBoxSearch_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void LabelAdmin_MouseDown(object sender, MouseEventArgs e)
+        {
+            time = 0;
+            timer1.Start();
+        }
+
+        private void LabelAdmin_MouseUp(object sender, MouseEventArgs e)
+        {
+            timer1.Stop();
+            if (time >= 5)
+            {
+                MessageBox.Show("Admin");
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            time += 1;
+        }
+
+        private void ButtonFilter_Click(object sender, EventArgs e)
+        {
+            FilterForm filter = new FilterForm();
+            filter.ShowDialog();
         }
     }
 }
