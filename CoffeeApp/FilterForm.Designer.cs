@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilterForm));
             label1 = new Label();
             label2 = new Label();
             numericPriceMin = new NumericUpDown();
@@ -256,9 +257,10 @@
             Controls.Add(numericPriceMin);
             Controls.Add(label2);
             Controls.Add(label1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FilterForm";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "FilterForm";
+            Text = "Фільтр";
             Load += FilterForm_Load;
             Paint += FilterForm_Paint;
             ((System.ComponentModel.ISupportInitialize)numericPriceMin).EndInit();
