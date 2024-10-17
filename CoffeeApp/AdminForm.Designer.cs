@@ -43,9 +43,9 @@
             MenuItemSortExpensive = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             ButtonCasa = new ToolStripButton();
-            panel1 = new Panel();
-            ButtonExit = new ToolStripButton();
             toolStripSeparator5 = new ToolStripSeparator();
+            ButtonExit = new ToolStripButton();
+            panel1 = new Panel();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -82,6 +82,7 @@
             ButtonFilter.Name = "ButtonFilter";
             ButtonFilter.Size = new Size(128, 27);
             ButtonFilter.Text = "Фільтрувати";
+            ButtonFilter.Click += ButtonFilter_Click;
             // 
             // toolStripSeparator3
             // 
@@ -151,14 +152,10 @@
             ButtonCasa.Size = new Size(70, 27);
             ButtonCasa.Text = "Каса";
             // 
-            // panel1
+            // toolStripSeparator5
             // 
-            panel1.AutoScroll = true;
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 30);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(864, 465);
-            panel1.TabIndex = 2;
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(6, 30);
             // 
             // ButtonExit
             // 
@@ -168,10 +165,14 @@
             ButtonExit.Size = new Size(75, 27);
             ButtonExit.Text = "Вихід";
             // 
-            // toolStripSeparator5
+            // panel1
             // 
-            toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(6, 30);
+            panel1.AutoScroll = true;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 30);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(864, 465);
+            panel1.TabIndex = 2;
             // 
             // AdminForm
             // 

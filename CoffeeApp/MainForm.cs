@@ -55,8 +55,8 @@ namespace CoffeeApp
 
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
-            FilterForm filter = new FilterForm();
-            filter.ShowDialog();
+            //FilterForm filter = new FilterForm();
+            //filter.ShowDialog();
         }
 
         private void ButtonSort_ButtonClick(object sender, EventArgs e)
