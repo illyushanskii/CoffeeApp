@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             toolStrip1 = new ToolStrip();
+            ButtonAdd = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             ButtonFilter = new ToolStripButton();
             toolStripSeparator3 = new ToolStripSeparator();
@@ -41,8 +42,10 @@
             MenuItemSortCheap = new ToolStripMenuItem();
             MenuItemSortExpensive = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
-            toolStripButton1 = new ToolStripButton();
-            ButtonAdd = new ToolStripButton();
+            ButtonCasa = new ToolStripButton();
+            panel1 = new Panel();
+            ButtonExit = new ToolStripButton();
+            toolStripSeparator5 = new ToolStripSeparator();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -50,13 +53,22 @@
             // 
             toolStrip1.Font = new Font("Segoe UI", 10F);
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { ButtonAdd, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { ButtonAdd, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, ButtonCasa, toolStripSeparator5, ButtonExit });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
-            toolStrip1.Size = new Size(769, 30);
+            toolStrip1.Size = new Size(864, 30);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
+            // 
+            // ButtonAdd
+            // 
+            ButtonAdd.Image = (Image)resources.GetObject("ButtonAdd.Image");
+            ButtonAdd.ImageTransparentColor = Color.Magenta;
+            ButtonAdd.Name = "ButtonAdd";
+            ButtonAdd.Size = new Size(91, 27);
+            ButtonAdd.Text = "Додати";
+            ButtonAdd.Click += ButtonAdd_Click;
             // 
             // toolStripSeparator1
             // 
@@ -130,32 +142,48 @@
             toolStripSeparator4.Name = "toolStripSeparator4";
             toolStripSeparator4.Size = new Size(6, 30);
             // 
-            // toolStripButton1
+            // ButtonCasa
             // 
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.RightToLeft = RightToLeft.No;
-            toolStripButton1.Size = new Size(70, 27);
-            toolStripButton1.Text = "Каса";
+            ButtonCasa.Image = (Image)resources.GetObject("ButtonCasa.Image");
+            ButtonCasa.ImageTransparentColor = Color.Magenta;
+            ButtonCasa.Name = "ButtonCasa";
+            ButtonCasa.RightToLeft = RightToLeft.No;
+            ButtonCasa.Size = new Size(70, 27);
+            ButtonCasa.Text = "Каса";
             // 
-            // ButtonAdd
+            // panel1
             // 
-            ButtonAdd.Image = (Image)resources.GetObject("ButtonAdd.Image");
-            ButtonAdd.ImageTransparentColor = Color.Magenta;
-            ButtonAdd.Name = "ButtonAdd";
-            ButtonAdd.Size = new Size(91, 27);
-            ButtonAdd.Text = "Додати";
+            panel1.AutoScroll = true;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 30);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(864, 465);
+            panel1.TabIndex = 2;
+            // 
+            // ButtonExit
+            // 
+            ButtonExit.Image = (Image)resources.GetObject("ButtonExit.Image");
+            ButtonExit.ImageTransparentColor = Color.Magenta;
+            ButtonExit.Name = "ButtonExit";
+            ButtonExit.Size = new Size(75, 27);
+            ButtonExit.Text = "Вихід";
+            // 
+            // toolStripSeparator5
+            // 
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new Size(6, 30);
             // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(769, 450);
+            ClientSize = new Size(864, 495);
+            Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminForm";
             Text = "Адміністратор";
+            Paint += AdminForm_Paint;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -176,7 +204,10 @@
         private ToolStripMenuItem MenuItemSortCheap;
         private ToolStripMenuItem MenuItemSortExpensive;
         private ToolStripSeparator toolStripSeparator4;
-        private ToolStripButton toolStripButton1;
+        private ToolStripButton ButtonCasa;
         private ToolStripButton ButtonAdd;
+        private Panel panel1;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripButton ButtonExit;
     }
 }
