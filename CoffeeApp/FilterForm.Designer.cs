@@ -216,6 +216,7 @@
             comboBoxCountry.TabIndex = 16;
             comboBoxCountry.TextUpdate += comboBoxCountry_TextUpdate;
             comboBoxCountry.Click += comboBoxCountry_Click;
+            comboBoxCountry.Leave += comboBoxCountry_Leave;
             // 
             // label10
             // 
@@ -261,6 +262,7 @@
             comboBoxName.TabIndex = 21;
             comboBoxName.TextUpdate += comboBoxName_TextUpdate;
             comboBoxName.Click += comboBoxName_Click;
+            comboBoxName.Leave += comboBoxName_Leave;
             // 
             // label11
             // 

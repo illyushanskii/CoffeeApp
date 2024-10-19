@@ -84,7 +84,7 @@ namespace CoffeeApp
             numericWeightMax.Value = (decimal)maxWeight;
 
             if (filterIn != null)
-            { 
+            {
                 comboBoxCountry.SelectedIndex = comboBoxCountry.Items.IndexOf(filterIn.MadeIn);
                 comboBoxName.SelectedIndex = comboBoxName.Items.IndexOf(filterIn.Name);
                 comboBoxType.SelectedIndex = comboBoxType.Items.IndexOf(filterIn.CoffeeType);
@@ -98,18 +98,6 @@ namespace CoffeeApp
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            if (!comboBoxName.Items.Contains(comboBoxName.Text))
-            {
-                MessageBox.Show("Оберіть значення в полі \"Назва:\".");
-                this.DialogResult = DialogResult.None;
-                return;
-            }
-            if (!comboBoxCountry.Items.Contains(comboBoxCountry.Text))
-            {
-                MessageBox.Show("Оберіть значення в полі \"Країна-виробник:\".");
-                this.DialogResult = DialogResult.None;
-                return;
-            }
             filter.MadeIn = comboBoxCountry.Text;
             filter.Name = comboBoxName.Text;
             filter.PriceStart = minPrice;
@@ -172,19 +160,19 @@ namespace CoffeeApp
         }
         private void resetComboBox(System.Windows.Forms.ComboBox comboBox, string mode)
         {
-            string item ="";
+            string item = "";
             comboBox.Items.Clear();
             comboBox.Items.Add("none");
 
             foreach (Product prod in products)
             {
-                item = mode == "Name"?prod.Name:prod.MadeIn;
+                item = mode == "Name" ? prod.Name : prod.MadeIn;
                 if (!comboBox.Items.Contains(item))
                 {
                     comboBox.Items.Add(item);
                 }
             }
-            
+
         }
         private void searchComboBox(System.Windows.Forms.ComboBox comboBox)
         {
@@ -219,6 +207,22 @@ namespace CoffeeApp
             else
             {
                 comboBox.DroppedDown = true;
+            }
+        }
+
+        private void comboBoxName_Leave(object sender, EventArgs e)
+        {
+            if (!comboBoxName.Items.Contains(comboBoxName.Text))
+            {
+                comboBoxName.Text = "none";
+            }
+        }
+
+        private void comboBoxCountry_Leave(object sender, EventArgs e)
+        {
+            if (!comboBoxCountry.Items.Contains(comboBoxCountry.Text))
+            {
+                comboBoxCountry.Text = "none";
             }
         }
     }
