@@ -14,7 +14,7 @@ namespace CoffeeApp
     public partial class AddForm : Form
     {
         Product product = new Product();
-        int id;
+        int id = -1;
         public AddForm(int Id)
         {
             InitializeComponent();
@@ -33,6 +33,7 @@ namespace CoffeeApp
             label_Pop.Text = $"Поп: {productIn.Popularity}";
             label_Pop.Visible = true;
             label_ID.Text = $"ID: {productIn.Id}";
+            id = productIn.Id;
             label_ID.Visible = true;
             textBoxName.Text = productIn.Name;
             textBoxDescription.Text = productIn.Description;

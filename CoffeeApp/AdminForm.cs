@@ -15,6 +15,8 @@ namespace CoffeeApp
     {
         int id = 0;
         List<Product> products = new List<Product>();
+        List<Product> FiltredProducts = new List<Product>();
+        Filter filterProd = null;
         public AdminForm()
         {
             InitializeComponent();
@@ -27,18 +29,18 @@ namespace CoffeeApp
             if (form.DialogResult == DialogResult.OK)
             {
                 products.Add(form.GetProduct());
-            }
-            id++;
-            
+                id++;
+                Filtering();
+            }   
         }
 
         private void AdminForm_Paint(object sender, PaintEventArgs e)
         {
             panel1.Controls.Clear();
             int y = 30;
-            for (int inx = 0; inx < products.Count; inx++)
+            for (int inx = 0; inx < FiltredProducts.Count; inx++)
             {
-                Product product = products[inx];
+                Product product = FiltredProducts[inx];
                 PictureBox pictureBox = new PictureBox();
                 TextBox textBoxInfo = new TextBox();
                 NumericUpDown numericUpDownQuantity = new NumericUpDown();
@@ -67,7 +69,7 @@ namespace CoffeeApp
                 numericUpDownQuantity.Width = 100;
                 numericUpDownQuantity.Tag = inx;
                 numericUpDownQuantity.Minimum = 0;
-                numericUpDownQuantity.Maximum= 100000;
+                numericUpDownQuantity.Maximum = 100000;
                 numericUpDownQuantity.Value = product.Quantity;
                 numericUpDownQuantity.ValueChanged += NumericUpDownQuantity_ValueChanged;
 
@@ -77,7 +79,7 @@ namespace CoffeeApp
                 labelQuantity.Location = new Point(630, y + 20);
                 labelQuantity.AutoSize = true;
 
-                Font buttonFont = new Font("Arial", 10,FontStyle.Bold);
+                Font buttonFont = new Font("Arial", 10, FontStyle.Bold);
                 delButton.Font = buttonFont;
                 delButton.Location = new Point(740, y + 5);
                 delButton.Tag = inx;
@@ -89,7 +91,7 @@ namespace CoffeeApp
 
                 editButton.Font = buttonFont;
                 editButton.Location = new Point(740, y + 55);
-                editButton.Tag = inx;   
+                editButton.Tag = inx;
                 editButton.Click += EditButton_Click;
                 editButton.Width = 110;
                 editButton.BackColor = Color.Yellow;
@@ -109,29 +111,82 @@ namespace CoffeeApp
         {
             Button clickedButton = (Button)sender;
             int inx = (int)clickedButton.Tag;
-            products.RemoveAt(inx);
-            Invalidate();
+            Product check = FiltredProducts[inx];
+            for (int i = 0; i < products.Count; i++)
+            {
+                if (products[i].Id == check.Id)
+                {
+                    products.RemoveAt(i);
+                }
+            }
+            Filtering();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
             Button clickedButton = (Button)sender;
             int inx = (int)clickedButton.Tag;
-            AddForm edit = new AddForm(products[inx]);
+            AddForm edit = new AddForm(FiltredProducts[inx]);
             edit.ShowDialog();
             if (edit.DialogResult == DialogResult.OK)
             {
-                products[inx] = edit.GetProduct();
+                Product check = edit.GetProduct();
+                for(int i = 0; i < products.Count; i++)
+                {
+                    if (products[i].Id == check.Id)
+                    {
+                        products[i] = check;
+                    }
+                }
             }
-            Invalidate();
+            Filtering();
         }
 
         private void NumericUpDownQuantity_ValueChanged(object sender, EventArgs e)
         {
             NumericUpDown numeric = (NumericUpDown)sender;
             int inx = (int)numeric.Tag;
-            products[inx].Quantity = (int)numeric.Value;
+            FiltredProducts[inx].Quantity = (int)numeric.Value;
             Invalidate();
+        }
+        private void Filtering()
+        {
+            if (filterProd != null)
+            {
+                FiltredProducts.Clear();
+                string none = "none";
+                for (int i = 0; i < products.Count; i++)
+                {
+                    Product prod = products[i];
+                    bool check = true;
+                    if (prod.Name != filterProd.Name && filterProd.Name != none) { check = false; }
+                    if (prod.Composition != filterProd.Composition && filterProd.Composition != none) { check = false; }
+                    if (prod.CoffeeType != filterProd.CoffeeType && filterProd.CoffeeType != none) { check = false; }
+                    if (prod.MadeIn != filterProd.MadeIn && filterProd.MadeIn != none) { check = false; }
+                    if (prod.PriceSell < filterProd.PriceStart || prod.PriceSell > filterProd.PriceFinish) { check = false; }
+                    if (prod.Weight < filterProd.WeightStart || prod.Weight > filterProd.WeightFinish) { check = false; }
+                    if (check)
+                    {
+                        FiltredProducts.Add(prod);
+                    }
+                }
+            }
+            else
+            {
+                FiltredProducts = new List<Product>(products);
+            }
+            Invalidate();
+        }
+        private void ButtonFilter_Click(object sender, EventArgs e)
+        {
+            using (FilterForm filterForm = new FilterForm(products, filterProd))
+            {
+                if (filterForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    filterProd = filterForm.GetFilter();
+                    Filtering();
+                }
+            }
         }
     }
 }

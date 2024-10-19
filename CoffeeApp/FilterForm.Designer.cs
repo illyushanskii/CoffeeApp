@@ -42,12 +42,14 @@
             numericWeightMin = new NumericUpDown();
             label8 = new Label();
             comboBoxType = new ComboBox();
-            comboBoxСomposition = new ComboBox();
+            comboBoxComposition = new ComboBox();
             label9 = new Label();
             comboBoxCountry = new ComboBox();
             label10 = new Label();
             buttonReset = new Button();
             buttonOK = new Button();
+            comboBoxName = new ComboBox();
+            label11 = new Label();
             ((System.ComponentModel.ISupportInitialize)numericPriceMin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericPriceMax).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericWeightMax).BeginInit();
@@ -63,7 +65,6 @@
             label1.Size = new Size(147, 32);
             label1.TabIndex = 0;
             label1.Text = "Фільтрувати";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -74,22 +75,26 @@
             label2.Size = new Size(58, 28);
             label2.TabIndex = 1;
             label2.Text = "Ціна:";
-            label2.Click += label2_Click;
             // 
             // numericPriceMin
             // 
+            numericPriceMin.DecimalPlaces = 2;
             numericPriceMin.Location = new Point(86, 78);
+            numericPriceMin.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             numericPriceMin.Name = "numericPriceMin";
             numericPriceMin.Size = new Size(74, 27);
             numericPriceMin.TabIndex = 2;
-            numericPriceMin.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericPriceMin.ValueChanged += numericPriceMin_ValueChanged;
             // 
             // numericPriceMax
             // 
+            numericPriceMax.DecimalPlaces = 2;
             numericPriceMax.Location = new Point(203, 78);
+            numericPriceMax.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             numericPriceMax.Name = "numericPriceMax";
             numericPriceMax.Size = new Size(69, 27);
             numericPriceMax.TabIndex = 3;
+            numericPriceMax.ValueChanged += numericPriceMax_ValueChanged;
             // 
             // label3
             // 
@@ -120,7 +125,6 @@
             label5.Size = new Size(63, 28);
             label5.TabIndex = 6;
             label5.Text = "Маса:";
-            label5.Click += label5_Click;
             // 
             // label6
             // 
@@ -144,50 +148,59 @@
             // 
             // numericWeightMax
             // 
+            numericWeightMax.DecimalPlaces = 2;
             numericWeightMax.Location = new Point(203, 160);
+            numericWeightMax.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             numericWeightMax.Name = "numericWeightMax";
             numericWeightMax.Size = new Size(69, 27);
             numericWeightMax.TabIndex = 8;
+            numericWeightMax.ValueChanged += numericWeightMax_ValueChanged;
             // 
             // numericWeightMin
             // 
+            numericWeightMin.DecimalPlaces = 2;
             numericWeightMin.Location = new Point(86, 160);
+            numericWeightMin.Maximum = new decimal(new int[] { 100000, 0, 0, 0 });
             numericWeightMin.Name = "numericWeightMin";
             numericWeightMin.Size = new Size(74, 27);
             numericWeightMin.TabIndex = 7;
-            numericWeightMin.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numericWeightMin.ValueChanged += numericWeightMin_ValueChanged;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Segoe UI", 12F);
-            label8.Location = new Point(9, 204);
+            label8.Location = new Point(9, 286);
             label8.Name = "label8";
             label8.Size = new Size(50, 28);
             label8.TabIndex = 11;
-            label8.Text = "Вид:";
+            label8.Text = "Тип:";
             // 
             // comboBoxType
             // 
+            comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.FormattingEnabled = true;
-            comboBoxType.Location = new Point(38, 237);
+            comboBoxType.Items.AddRange(new object[] { "none" });
+            comboBoxType.Location = new Point(38, 319);
             comboBoxType.Name = "comboBoxType";
             comboBoxType.Size = new Size(234, 28);
             comboBoxType.TabIndex = 12;
             // 
-            // comboBoxСomposition
+            // comboBoxComposition
             // 
-            comboBoxСomposition.FormattingEnabled = true;
-            comboBoxСomposition.Location = new Point(38, 319);
-            comboBoxСomposition.Name = "comboBoxСomposition";
-            comboBoxСomposition.Size = new Size(234, 28);
-            comboBoxСomposition.TabIndex = 14;
+            comboBoxComposition.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxComposition.FormattingEnabled = true;
+            comboBoxComposition.Items.AddRange(new object[] { "none" });
+            comboBoxComposition.Location = new Point(38, 401);
+            comboBoxComposition.Name = "comboBoxComposition";
+            comboBoxComposition.Size = new Size(234, 28);
+            comboBoxComposition.TabIndex = 14;
             // 
             // label9
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 12F);
-            label9.Location = new Point(9, 286);
+            label9.Location = new Point(9, 368);
             label9.Name = "label9";
             label9.Size = new Size(70, 28);
             label9.TabIndex = 13;
@@ -196,16 +209,20 @@
             // comboBoxCountry
             // 
             comboBoxCountry.FormattingEnabled = true;
-            comboBoxCountry.Location = new Point(38, 401);
+            comboBoxCountry.Items.AddRange(new object[] { "none" });
+            comboBoxCountry.Location = new Point(38, 483);
             comboBoxCountry.Name = "comboBoxCountry";
             comboBoxCountry.Size = new Size(234, 28);
             comboBoxCountry.TabIndex = 16;
+            comboBoxCountry.TextUpdate += comboBoxCountry_TextUpdate;
+            comboBoxCountry.Click += comboBoxCountry_Click;
+            comboBoxCountry.Leave += comboBoxCountry_Leave;
             // 
             // label10
             // 
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 12F);
-            label10.Location = new Point(9, 368);
+            label10.Location = new Point(9, 450);
             label10.Name = "label10";
             label10.Size = new Size(178, 28);
             label10.TabIndex = 15;
@@ -213,36 +230,62 @@
             // 
             // buttonReset
             // 
+            buttonReset.DialogResult = DialogResult.OK;
             buttonReset.Font = new Font("Segoe UI", 12F);
-            buttonReset.Location = new Point(9, 471);
+            buttonReset.Location = new Point(9, 536);
             buttonReset.Name = "buttonReset";
             buttonReset.Size = new Size(140, 39);
             buttonReset.TabIndex = 18;
             buttonReset.Text = "Скинути";
             buttonReset.UseVisualStyleBackColor = true;
-            buttonReset.Click += buttonNone_Click;
+            buttonReset.Click += buttonReset_Click;
             // 
             // buttonOK
             // 
             buttonOK.DialogResult = DialogResult.OK;
             buttonOK.Font = new Font("Segoe UI", 12F);
-            buttonOK.Location = new Point(155, 471);
+            buttonOK.Location = new Point(155, 536);
             buttonOK.Name = "buttonOK";
             buttonOK.Size = new Size(147, 39);
             buttonOK.TabIndex = 19;
             buttonOK.Text = "Прийняти";
             buttonOK.UseVisualStyleBackColor = true;
+            buttonOK.Click += buttonOK_Click;
+            // 
+            // comboBoxName
+            // 
+            comboBoxName.FormattingEnabled = true;
+            comboBoxName.Items.AddRange(new object[] { "none" });
+            comboBoxName.Location = new Point(38, 237);
+            comboBoxName.Name = "comboBoxName";
+            comboBoxName.Size = new Size(234, 28);
+            comboBoxName.TabIndex = 21;
+            comboBoxName.TextUpdate += comboBoxName_TextUpdate;
+            comboBoxName.Click += comboBoxName_Click;
+            comboBoxName.Leave += comboBoxName_Leave;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 12F);
+            label11.Location = new Point(9, 204);
+            label11.Name = "label11";
+            label11.Size = new Size(70, 28);
+            label11.TabIndex = 20;
+            label11.Text = "Назва:";
             // 
             // FilterForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(314, 522);
+            ClientSize = new Size(314, 584);
+            Controls.Add(comboBoxName);
+            Controls.Add(label11);
             Controls.Add(buttonOK);
             Controls.Add(buttonReset);
             Controls.Add(comboBoxCountry);
             Controls.Add(label10);
-            Controls.Add(comboBoxСomposition);
+            Controls.Add(comboBoxComposition);
             Controls.Add(label9);
             Controls.Add(comboBoxType);
             Controls.Add(label8);
@@ -286,11 +329,13 @@
         private NumericUpDown numericWeightMin;
         private Label label8;
         private ComboBox comboBoxType;
-        private ComboBox comboBoxСomposition;
+        private ComboBox comboBoxComposition;
         private Label label9;
         private ComboBox comboBoxCountry;
         private Label label10;
         private Button buttonReset;
         private Button buttonOK;
+        private ComboBox comboBoxName;
+        private Label label11;
     }
 }
