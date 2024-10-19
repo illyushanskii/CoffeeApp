@@ -147,13 +147,13 @@ namespace CoffeeApp
 
         private void pictureBoxImg_MouseMove(object sender, MouseEventArgs e)
         {
-            pictureBoxImg.BackColor = Color.Blue;
+            pictureBoxImg.BackColor = ColorTranslator.FromHtml("#e4f7ef");
 
         }
 
         private void pictureBoxImg_MouseLeave(object sender, EventArgs e)
         {
-            pictureBoxImg.BackColor = Control.DefaultBackColor;
+            pictureBoxImg.BackColor = Color.Transparent;
         }
     }
 }
