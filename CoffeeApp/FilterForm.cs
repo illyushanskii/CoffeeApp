@@ -20,7 +20,7 @@ namespace CoffeeApp
         double maxWeight = 0;
         double minPrice = 0;
         double minWeight = 0;
-        public FilterForm(List<Product> productsIn,Filter FilterIn)
+        public FilterForm(List<Product> productsIn, Filter FilterIn)
         {
             InitializeComponent();
             this.products = productsIn;
@@ -66,6 +66,10 @@ namespace CoffeeApp
                 {
                     comboBoxName.Items.Add(product.Name);
                 }
+                if (!comboBoxCountry.Items.Contains(product.MadeIn))
+                {
+                    comboBoxCountry.Items.Add(product.MadeIn);
+                }
                 if (!comboBoxType.Items.Contains(product.CoffeeType))
                 {
                     comboBoxType.Items.Add(product.CoffeeType);
@@ -74,15 +78,13 @@ namespace CoffeeApp
                 {
                     comboBoxComposition.Items.Add(product.Composition);
                 }
-                if (!comboBoxCountry.Items.Contains(product.MadeIn))
-                {
-                    comboBoxCountry.Items.Add(product.MadeIn);
-                }
             }
+
             numericPriceMax.Value = (decimal)maxPrice;
             numericWeightMax.Value = (decimal)maxWeight;
-            if(filterIn != null)
-            {
+
+            if (filterIn != null)
+            { 
                 comboBoxCountry.SelectedIndex = comboBoxCountry.Items.IndexOf(filterIn.MadeIn);
                 comboBoxName.SelectedIndex = comboBoxName.Items.IndexOf(filterIn.Name);
                 comboBoxType.SelectedIndex = comboBoxType.Items.IndexOf(filterIn.CoffeeType);
@@ -96,14 +98,26 @@ namespace CoffeeApp
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
+            if (!comboBoxName.Items.Contains(comboBoxName.Text))
+            {
+                MessageBox.Show("Оберіть значення в полі \"Назва:\".");
+                this.DialogResult = DialogResult.None;
+                return;
+            }
+            if (!comboBoxCountry.Items.Contains(comboBoxCountry.Text))
+            {
+                MessageBox.Show("Оберіть значення в полі \"Країна-виробник:\".");
+                this.DialogResult = DialogResult.None;
+                return;
+            }
+            filter.MadeIn = comboBoxCountry.Text;
+            filter.Name = comboBoxName.Text;
             filter.PriceStart = minPrice;
             filter.PriceFinish = maxPrice;
             filter.WeightStart = minWeight;
             filter.WeightFinish = maxWeight;
-            filter.Name = comboBoxName.Text;
             filter.CoffeeType = comboBoxType.Text;
             filter.Composition = comboBoxComposition.Text;
-            filter.MadeIn = comboBoxCountry.Text;
         }
 
         private void numericPriceMin_ValueChanged(object sender, EventArgs e)
@@ -129,6 +143,83 @@ namespace CoffeeApp
         private void buttonReset_Click(object sender, EventArgs e)
         {
             filter = null;
+        }
+
+        private void comboBoxName_TextUpdate(object sender, EventArgs e)
+        {
+            resetComboBox(comboBoxName, "Name");
+            searchComboBox(comboBoxName);
+        }
+
+        private void comboBoxName_Click(object sender, EventArgs e)
+        {
+            resetComboBox(comboBoxName, "Name");
+            comboBoxName.Text = "";
+            comboBoxName.DroppedDown = true;
+        }
+
+        private void comboBoxCountry_TextUpdate(object sender, EventArgs e)
+        {
+            resetComboBox(comboBoxCountry, "Country");
+            searchComboBox(comboBoxCountry);
+        }
+
+        private void comboBoxCountry_Click(object sender, EventArgs e)
+        {
+            resetComboBox(comboBoxCountry, "Country");
+            comboBoxCountry.Text = "";
+            comboBoxCountry.DroppedDown = true;
+        }
+        private void resetComboBox(System.Windows.Forms.ComboBox comboBox, string mode)
+        {
+            string item ="";
+            comboBox.Items.Clear();
+            comboBox.Items.Add("none");
+
+            foreach (Product prod in products)
+            {
+                item = mode == "Name"?prod.Name:prod.MadeIn;
+                if (!comboBox.Items.Contains(item))
+                {
+                    comboBox.Items.Add(item);
+                }
+            }
+            
+        }
+        private void searchComboBox(System.Windows.Forms.ComboBox comboBox)
+        {
+            List<string> newList = new List<string>();
+
+            if (!string.IsNullOrEmpty(comboBox.Text))
+            {
+                string search = comboBox.Text.ToLower();
+
+                for (int i = 0; i < comboBox.Items.Count; i++)
+                {
+                    string item = comboBox.Items[i].ToString();
+                    if (item.ToLower().Contains(search))
+                    {
+                        newList.Add(item);
+                    }
+                }
+                comboBox.Items.Clear();
+                if (newList.Count > 0)
+                {
+                    comboBox.Items.AddRange(newList.ToArray());
+                    comboBox.DroppedDown = true;
+                    comboBox.SelectionStart = comboBox.Text.Length;
+                }
+                else
+                {
+                    comboBox.Items.Add("none");
+                    comboBox.DroppedDown = true;
+                    comboBox.SelectionStart = comboBox.Text.Length;
+                }
+            }
+            else
+            {
+                comboBox.DroppedDown = true;
+            }
         }
     }
 }

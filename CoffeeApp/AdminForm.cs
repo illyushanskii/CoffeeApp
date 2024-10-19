@@ -146,7 +146,7 @@ namespace CoffeeApp
         {
             NumericUpDown numeric = (NumericUpDown)sender;
             int inx = (int)numeric.Tag;
-            products[inx].Quantity = (int)numeric.Value;
+            FiltredProducts[inx].Quantity = (int)numeric.Value;
             Invalidate();
         }
         private void Filtering()
@@ -179,12 +179,13 @@ namespace CoffeeApp
         }
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
-            FilterForm filterForm = new FilterForm(products,filterProd);
-            filterForm.ShowDialog();
-            if (filterForm.DialogResult == DialogResult.OK)
+            using (FilterForm filterForm = new FilterForm(products, filterProd))
             {
-                filterProd = filterForm.GetFilter();
-                Filtering();
+                if (filterForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    filterProd = filterForm.GetFilter();
+                    Filtering();
+                }
             }
         }
     }

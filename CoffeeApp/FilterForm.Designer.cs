@@ -208,13 +208,14 @@
             // 
             // comboBoxCountry
             // 
-            comboBoxCountry.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxCountry.FormattingEnabled = true;
             comboBoxCountry.Items.AddRange(new object[] { "none" });
             comboBoxCountry.Location = new Point(38, 483);
             comboBoxCountry.Name = "comboBoxCountry";
             comboBoxCountry.Size = new Size(234, 28);
             comboBoxCountry.TabIndex = 16;
+            comboBoxCountry.TextUpdate += comboBoxCountry_TextUpdate;
+            comboBoxCountry.Click += comboBoxCountry_Click;
             // 
             // label10
             // 
@@ -252,13 +253,14 @@
             // 
             // comboBoxName
             // 
-            comboBoxName.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxName.FormattingEnabled = true;
             comboBoxName.Items.AddRange(new object[] { "none" });
             comboBoxName.Location = new Point(38, 237);
             comboBoxName.Name = "comboBoxName";
             comboBoxName.Size = new Size(234, 28);
             comboBoxName.TabIndex = 21;
+            comboBoxName.TextUpdate += comboBoxName_TextUpdate;
+            comboBoxName.Click += comboBoxName_Click;
             // 
             // label11
             // 
