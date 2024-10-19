@@ -225,5 +225,30 @@ namespace CoffeeApp
                 comboBoxCountry.Text = "none";
             }
         }
+
+        private void comboBoxComposition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonReset_MouseHover(object sender, EventArgs e)
+        {
+            buttonReset.BackColor = Color.FromArgb(168, 141, 85);
+        }
+
+        private void buttonReset_MouseLeave(object sender, EventArgs e)
+        {
+            buttonReset.BackColor = SystemColors.Control;
+        }
+
+        private void buttonOK_MouseHover(object sender, EventArgs e)
+        {
+            buttonOK.BackColor = Color.FromArgb(168, 141, 85);
+        }
+
+        private void buttonOK_MouseLeave(object sender, EventArgs e)
+        {
+            buttonOK.BackColor = SystemColors.Control;
+        }
     }
 }
