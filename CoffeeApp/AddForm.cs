@@ -77,7 +77,6 @@ namespace CoffeeApp
                 pictureBoxImg.Image = img;
             }
         }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             bool result = true;
@@ -90,7 +89,6 @@ namespace CoffeeApp
             }
             buttonAdd.Enabled = result;
         }
-
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             timer1.Stop();
@@ -126,7 +124,8 @@ namespace CoffeeApp
                 textBoxQuantity.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
-            }else if (textBoxDescription.Text.Length > 80)
+            }
+            else if (textBoxDescription.Text.Length > 80)
             {
                 MessageBox.Show("Перевищення кількості символів(80) в полі \"Опис\"");
                 this.DialogResult = DialogResult.None;
@@ -139,22 +138,40 @@ namespace CoffeeApp
             product.Quantity = quantity;
             product.Id = id;
             product.PriceBuy = priceBuy;
-            product.PriceSell= priceSell;
+            product.PriceSell = priceSell;
             product.MadeIn = textBoxCounty.Text;
             product.Composition = comboBoxComposition.Text;
             product.Image = pictureBoxImg.Image;
             this.DialogResult = DialogResult.OK;
         }
-
         private void pictureBoxImg_MouseMove(object sender, MouseEventArgs e)
         {
             pictureBoxImg.BackColor = ColorTranslator.FromHtml("#e4f7ef");
 
         }
-
         private void pictureBoxImg_MouseLeave(object sender, EventArgs e)
         {
             pictureBoxImg.BackColor = Color.Transparent;
+        }
+        private void buttonCancel_MouseHover(object sender, EventArgs e)
+        {
+            buttonCancel.BackColor = Color.FromArgb(82, 38, 7); 
+            buttonCancel.ForeColor = Color.FromArgb(246, 221, 199);
+        }
+        private void buttonCancel_MouseLeave(object sender, EventArgs e)
+        {
+            buttonCancel.BackColor = SystemColors.Control;
+            buttonCancel.ForeColor = SystemColors.ControlText;
+        }
+        private void buttonAdd_MouseHover(object sender, EventArgs e)
+        {
+            buttonAdd.BackColor = Color.FromArgb(82, 38, 7);
+            buttonAdd.ForeColor = Color.FromArgb(246, 221, 199);
+        }
+        private void buttonAdd_MouseLeave(object sender, EventArgs e)
+        {
+            buttonAdd.BackColor = SystemColors.Control;
+            buttonAdd.ForeColor = SystemColors.ControlText;
         }
     }
 }
