@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CoffeeApp
@@ -34,7 +36,6 @@ namespace CoffeeApp
         {
             return filter;
         }
-
         private void FilterForm_Paint(object sender, PaintEventArgs e)
         {
             int y = 118;
@@ -49,9 +50,10 @@ namespace CoffeeApp
             }
 
         }
-
         private void FilterForm_Load(object sender, EventArgs e)
         {
+            label1.Left = (this.ClientSize.Width - label1.Width) / 2; 
+            label1.Top = 10;
             if (products == null)
             {
                 return;
@@ -233,7 +235,7 @@ namespace CoffeeApp
 
         private void buttonReset_MouseHover(object sender, EventArgs e)
         {
-            buttonReset.BackColor = Color.FromArgb(168, 141, 85);
+            buttonReset.BackColor = Color.FromArgb(246, 221, 199);
         }
 
         private void buttonReset_MouseLeave(object sender, EventArgs e)
@@ -243,12 +245,22 @@ namespace CoffeeApp
 
         private void buttonOK_MouseHover(object sender, EventArgs e)
         {
-            buttonOK.BackColor = Color.FromArgb(168, 141, 85);
+            buttonOK.BackColor = Color.FromArgb(246, 221, 199);
         }
 
         private void buttonOK_MouseLeave(object sender, EventArgs e)
         {
             buttonOK.BackColor = SystemColors.Control;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }
