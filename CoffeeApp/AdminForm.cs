@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CoffeeApp
 {
@@ -31,22 +32,33 @@ namespace CoffeeApp
                 products.Add(form.GetProduct());
                 id++;
                 Filtering();
-            }   
+            }
         }
 
-        private void AdminForm_Paint(object sender, PaintEventArgs e)
+        private void UpdateForm()
         {
             panel1.Controls.Clear();
             int y = 30;
+            if(FiltredProducts.Count == 0)
+            {
+                Label noSearch = new Label();
+                noSearch.Text = "За даними параметрами пошуку нічого не знайдено!";
+                noSearch.Location = new Point(15, 30);
+                Font font = new Font("Arial", 19,FontStyle.Bold);
+                noSearch.Font = font;
+                noSearch.AutoSize = true;
+               panel1.Controls.Add(noSearch);
+                return;
+            }
             for (int inx = 0; inx < FiltredProducts.Count; inx++)
             {
                 Product product = FiltredProducts[inx];
                 PictureBox pictureBox = new PictureBox();
-                TextBox textBoxInfo = new TextBox();
+                System.Windows.Forms.TextBox textBoxInfo = new System.Windows.Forms.TextBox();
                 NumericUpDown numericUpDownQuantity = new NumericUpDown();
                 Label labelQuantity = new Label();
-                Button delButton = new Button();
-                Button editButton = new Button();
+                System.Windows.Forms.Button delButton = new System.Windows.Forms.Button();
+                System.Windows.Forms.Button editButton = new System.Windows.Forms.Button();
 
                 pictureBox.Image = product.Image;
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -109,7 +121,7 @@ namespace CoffeeApp
         }
         private void DelButton_Click(object sender, EventArgs e)
         {
-            Button clickedButton = (Button)sender;
+            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
             int inx = (int)clickedButton.Tag;
             Product check = FiltredProducts[inx];
             for (int i = 0; i < products.Count; i++)
@@ -124,14 +136,14 @@ namespace CoffeeApp
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            Button clickedButton = (Button)sender;
+            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
             int inx = (int)clickedButton.Tag;
             AddForm edit = new AddForm(FiltredProducts[inx]);
             edit.ShowDialog();
             if (edit.DialogResult == DialogResult.OK)
             {
                 Product check = edit.GetProduct();
-                for(int i = 0; i < products.Count; i++)
+                for (int i = 0; i < products.Count; i++)
                 {
                     if (products[i].Id == check.Id)
                     {
@@ -147,12 +159,13 @@ namespace CoffeeApp
             NumericUpDown numeric = (NumericUpDown)sender;
             int inx = (int)numeric.Tag;
             FiltredProducts[inx].Quantity = (int)numeric.Value;
-            Invalidate();
+            UpdateForm();
         }
         private void Filtering()
         {
             if (filterProd != null)
             {
+                ButtonFilter.Checked = true;
                 FiltredProducts.Clear();
                 string none = "none";
                 for (int i = 0; i < products.Count; i++)
@@ -173,9 +186,14 @@ namespace CoffeeApp
             }
             else
             {
+                ButtonFilter.Checked = false;
                 FiltredProducts = new List<Product>(products);
             }
-            Invalidate();
+            if (!string.IsNullOrWhiteSpace(TextBoxSearch.Text) && TextBoxSearch.Text != "Пошук...")
+            {
+                Searching();
+            }
+            UpdateForm();
         }
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
@@ -186,6 +204,58 @@ namespace CoffeeApp
                     filterProd = filterForm.GetFilter();
                     Filtering();
                 }
+            }
+        }
+
+        private void TextBoxSearch_Click(object sender, EventArgs e)
+        {
+            TextBoxSearch.Text = "";
+        }
+
+        private void TextBoxSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Filtering();
+            }
+        }
+
+        private void ButtonSearch_Click(object sender, EventArgs e)
+        {
+            if (TextBoxSearch.Text == "Пошук...")
+                return;
+            Filtering();
+        }
+
+        private void Searching()
+        {
+            List<Product> searchProducts = new List<Product>();
+            string search = TextBoxSearch.Text.ToLower();
+            foreach (Product product in FiltredProducts)
+            {
+                if (product.Description.ToLower().Contains(search))
+                {
+                    searchProducts.Add(product);
+                }
+            }
+                FiltredProducts = new List<Product>(searchProducts);
+        }
+
+        private void TextBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
+            {
+                TextBoxSearch.Text = "";
+                Filtering();
+            }
+        }
+
+        private void TextBoxSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
+            {
+                TextBoxSearch.Text = "Пошук...";
+                Filtering();
             }
         }
     }

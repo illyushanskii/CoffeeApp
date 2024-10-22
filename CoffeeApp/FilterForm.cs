@@ -36,20 +36,7 @@ namespace CoffeeApp
         {
             return filter;
         }
-        private void FilterForm_Paint(object sender, PaintEventArgs e)
-        {
-            int y = 118;
-            Graphics g = e.Graphics;
-            Pen pen = new Pen(Color.Gray, 4);
-            pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
-            pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
-            for (int i = 0; i < 6; i++)
-            {
-                g.DrawLine(pen, new Point(16, y), new Point(275, y));
-                y += 82;
-            }
 
-        }
         private void FilterForm_Load(object sender, EventArgs e)
         {
             label1.Left = (this.ClientSize.Width - label1.Width) / 2; 
@@ -228,39 +215,28 @@ namespace CoffeeApp
             }
         }
 
-        private void comboBoxComposition_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void buttonReset_MouseHover(object sender, EventArgs e)
         {
-            buttonReset.BackColor = Color.FromArgb(246, 221, 199);
+            buttonReset.BackColor = Color.FromArgb(82, 38, 7);
+            buttonReset.ForeColor = Color.FromArgb(246, 221, 199);
         }
 
         private void buttonReset_MouseLeave(object sender, EventArgs e)
         {
             buttonReset.BackColor = SystemColors.Control;
+            buttonReset.ForeColor = SystemColors.ControlText;
         }
 
         private void buttonOK_MouseHover(object sender, EventArgs e)
         {
-            buttonOK.BackColor = Color.FromArgb(246, 221, 199);
+            buttonOK.BackColor = Color.FromArgb(82, 38, 7);
+            buttonOK.ForeColor = Color.FromArgb(246, 221, 199);
         }
 
         private void buttonOK_MouseLeave(object sender, EventArgs e)
         {
             buttonOK.BackColor = SystemColors.Control;
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-            
+            buttonOK.ForeColor = SystemColors.ControlText;
         }
     }
 }
