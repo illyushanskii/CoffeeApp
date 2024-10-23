@@ -46,6 +46,7 @@
             toolStripSeparator5 = new ToolStripSeparator();
             ButtonExit = new ToolStripButton();
             panel1 = new Panel();
+            MenuItemSortPopularity = new ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
-            toolStrip1.Size = new Size(864, 30);
+            toolStrip1.Size = new Size(893, 30);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -129,22 +130,25 @@
             // 
             // ButtonSort
             // 
-            ButtonSort.DropDownItems.AddRange(new ToolStripItem[] { MenuItemSortName, MenuItemSortCheap, MenuItemSortExpensive });
+            ButtonSort.AutoSize = false;
+            ButtonSort.DropDownItems.AddRange(new ToolStripItem[] { MenuItemSortName, MenuItemSortPopularity, MenuItemSortCheap, MenuItemSortExpensive });
             ButtonSort.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonSort.ForeColor = Color.FromArgb(82, 38, 7);
             ButtonSort.Image = (Image)resources.GetObject("ButtonSort.Image");
             ButtonSort.ImageTransparentColor = Color.Magenta;
             ButtonSort.Name = "ButtonSort";
-            ButtonSort.Size = new Size(143, 27);
-            ButtonSort.Text = "Сортування";
+            ButtonSort.Size = new Size(182, 27);
+            ButtonSort.Text = "За популярністю";
             // 
             // MenuItemSortName
             // 
             MenuItemSortName.BackColor = Color.FromArgb(246, 221, 199);
+            MenuItemSortName.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             MenuItemSortName.ForeColor = Color.FromArgb(82, 38, 7);
             MenuItemSortName.Name = "MenuItemSortName";
             MenuItemSortName.Size = new Size(289, 28);
-            MenuItemSortName.Text = "Назва";
+            MenuItemSortName.Text = "За назвою";
+            MenuItemSortName.Click += MenuItemSortName_Click;
             // 
             // MenuItemSortCheap
             // 
@@ -153,6 +157,7 @@
             MenuItemSortCheap.Name = "MenuItemSortCheap";
             MenuItemSortCheap.Size = new Size(289, 28);
             MenuItemSortCheap.Text = "Від дешевих до дорогих";
+            MenuItemSortCheap.Click += MenuItemSortCheap_Click;
             // 
             // MenuItemSortExpensive
             // 
@@ -161,6 +166,7 @@
             MenuItemSortExpensive.Name = "MenuItemSortExpensive";
             MenuItemSortExpensive.Size = new Size(289, 28);
             MenuItemSortExpensive.Text = "Від дорогих до дешевих";
+            MenuItemSortExpensive.Click += MenuItemSortExpensive_Click;
             // 
             // toolStripSeparator4
             // 
@@ -200,14 +206,23 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 30);
             panel1.Name = "panel1";
-            panel1.Size = new Size(864, 465);
+            panel1.Size = new Size(893, 465);
             panel1.TabIndex = 2;
+            // 
+            // MenuItemSortPopularity
+            // 
+            MenuItemSortPopularity.BackColor = Color.FromArgb(246, 221, 199);
+            MenuItemSortPopularity.ForeColor = Color.FromArgb(82, 38, 7);
+            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
+            MenuItemSortPopularity.Size = new Size(289, 28);
+            MenuItemSortPopularity.Text = "За популярністю";
+            MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(864, 495);
+            ClientSize = new Size(893, 495);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -238,5 +253,6 @@
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripButton ButtonExit;
         private ToolStripMenuItem MenuItemSortExpensive;
+        private ToolStripMenuItem MenuItemSortPopularity;
     }
 }

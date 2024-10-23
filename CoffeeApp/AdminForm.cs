@@ -18,6 +18,7 @@ namespace CoffeeApp
         List<Product> products = new List<Product>();
         List<Product> FiltredProducts = new List<Product>();
         Filter filterProd = null;
+        string sortProd = "pop";
         public AdminForm()
         {
             InitializeComponent();
@@ -39,15 +40,15 @@ namespace CoffeeApp
         {
             panel1.Controls.Clear();
             int y = 30;
-            if(FiltredProducts.Count == 0)
+            if (FiltredProducts.Count == 0)
             {
                 Label noSearch = new Label();
                 noSearch.Text = "За даними параметрами пошуку нічого не знайдено!";
                 noSearch.Location = new Point(15, 30);
-                Font font = new Font("Arial", 19,FontStyle.Bold);
+                Font font = new Font("Arial", 19, FontStyle.Bold);
                 noSearch.Font = font;
                 noSearch.AutoSize = true;
-               panel1.Controls.Add(noSearch);
+                panel1.Controls.Add(noSearch);
                 return;
             }
             for (int inx = 0; inx < FiltredProducts.Count; inx++)
@@ -193,6 +194,7 @@ namespace CoffeeApp
             {
                 Searching();
             }
+            Sorting();
             UpdateForm();
         }
         private void ButtonFilter_Click(object sender, EventArgs e)
@@ -238,7 +240,7 @@ namespace CoffeeApp
                     searchProducts.Add(product);
                 }
             }
-                FiltredProducts = new List<Product>(searchProducts);
+            FiltredProducts = new List<Product>(searchProducts);
         }
 
         private void TextBoxSearch_TextChanged(object sender, EventArgs e)
@@ -256,6 +258,62 @@ namespace CoffeeApp
             {
                 TextBoxSearch.Text = "Пошук...";
                 Filtering();
+            }
+        }
+
+        private void MenuItemSortName_Click(object sender, EventArgs e)
+        {
+            ButtonSort.Text = MenuItemSortName.Text;
+            sortProd = "nam";
+            Filtering();
+        }
+
+        private void MenuItemSortPopularity_Click(object sender, EventArgs e)
+        {
+            ButtonSort.Text = MenuItemSortPopularity.Text;
+            sortProd = "pop";
+            Filtering();
+        }
+
+        private void MenuItemSortCheap_Click(object sender, EventArgs e)
+        {
+            ButtonSort.Text = "Від дешевих до...";
+            sortProd = "chp";
+            Filtering();
+        }
+
+        private void MenuItemSortExpensive_Click(object sender, EventArgs e)
+        {
+            ButtonSort.Text = "Від дорогих до...";
+            sortProd = "exp";
+            Filtering();
+        }
+        private void Sorting()
+        {
+            Comparison<Product> comparison = null;
+
+            switch (sortProd)
+            {
+                case "pop":
+                    comparison = (x, y) => y.Popularity.CompareTo(x.Popularity);
+                    break;
+                case "nam":
+                    comparison = (x, y) => string.Compare(x.Name, y.Name);
+                    break;
+                case "chp":
+                    comparison = (x, y) => x.PriceSell.CompareTo(y.PriceSell);
+                    break;
+                case "exp":
+                    comparison = (x, y) => y.PriceSell.CompareTo(x.PriceSell);
+                    break;
+                default:
+                    MessageBox.Show("Error sorting");
+                    return;
+            }
+
+            if (comparison != null)
+            {
+                FiltredProducts.Sort(comparison);
             }
         }
     }
