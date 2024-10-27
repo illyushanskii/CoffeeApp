@@ -39,14 +39,14 @@
             toolStripSeparator2 = new ToolStripSeparator();
             ButtonSort = new ToolStripSplitButton();
             MenuItemSortName = new ToolStripMenuItem();
+            MenuItemSortPopularity = new ToolStripMenuItem();
             MenuItemSortCheap = new ToolStripMenuItem();
             MenuItemSortExpensive = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
             ButtonCasa = new ToolStripButton();
             toolStripSeparator5 = new ToolStripSeparator();
-            ButtonExit = new ToolStripButton();
+            ButtonDropDB = new ToolStripButton();
             panel1 = new Panel();
-            MenuItemSortPopularity = new ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,11 +55,12 @@
             toolStrip1.BackColor = Color.FromArgb(246, 221, 199);
             toolStrip1.Font = new Font("Segoe UI", 10F);
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { ButtonAdd, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, ButtonCasa, toolStripSeparator5, ButtonExit });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { ButtonAdd, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, ButtonCasa, toolStripSeparator5, ButtonDropDB });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
-            toolStrip1.Size = new Size(893, 30);
+            toolStrip1.RightToLeft = RightToLeft.No;
+            toolStrip1.Size = new Size(898, 30);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -150,6 +151,15 @@
             MenuItemSortName.Text = "За назвою";
             MenuItemSortName.Click += MenuItemSortName_Click;
             // 
+            // MenuItemSortPopularity
+            // 
+            MenuItemSortPopularity.BackColor = Color.FromArgb(246, 221, 199);
+            MenuItemSortPopularity.ForeColor = Color.FromArgb(82, 38, 7);
+            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
+            MenuItemSortPopularity.Size = new Size(289, 28);
+            MenuItemSortPopularity.Text = "За популярністю";
+            MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
+            // 
             // MenuItemSortCheap
             // 
             MenuItemSortCheap.BackColor = Color.FromArgb(246, 221, 199);
@@ -189,15 +199,16 @@
             toolStripSeparator5.Name = "toolStripSeparator5";
             toolStripSeparator5.Size = new Size(6, 30);
             // 
-            // ButtonExit
+            // ButtonDropDB
             // 
-            ButtonExit.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonExit.ForeColor = Color.FromArgb(82, 38, 7);
-            ButtonExit.Image = (Image)resources.GetObject("ButtonExit.Image");
-            ButtonExit.ImageTransparentColor = Color.Magenta;
-            ButtonExit.Name = "ButtonExit";
-            ButtonExit.Size = new Size(77, 27);
-            ButtonExit.Text = "Вихід";
+            ButtonDropDB.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonDropDB.ForeColor = Color.FromArgb(82, 38, 7);
+            ButtonDropDB.Image = (Image)resources.GetObject("ButtonDropDB.Image");
+            ButtonDropDB.ImageTransparentColor = Color.Magenta;
+            ButtonDropDB.Name = "ButtonDropDB";
+            ButtonDropDB.Size = new Size(29, 27);
+            ButtonDropDB.ToolTipText = "Скидання БД";
+            ButtonDropDB.Click += ButtonDropDB_Click;
             // 
             // panel1
             // 
@@ -206,28 +217,20 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 30);
             panel1.Name = "panel1";
-            panel1.Size = new Size(893, 465);
+            panel1.Size = new Size(898, 465);
             panel1.TabIndex = 2;
-            // 
-            // MenuItemSortPopularity
-            // 
-            MenuItemSortPopularity.BackColor = Color.FromArgb(246, 221, 199);
-            MenuItemSortPopularity.ForeColor = Color.FromArgb(82, 38, 7);
-            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
-            MenuItemSortPopularity.Size = new Size(289, 28);
-            MenuItemSortPopularity.Text = "За популярністю";
-            MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(893, 495);
+            ClientSize = new Size(898, 495);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminForm";
             Text = "Адміністратор";
+            FormClosed += AdminForm_FormClosed;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -251,7 +254,7 @@
         private ToolStripButton ButtonAdd;
         private Panel panel1;
         private ToolStripSeparator toolStripSeparator5;
-        private ToolStripButton ButtonExit;
+        private ToolStripButton ButtonDropDB;
         private ToolStripMenuItem MenuItemSortExpensive;
         private ToolStripMenuItem MenuItemSortPopularity;
     }

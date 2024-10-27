@@ -37,7 +37,7 @@ namespace CoffeeApp
             label_ID.Visible = true;
             textBoxName.Text = productIn.Name;
             textBoxDescription.Text = productIn.Description;
-            textBoxCounty.Text = productIn.MadeIn;
+            textBoxCountry.Text = productIn.MadeIn;
             textBoxPriceBuy.Text = productIn.PriceBuy.ToString();
             textBoxPriceSell.Text = productIn.PriceSell.ToString();
             textBoxQuantity.Text = productIn.Quantity.ToString();
@@ -97,40 +97,46 @@ namespace CoffeeApp
             double weight;
             int quantity;
 
-            if (!double.TryParse(textBoxPriceBuy.Text, out priceBuy))
+            if (!double.TryParse(textBoxPriceBuy.Text, out priceBuy)||Convert.ToDouble(textBoxPriceBuy.Text) <= 0)
             {
                 MessageBox.Show("Неправильне введення поля \"Ціна закупки\"");
                 textBoxPriceBuy.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            else if (!double.TryParse(textBoxPriceSell.Text, out priceSell))
+            else if (!double.TryParse(textBoxPriceSell.Text, out priceSell)||Convert.ToDouble(textBoxPriceSell.Text) <= 0)
             {
                 MessageBox.Show("Неправильне введення поля \"Ціна продажу\"");
                 textBoxPriceSell.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            else if (!double.TryParse(textBoxWeight.Text, out weight))
+            else if (!double.TryParse(textBoxWeight.Text, out weight)||Convert.ToDouble(textBoxWeight.Text) <= 0)
             {
                 MessageBox.Show("Неправильне введення поля \"Маса нетто\"");
                 textBoxWeight.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            else if (!int.TryParse(textBoxQuantity.Text, out quantity))
+            else if (!int.TryParse(textBoxQuantity.Text, out quantity)||Convert.ToInt32(textBoxQuantity.Text) <= 0)
             {
                 MessageBox.Show("Неправильне введення поля \"Кількість\"");
                 textBoxQuantity.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            else if (textBoxDescription.Text.Length > 80)
-            {
-                MessageBox.Show("Перевищення кількості символів(80) в полі \"Опис\"");
+            else if(textBoxName.Text.Any(c => !Char.IsLetter(c))){
+                MessageBox.Show("Введіть лише літери в поле \"Назва\"");
                 this.DialogResult = DialogResult.None;
                 return;
             }
+            else if (textBoxCountry.Text.Any(c => !Char.IsLetter(c)))
+            {
+                MessageBox.Show("Введіть лише літери в поле \"Країна-виробник\"");
+                this.DialogResult = DialogResult.None;
+                return;
+            }
+
             product.Description = textBoxDescription.Text;
             product.Name = textBoxName.Text;
             product.CoffeeType = comboBoxType.Text;
@@ -139,7 +145,7 @@ namespace CoffeeApp
             product.Id = id;
             product.PriceBuy = priceBuy;
             product.PriceSell = priceSell;
-            product.MadeIn = textBoxCounty.Text;
+            product.MadeIn = textBoxCountry.Text;
             product.Composition = comboBoxComposition.Text;
             product.Image = pictureBoxImg.Image;
             this.DialogResult = DialogResult.OK;

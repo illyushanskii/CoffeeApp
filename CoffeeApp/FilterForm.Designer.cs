@@ -51,6 +51,8 @@
             label2 = new Label();
             label1 = new Label();
             numericWeightMax = new NumericUpDown();
+            label12 = new Label();
+            label13 = new Label();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericWeightMin).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericPriceMax).BeginInit();
@@ -181,6 +183,8 @@
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(246, 221, 199);
+            panel2.Controls.Add(label13);
+            panel2.Controls.Add(label12);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(numericWeightMin);
             panel2.Controls.Add(label7);
@@ -207,7 +211,7 @@
             panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(328, 637);
+            panel2.Size = new Size(329, 637);
             panel2.TabIndex = 23;
             // 
             // label6
@@ -327,11 +331,34 @@
             numericWeightMax.TabIndex = 8;
             numericWeightMax.ValueChanged += numericWeightMax_ValueChanged;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label12.ForeColor = Color.FromArgb(82, 38, 7);
+            label12.Location = new Point(259, 92);
+            label12.Name = "label12";
+            label12.Size = new Size(66, 20);
+            label12.TabIndex = 22;
+            label12.Text = "₴ грн.";
+            label12.Click += label12_Click;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Font = new Font("Verdana", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label13.ForeColor = Color.FromArgb(82, 38, 7);
+            label13.Location = new Point(259, 176);
+            label13.Name = "label13";
+            label13.Size = new Size(55, 20);
+            label13.TabIndex = 23;
+            label13.Text = "грам";
+            // 
             // FilterForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(328, 637);
+            ClientSize = new Size(329, 637);
             Controls.Add(panel2);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FilterForm";
@@ -370,5 +397,7 @@
         private Label label2;
         private Label label1;
         private NumericUpDown numericWeightMax;
+        private Label label13;
+        private Label label12;
     }
 }

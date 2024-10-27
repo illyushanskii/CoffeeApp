@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -18,10 +19,16 @@ namespace CoffeeApp
         List<Product> products = new List<Product>();
         List<Product> FiltredProducts = new List<Product>();
         Filter filterProd = null;
+        MainForm MainForm;
         string sortProd = "pop";
         public AdminForm()
         {
             InitializeComponent();
+        }
+        public AdminForm(MainForm mainForm)
+        {
+            InitializeComponent();
+            MainForm = mainForm;
         }
 
         private void ButtonAdd_Click(object sender, EventArgs e)
@@ -82,7 +89,7 @@ namespace CoffeeApp
                 numericUpDownQuantity.Width = 100;
                 numericUpDownQuantity.Tag = inx;
                 numericUpDownQuantity.Minimum = 0;
-                numericUpDownQuantity.Maximum = 100000;
+                numericUpDownQuantity.Maximum = 9999999999;
                 numericUpDownQuantity.Value = product.Quantity;
                 numericUpDownQuantity.ValueChanged += NumericUpDownQuantity_ValueChanged;
 
@@ -314,6 +321,30 @@ namespace CoffeeApp
             if (comparison != null)
             {
                 FiltredProducts.Sort(comparison);
+            }
+        }
+
+        private void AdminForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if(MainForm!=null)
+            MainForm.Visible = true;
+        }
+
+        private void ButtonDropDB_Click(object sender, EventArgs e)
+        {
+            ConfirmForm confirm = new ConfirmForm();
+            if(confirm.ShowDialog(this) == DialogResult.OK)
+            {
+                DataBase dataBase = new DataBase();
+                dataBase.openBase();
+                SQLiteCommand cmd = new SQLiteCommand("DELETE FROM `Admin`",dataBase.getConnection());
+
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    MessageBox.Show("База данних успішно скинута.");
+                }
+                dataBase.closeBase();
+                Application.Exit();
             }
         }
     }

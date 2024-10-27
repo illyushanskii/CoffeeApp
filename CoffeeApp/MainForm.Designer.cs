@@ -45,6 +45,7 @@
             toolStripSeparator4 = new ToolStripSeparator();
             toolStripButton1 = new ToolStripButton();
             timer1 = new System.Windows.Forms.Timer(components);
+            timer2 = new System.Windows.Forms.Timer(components);
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,7 +57,7 @@
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
-            toolStrip1.Size = new Size(746, 27);
+            toolStrip1.Size = new Size(853, 30);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -65,7 +66,7 @@
             LabelAdmin.Font = new Font("Imprint MT Shadow", 12F, FontStyle.Bold);
             LabelAdmin.Image = (Image)resources.GetObject("LabelAdmin.Image");
             LabelAdmin.Name = "LabelAdmin";
-            LabelAdmin.Size = new Size(145, 24);
+            LabelAdmin.Size = new Size(172, 27);
             LabelAdmin.Text = "Okovitiy Beans";
             LabelAdmin.MouseDown += LabelAdmin_MouseDown;
             LabelAdmin.MouseUp += LabelAdmin_MouseUp;
@@ -73,21 +74,21 @@
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 27);
+            toolStripSeparator1.Size = new Size(6, 30);
             // 
             // ButtonFilter
             // 
             ButtonFilter.Image = (Image)resources.GetObject("ButtonFilter.Image");
             ButtonFilter.ImageTransparentColor = Color.Magenta;
             ButtonFilter.Name = "ButtonFilter";
-            ButtonFilter.Size = new Size(109, 24);
+            ButtonFilter.Size = new Size(128, 27);
             ButtonFilter.Text = "Фільтрувати";
             ButtonFilter.Click += ButtonFilter_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(6, 27);
+            toolStripSeparator3.Size = new Size(6, 30);
             // 
             // ButtonSearch
             // 
@@ -95,7 +96,7 @@
             ButtonSearch.Image = (Image)resources.GetObject("ButtonSearch.Image");
             ButtonSearch.ImageTransparentColor = Color.Magenta;
             ButtonSearch.Name = "ButtonSearch";
-            ButtonSearch.Size = new Size(24, 24);
+            ButtonSearch.Size = new Size(29, 27);
             ButtonSearch.Text = "toolStripButton2";
             ButtonSearch.ToolTipText = "Пошук";
             // 
@@ -103,14 +104,14 @@
             // 
             TextBoxSearch.Font = new Font("Segoe UI", 10F);
             TextBoxSearch.Name = "TextBoxSearch";
-            TextBoxSearch.Size = new Size(237, 27);
+            TextBoxSearch.Size = new Size(270, 30);
             TextBoxSearch.Text = "Пошук...";
             TextBoxSearch.Click += TextBoxSearch_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 27);
+            toolStripSeparator2.Size = new Size(6, 30);
             // 
             // ButtonSort
             // 
@@ -118,31 +119,31 @@
             ButtonSort.Image = (Image)resources.GetObject("ButtonSort.Image");
             ButtonSort.ImageTransparentColor = Color.Magenta;
             ButtonSort.Name = "ButtonSort";
-            ButtonSort.Size = new Size(120, 24);
+            ButtonSort.Size = new Size(142, 27);
             ButtonSort.Text = "Сортування";
             // 
             // MenuItemSortName
             // 
             MenuItemSortName.Name = "MenuItemSortName";
-            MenuItemSortName.Size = new Size(230, 24);
+            MenuItemSortName.Size = new Size(283, 28);
             MenuItemSortName.Text = "Назва";
             // 
             // MenuItemSortCheap
             // 
             MenuItemSortCheap.Name = "MenuItemSortCheap";
-            MenuItemSortCheap.Size = new Size(230, 24);
+            MenuItemSortCheap.Size = new Size(283, 28);
             MenuItemSortCheap.Text = "Від дешевих до дорогих";
             // 
             // MenuItemSortExpensive
             // 
             MenuItemSortExpensive.Name = "MenuItemSortExpensive";
-            MenuItemSortExpensive.Size = new Size(230, 24);
+            MenuItemSortExpensive.Size = new Size(283, 28);
             MenuItemSortExpensive.Text = "Від дорогих до дешевих";
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(6, 27);
+            toolStripSeparator4.Size = new Size(6, 30);
             // 
             // toolStripButton1
             // 
@@ -150,7 +151,7 @@
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.RightToLeft = RightToLeft.No;
-            toolStripButton1.Size = new Size(75, 24);
+            toolStripButton1.Size = new Size(86, 27);
             toolStripButton1.Text = "Кошик";
             // 
             // timer1
@@ -158,14 +159,19 @@
             timer1.Interval = 1000;
             timer1.Tick += timer1_Tick;
             // 
+            // timer2
+            // 
+            timer2.Interval = 1000;
+            timer2.Tick += timer2_Tick;
+            // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(746, 356);
+            ClientSize = new Size(853, 475);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "MainForm";
             Text = "Coffee...";
             Load += MainForm_Load;
@@ -192,5 +198,6 @@
         private ToolStripButton toolStripButton1;
         private ToolStripLabel LabelAdmin;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer2;
     }
 }

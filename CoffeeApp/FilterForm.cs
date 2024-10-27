@@ -39,7 +39,7 @@ namespace CoffeeApp
 
         private void FilterForm_Load(object sender, EventArgs e)
         {
-            label1.Left = (this.ClientSize.Width - label1.Width) / 2; 
+            label1.Left = (this.ClientSize.Width - label1.Width) / 2;
             label1.Top = 10;
             if (products == null)
             {
@@ -237,6 +237,11 @@ namespace CoffeeApp
         {
             buttonOK.BackColor = SystemColors.Control;
             buttonOK.ForeColor = SystemColors.ControlText;
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -48,7 +48,7 @@
             textBoxWeight = new TextBox();
             label8 = new Label();
             label9 = new Label();
-            textBoxCounty = new TextBox();
+            textBoxCountry = new TextBox();
             label10 = new Label();
             timer1 = new System.Windows.Forms.Timer(components);
             comboBoxComposition = new ComboBox();
@@ -195,6 +195,7 @@
             // textBoxName
             // 
             textBoxName.Location = new Point(73, 13);
+            textBoxName.MaxLength = 32;
             textBoxName.Name = "textBoxName";
             textBoxName.Size = new Size(234, 27);
             textBoxName.TabIndex = 11;
@@ -202,6 +203,7 @@
             // textBoxPriceBuy
             // 
             textBoxPriceBuy.Location = new Point(143, 53);
+            textBoxPriceBuy.MaxLength = 10;
             textBoxPriceBuy.Name = "textBoxPriceBuy";
             textBoxPriceBuy.Size = new Size(164, 27);
             textBoxPriceBuy.TabIndex = 12;
@@ -209,6 +211,7 @@
             // textBoxPriceSell
             // 
             textBoxPriceSell.Location = new Point(151, 93);
+            textBoxPriceSell.MaxLength = 10;
             textBoxPriceSell.Name = "textBoxPriceSell";
             textBoxPriceSell.Size = new Size(156, 27);
             textBoxPriceSell.TabIndex = 13;
@@ -216,6 +219,7 @@
             // textBoxQuantity
             // 
             textBoxQuantity.Location = new Point(107, 133);
+            textBoxQuantity.MaxLength = 10;
             textBoxQuantity.Name = "textBoxQuantity";
             textBoxQuantity.Size = new Size(200, 27);
             textBoxQuantity.TabIndex = 14;
@@ -223,6 +227,7 @@
             // textBoxWeight
             // 
             textBoxWeight.Location = new Point(130, 173);
+            textBoxWeight.MaxLength = 10;
             textBoxWeight.Name = "textBoxWeight";
             textBoxWeight.Size = new Size(176, 27);
             textBoxWeight.TabIndex = 15;
@@ -249,12 +254,13 @@
             label9.TabIndex = 18;
             label9.Text = "Країна-виробник:";
             // 
-            // textBoxCounty
+            // textBoxCountry
             // 
-            textBoxCounty.Location = new Point(177, 255);
-            textBoxCounty.Name = "textBoxCounty";
-            textBoxCounty.Size = new Size(129, 27);
-            textBoxCounty.TabIndex = 19;
+            textBoxCountry.Location = new Point(177, 255);
+            textBoxCountry.MaxLength = 32;
+            textBoxCountry.Name = "textBoxCountry";
+            textBoxCountry.Size = new Size(129, 27);
+            textBoxCountry.TabIndex = 19;
             // 
             // label10
             // 
@@ -295,6 +301,7 @@
             // textBoxDescription
             // 
             textBoxDescription.Location = new Point(67, 331);
+            textBoxDescription.MaxLength = 80;
             textBoxDescription.Multiline = true;
             textBoxDescription.Name = "textBoxDescription";
             textBoxDescription.Size = new Size(239, 73);
@@ -325,7 +332,7 @@
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(label10);
             groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(textBoxCounty);
+            groupBox1.Controls.Add(textBoxCountry);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(label9);
             groupBox1.Controls.Add(label7);
@@ -393,7 +400,7 @@
         private TextBox textBoxWeight;
         private Label label8;
         private Label label9;
-        private TextBox textBoxCounty;
+        private TextBox textBoxCountry;
         private Label label10;
         private System.Windows.Forms.Timer timer1;
         private ComboBox comboBoxComposition;
