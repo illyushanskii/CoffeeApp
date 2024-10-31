@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.DataFormats;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace CoffeeApp
 {
@@ -214,17 +215,10 @@ namespace CoffeeApp
                 comboBoxCountry.Text = "none";
             }
         }
-
-        private void buttonReset_MouseHover(object sender, EventArgs e)
-        {
-            buttonReset.BackColor = Color.FromArgb(82, 38, 7);
-            buttonReset.ForeColor = Color.FromArgb(246, 221, 199);
-        }
-
         private void buttonReset_MouseLeave(object sender, EventArgs e)
         {
-            buttonReset.BackColor = SystemColors.Control;
-            buttonReset.ForeColor = SystemColors.ControlText;
+            buttonReset.ForeColor = Color.FromArgb(246, 221, 199);
+            buttonReset.BackColor = Color.FromArgb(82, 38, 7);
         }
 
         private void buttonOK_MouseHover(object sender, EventArgs e)
@@ -235,13 +229,25 @@ namespace CoffeeApp
 
         private void buttonOK_MouseLeave(object sender, EventArgs e)
         {
-            buttonOK.BackColor = SystemColors.Control;
-            buttonOK.ForeColor = SystemColors.ControlText;
+            buttonOK.ForeColor = Color.FromArgb(246, 221, 199);
+            buttonOK.BackColor = Color.FromArgb(82, 38, 7);
         }
 
         private void label12_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void buttonReset_MouseEnter(object sender, EventArgs e)
+        {
+            buttonReset.ForeColor = Color.FromArgb(82, 38, 7);
+            buttonReset.BackColor = Color.FromArgb(246, 221, 199);
+        }
+
+        private void buttonOK_MouseEnter(object sender, EventArgs e)
+        {
+            buttonOK.ForeColor = Color.FromArgb(82, 38, 7);
+            buttonOK.BackColor = Color.FromArgb(246, 221, 199);
         }
     }
 }
