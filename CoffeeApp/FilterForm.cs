@@ -47,25 +47,25 @@ namespace CoffeeApp
             }
             foreach (Product product in products)
             {
-                if (maxPrice < product.PriceSell)
-                { maxPrice = product.PriceSell; }
-                if (maxWeight < product.Weight)
-                { maxWeight = product.Weight; }
-                if (!comboBoxName.Items.Contains(product.Name))
+                if (maxPrice < product.PriceSell())
+                { maxPrice = product.PriceSell(); }
+                if (maxWeight < product.Weight())
+                { maxWeight = product.Weight(); }
+                if (!comboBoxName.Items.Contains(product.Name()))
                 {
-                    comboBoxName.Items.Add(product.Name);
+                    comboBoxName.Items.Add(product.Name());
                 }
-                if (!comboBoxCountry.Items.Contains(product.MadeIn))
+                if (!comboBoxCountry.Items.Contains(product.MadeIn()))
                 {
-                    comboBoxCountry.Items.Add(product.MadeIn);
+                    comboBoxCountry.Items.Add(product.MadeIn());
                 }
-                if (!comboBoxType.Items.Contains(product.CoffeeType))
+                if (!comboBoxType.Items.Contains(product.Type()))
                 {
-                    comboBoxType.Items.Add(product.CoffeeType);
+                    comboBoxType.Items.Add(product.Type());
                 }
-                if (!comboBoxComposition.Items.Contains(product.Composition))
+                if (!comboBoxComposition.Items.Contains(product.Composition()))
                 {
-                    comboBoxComposition.Items.Add(product.Composition);
+                    comboBoxComposition.Items.Add(product.Composition());
                 }
             }
 
@@ -74,27 +74,27 @@ namespace CoffeeApp
 
             if (filterIn != null)
             {
-                comboBoxCountry.SelectedIndex = comboBoxCountry.Items.IndexOf(filterIn.MadeIn);
-                comboBoxName.SelectedIndex = comboBoxName.Items.IndexOf(filterIn.Name);
-                comboBoxType.SelectedIndex = comboBoxType.Items.IndexOf(filterIn.CoffeeType);
-                comboBoxComposition.SelectedIndex = comboBoxComposition.Items.IndexOf(filterIn.Composition);
-                numericPriceMax.Value = (decimal)filterIn.PriceFinish;
-                numericPriceMin.Value = (decimal)filterIn.PriceStart;
-                numericWeightMin.Value = (decimal)filterIn.WeightStart;
-                numericWeightMax.Value = (decimal)filterIn.WeightFinish;
+                comboBoxCountry.SelectedIndex = comboBoxCountry.Items.IndexOf(filterIn.MadeIn());
+                comboBoxName.SelectedIndex = comboBoxName.Items.IndexOf(filterIn.Name());
+                comboBoxType.SelectedIndex = comboBoxType.Items.IndexOf(filterIn.Type());
+                comboBoxComposition.SelectedIndex = comboBoxComposition.Items.IndexOf(filterIn.Composition());
+                numericPriceMax.Value = (decimal)filterIn.PriceFinish();
+                numericPriceMin.Value = (decimal)filterIn.PriceStart();
+                numericWeightMin.Value = (decimal)filterIn.WeightStart();
+                numericWeightMax.Value = (decimal)filterIn.WeightFinish();
             }
         }
 
         private void buttonOK_Click(object sender, EventArgs e)
         {
-            filter.MadeIn = comboBoxCountry.Text;
-            filter.Name = comboBoxName.Text;
-            filter.PriceStart = minPrice;
-            filter.PriceFinish = maxPrice;
-            filter.WeightStart = minWeight;
-            filter.WeightFinish = maxWeight;
-            filter.CoffeeType = comboBoxType.Text;
-            filter.Composition = comboBoxComposition.Text;
+            filter.MadeIn(comboBoxCountry.Text);
+            filter.Name(comboBoxName.Text);
+            filter.PriceStart(minPrice);
+            filter.PriceFinish(maxPrice);
+            filter.WeightStart(minWeight);
+            filter.WeightFinish(maxWeight);
+            filter.Type(comboBoxType.Text);
+            filter.Composition(comboBoxComposition.Text);
         }
 
         private void numericPriceMin_ValueChanged(object sender, EventArgs e)
@@ -155,7 +155,7 @@ namespace CoffeeApp
 
             foreach (Product prod in products)
             {
-                item = mode == "Name" ? prod.Name : prod.MadeIn;
+                item = mode == "Name" ? prod.Name() : prod.MadeIn();
                 if (!comboBox.Items.Contains(item))
                 {
                     comboBox.Items.Add(item);

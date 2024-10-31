@@ -46,6 +46,7 @@
             toolStripButton1 = new ToolStripButton();
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
+            panel1 = new Panel();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -164,17 +165,27 @@
             timer2.Interval = 1000;
             timer2.Tick += timer2_Tick;
             // 
+            // panel1
+            // 
+            panel1.AutoScroll = true;
+            panel1.BackColor = SystemColors.Control;
+            panel1.Dock = DockStyle.Fill;
+            panel1.Location = new Point(0, 30);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(853, 445);
+            panel1.TabIndex = 1;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(853, 475);
+            Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(5, 4, 5, 4);
             Name = "MainForm";
             Text = "Coffee...";
-            Load += MainForm_Load;
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             ResumeLayout(false);
@@ -199,5 +210,6 @@
         private ToolStripLabel LabelAdmin;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private Panel panel1;
     }
 }

@@ -37,7 +37,7 @@ namespace CoffeeApp
             {
                 DataBase data = new DataBase();
                 data.openBase();
-                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO `admin` (`Login`, `Password`) VALUES (@log, @pass)", data.getConnection());
+                SQLiteCommand cmd = new SQLiteCommand("INSERT INTO `Admin` (`Login`, `Password`) VALUES (@log, @pass)", data.getConnection());
                 cmd.Parameters.Add("@log",DbType.String).Value = textBoxLogin.Text;
                 cmd.Parameters.Add("@pass",DbType.String).Value = textBoxPass.Text;
                 if (cmd.ExecuteNonQuery() == 1)

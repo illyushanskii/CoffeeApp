@@ -27,7 +27,7 @@ namespace CoffeeApp
                 regForm.ShowDialog();
                 if(regForm.DialogResult == DialogResult.OK)
                 {
-                    Application.Run(new AdminForm());
+                    Application.Run(new MainForm("cv"));
                 }
             }
         }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Runtime.Caching;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CoffeeApp
@@ -18,19 +19,33 @@ namespace CoffeeApp
         int id = 0;
         List<Product> products = new List<Product>();
         List<Product> FiltredProducts = new List<Product>();
-        Filter filterProd = null;
+        Filter filterProd;
         MainForm MainForm;
         string sortProd = "pop";
-        public AdminForm()
-        {
-            InitializeComponent();
-        }
         public AdminForm(MainForm mainForm)
         {
             InitializeComponent();
             MainForm = mainForm;
+            MainForm.ReadProducts(products);
+            FiltredProducts= new List<Product>(products);
+            id = products.Max(p => p.ID());
+            id++;
+            this.UpdateForm();
         }
-
+        public AdminForm(MainForm mainForm, List<Product> Products)
+        {
+            InitializeComponent();
+            MainForm = mainForm;
+            products = new List<Product>(Products);
+            FiltredProducts = new List<Product>(Products);
+            id = Products.Max(p => p.ID());
+            id++;
+            UpdateForm();
+        }
+        public List<Product> GetProducts()
+        {
+            return new List<Product>(products);
+        }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             AddForm form = new AddForm(id);
@@ -68,16 +83,15 @@ namespace CoffeeApp
                 System.Windows.Forms.Button delButton = new System.Windows.Forms.Button();
                 System.Windows.Forms.Button editButton = new System.Windows.Forms.Button();
 
-                pictureBox.Image = product.Image;
+                pictureBox.Image = System.Drawing.Image.FromFile(product.ImagePath());
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
                 pictureBox.Location = new Point(10, y);
                 pictureBox.Size = new Size(100, 100);
 
                 Font textFont = new Font("Arial", 15);
-                textBoxInfo.Text = product.ToString();
+                textBoxInfo.Text = $"{product.ID()}){product.ToString()}";
                 textBoxInfo.Font = textFont;
                 textBoxInfo.Location = new Point(120, y + 5);
-                textBoxInfo.AutoSize = true;
                 textBoxInfo.ReadOnly = true;
                 textBoxInfo.Multiline = true;
                 textBoxInfo.Width = 500;
@@ -90,8 +104,9 @@ namespace CoffeeApp
                 numericUpDownQuantity.Tag = inx;
                 numericUpDownQuantity.Minimum = 0;
                 numericUpDownQuantity.Maximum = 9999999999;
-                numericUpDownQuantity.Value = product.Quantity;
+                numericUpDownQuantity.Value = product.Quantity();
                 numericUpDownQuantity.ValueChanged += NumericUpDownQuantity_ValueChanged;
+                numericUpDownQuantity.MouseWheel += NumericUpDownQuantity_MouseWheel;
 
 
                 labelQuantity.Font = quantityFont;
@@ -127,6 +142,12 @@ namespace CoffeeApp
                 y += 110;
             }
         }
+
+        private void NumericUpDownQuantity_MouseWheel(object sender, MouseEventArgs e)
+        {
+            ((HandledMouseEventArgs)e).Handled = true;
+        }
+
         private void DelButton_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
@@ -134,8 +155,17 @@ namespace CoffeeApp
             Product check = FiltredProducts[inx];
             for (int i = 0; i < products.Count; i++)
             {
-                if (products[i].Id == check.Id)
+                if (products[i].ID() == check.ID())
                 {
+                    DataBase data = new DataBase();
+                    data.openBase();
+                    SQLiteCommand cmd = new SQLiteCommand("DELETE FROM `Products` WHERE ID = @id;", data.getConnection());
+                    cmd.Parameters.Add("@id", DbType.Int32).Value = products[i].ID();
+
+                    if (cmd.ExecuteNonQuery() == 1)
+                        MessageBox.Show("Видалення успішне!");
+
+                    data.closeBase();
                     products.RemoveAt(i);
                 }
             }
@@ -153,12 +183,23 @@ namespace CoffeeApp
                 Product check = edit.GetProduct();
                 for (int i = 0; i < products.Count; i++)
                 {
-                    if (products[i].Id == check.Id)
+                    if (products[i].ID() == check.ID())
                     {
                         products[i] = check;
                     }
                 }
             }
+            //if (MainForm != null)
+            //{
+            //    MainForm.ReadProducts();
+            //}
+            //string del = edit.GetDelImgPath();
+
+            //if (File.Exists(del))
+            //{
+            //    File.Delete(del);
+            //    MessageBox.Show("Ok Del");
+            //}
             Filtering();
         }
 
@@ -166,7 +207,15 @@ namespace CoffeeApp
         {
             NumericUpDown numeric = (NumericUpDown)sender;
             int inx = (int)numeric.Tag;
-            FiltredProducts[inx].Quantity = (int)numeric.Value;
+           
+            DataBase data = new DataBase();
+            data.openBase();
+            SQLiteCommand cmd = new SQLiteCommand("UPDATE `Products` SET `Quantity` = @quantity WHERE ID = @id", data.getConnection());
+            cmd.Parameters.Add("@id", DbType.Int32).Value = FiltredProducts[inx].ID();
+            cmd.Parameters.Add("@quantity", DbType.Int32).Value = (int)numeric.Value;
+            cmd.ExecuteNonQuery();
+            data.closeBase();
+            FiltredProducts[inx].Quantity((int)numeric.Value);
             UpdateForm();
         }
         private void Filtering()
@@ -180,12 +229,12 @@ namespace CoffeeApp
                 {
                     Product prod = products[i];
                     bool check = true;
-                    if (prod.Name != filterProd.Name && filterProd.Name != none) { check = false; }
-                    if (prod.Composition != filterProd.Composition && filterProd.Composition != none) { check = false; }
-                    if (prod.CoffeeType != filterProd.CoffeeType && filterProd.CoffeeType != none) { check = false; }
-                    if (prod.MadeIn != filterProd.MadeIn && filterProd.MadeIn != none) { check = false; }
-                    if (prod.PriceSell < filterProd.PriceStart || prod.PriceSell > filterProd.PriceFinish) { check = false; }
-                    if (prod.Weight < filterProd.WeightStart || prod.Weight > filterProd.WeightFinish) { check = false; }
+                    if (prod.Name() != filterProd.Name() && filterProd.Name() != none) { check = false; }
+                    if (prod.Composition() != filterProd.Composition() && filterProd.Composition() != none) { check = false; }
+                    if (prod.Type() != filterProd.Type() && filterProd.Type() != none) { check = false; }
+                    if (prod.MadeIn() != filterProd.MadeIn() && filterProd.MadeIn() != none) { check = false; }
+                    if (prod.PriceSell() < filterProd.PriceStart() || prod.PriceSell() > filterProd.PriceFinish()) { check = false; }
+                    if (prod.Weight() < filterProd.WeightStart() || prod.Weight() > filterProd.WeightFinish()) { check = false; }
                     if (check)
                     {
                         FiltredProducts.Add(prod);
@@ -242,7 +291,7 @@ namespace CoffeeApp
             string search = TextBoxSearch.Text.ToLower();
             foreach (Product product in FiltredProducts)
             {
-                if (product.Description.ToLower().Contains(search))
+                if (product.Description().ToLower().Contains(search))
                 {
                     searchProducts.Add(product);
                 }
@@ -302,16 +351,16 @@ namespace CoffeeApp
             switch (sortProd)
             {
                 case "pop":
-                    comparison = (x, y) => y.Popularity.CompareTo(x.Popularity);
+                    comparison = (x, y) => y.Popularity().CompareTo(x.Popularity());
                     break;
                 case "nam":
-                    comparison = (x, y) => string.Compare(x.Name, y.Name);
+                    comparison = (x, y) => string.Compare(x.Name(), y.Name());
                     break;
                 case "chp":
-                    comparison = (x, y) => x.PriceSell.CompareTo(y.PriceSell);
+                    comparison = (x, y) => x.PriceSell().CompareTo(y.PriceSell());
                     break;
                 case "exp":
-                    comparison = (x, y) => y.PriceSell.CompareTo(x.PriceSell);
+                    comparison = (x, y) => y.PriceSell().CompareTo(x.PriceSell());
                     break;
                 default:
                     MessageBox.Show("Error sorting");
@@ -326,18 +375,22 @@ namespace CoffeeApp
 
         private void AdminForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if(MainForm!=null)
-            MainForm.Visible = true;
+            if (MainForm != null)
+            {
+                MainForm.ReadProducts(MainForm.GetList());
+                MainForm.UpdateForm();
+                MainForm.Visible = true;
+            }
         }
 
         private void ButtonDropDB_Click(object sender, EventArgs e)
         {
             ConfirmForm confirm = new ConfirmForm();
-            if(confirm.ShowDialog(this) == DialogResult.OK)
+            if (confirm.ShowDialog(this) == DialogResult.OK)
             {
                 DataBase dataBase = new DataBase();
                 dataBase.openBase();
-                SQLiteCommand cmd = new SQLiteCommand("DELETE FROM `Admin`",dataBase.getConnection());
+                SQLiteCommand cmd = new SQLiteCommand("DELETE FROM `Admin`", dataBase.getConnection());
 
                 if (cmd.ExecuteNonQuery() > 0)
                 {

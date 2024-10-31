@@ -4,17 +4,26 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using System.Data.SQLite;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Data.Entity.Infrastructure.Design.Executor;
+using System.IO;
+using System.Data.SqlClient;
 
 namespace CoffeeApp
 {
     public partial class AddForm : Form
     {
-        Product product = new Product();
-        int id = -1;
+        Product product;
+        int id;
+        string delImg;
+        string imgPath = ".\\Icons\\image.png";
+        string newImgPath = "";
         public AddForm(int Id)
         {
             InitializeComponent();
@@ -29,23 +38,25 @@ namespace CoffeeApp
             this.Text = "Змінити товар";
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Icons\Edit.ico");
             this.Icon = new Icon(path);
+            product = productIn;
             buttonAdd.Text = "Змінити";
-            label_Pop.Text = $"Поп: {productIn.Popularity}";
+            label_Pop.Text = $"Поп: {productIn.Popularity()}";
             label_Pop.Visible = true;
-            label_ID.Text = $"ID: {productIn.Id}";
-            id = productIn.Id;
+            label_ID.Text = $"ID: {productIn.ID()}";
+            id = productIn.ID();
             label_ID.Visible = true;
-            textBoxName.Text = productIn.Name;
-            textBoxDescription.Text = productIn.Description;
-            textBoxCountry.Text = productIn.MadeIn;
-            textBoxPriceBuy.Text = productIn.PriceBuy.ToString();
-            textBoxPriceSell.Text = productIn.PriceSell.ToString();
-            textBoxQuantity.Text = productIn.Quantity.ToString();
-            textBoxWeight.Text = productIn.Weight.ToString();
+            textBoxName.Text = productIn.Name();
+            textBoxDescription.Text = productIn.Description();
+            textBoxCountry.Text = productIn.MadeIn();
+            textBoxPriceBuy.Text = productIn.PriceBuy().ToString();
+            textBoxPriceSell.Text = productIn.PriceSell().ToString();
+            textBoxQuantity.Text = productIn.Quantity().ToString();
+            textBoxWeight.Text = productIn.Weight().ToString();
+            delImg = productIn.ImagePath();
             for (int i = 0; i < comboBoxType.Items.Count; i++)
             {
                 string text = comboBoxType.Items[i].ToString();
-                if (text == productIn.CoffeeType)
+                if (text == productIn.Type())
                 {
                     comboBoxType.SelectedIndex = i;
                     break;
@@ -54,18 +65,22 @@ namespace CoffeeApp
             for (int i = 0; i < comboBoxComposition.Items.Count; i++)
             {
                 string text = comboBoxComposition.Items[i].ToString();
-                if (text == productIn.Composition)
+                if (text == productIn.Composition())
                 {
                     comboBoxComposition.SelectedIndex = i;
                     break;
                 }
             }
-            pictureBoxImg.Image = productIn.Image;
+            pictureBoxImg.Image = System.Drawing.Image.FromFile(productIn.ImagePath());
             timer1.Start();
         }
         public Product GetProduct()
         {
             return product;
+        }
+        public string GetDelImgPath()
+        {
+            return delImg;
         }
         private void pictureBoxImg_Click(object sender, EventArgs e)
         {
@@ -73,7 +88,8 @@ namespace CoffeeApp
             open.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All Files|*.*";
             if (open.ShowDialog() == DialogResult.OK)
             {
-                Image img = Image.FromFile(open.FileName);
+                newImgPath = open.FileName;
+                System.Drawing.Image img = System.Drawing.Image.FromFile(newImgPath);
                 pictureBoxImg.Image = img;
             }
         }
@@ -137,18 +153,90 @@ namespace CoffeeApp
                 return;
             }
 
-            product.Description = textBoxDescription.Text;
-            product.Name = textBoxName.Text;
-            product.CoffeeType = comboBoxType.Text;
-            product.Weight = weight;
-            product.Quantity = quantity;
-            product.Id = id;
-            product.PriceBuy = priceBuy;
-            product.PriceSell = priceSell;
-            product.MadeIn = textBoxCountry.Text;
-            product.Composition = comboBoxComposition.Text;
-            product.Image = pictureBoxImg.Image;
+            if (newImgPath != "")
+            {
+                int backSlash = newImgPath.LastIndexOf('\\');
+
+                string fileName = newImgPath.Substring(backSlash + 1, newImgPath.Length - backSlash - 1);
+                string folderPath = ".\\\\ProductsImage";
+                Directory.CreateDirectory(folderPath);
+                imgPath = Path.Combine(folderPath, fileName);
+                if (!CheckPath(imgPath))
+                {
+                    pictureBoxImg.Image.Save(imgPath);
+                }
+            }
+
+            DataBase data = new DataBase();
+            SQLiteCommand cmd = null;
+            data.openBase();
+            if (product == null)
+            {
+                cmd = new SQLiteCommand("INSERT INTO `Products` (`ID`, `Name`,`Popularity`,`Description`,`PriceBuy`,`PriceSell`,`Quantity`,`Weight`,`Type`,`MadeIn`,`Composition`,`Image`) VALUES (@id, @name, @popularity, @description, @priceBuy, @priceSell, @quantity, @weight, @type, @madeIn, @composition, @image)", data.getConnection());
+                cmd.Parameters.Add("@popularity", DbType.Int32).Value = 0;
+            }
+            else
+            {
+                cmd = new SQLiteCommand("UPDATE `Products` SET `Name` = @name, `Description` = @description,`PriceBuy` = @priceBuy, `PriceSell` = @priceSell, `Quantity` = @quantity, `Weight` = @weight, `Type` = @type, `MadeIn` = @madeIn, `Composition` = @composition, `Image` = @image WHERE id = @id", data.getConnection());
+            }
+        
+            cmd.Parameters.Add("@id", DbType.Int32).Value = id;
+            cmd.Parameters.Add("@name", DbType.String).Value = textBoxName.Text;
+            cmd.Parameters.Add("@description", DbType.String).Value = textBoxDescription.Text;
+            cmd.Parameters.Add("@priceBuy", DbType.Double).Value = priceBuy;
+            cmd.Parameters.Add("@priceSell", DbType.Double).Value = priceSell;
+            cmd.Parameters.Add("@quantity", DbType.Int32).Value = quantity;
+            cmd.Parameters.Add("@weight", DbType.Double).Value = weight;
+            cmd.Parameters.Add("@type", DbType.String).Value = comboBoxType.Text;
+            cmd.Parameters.Add("@madeIn", DbType.String).Value = textBoxCountry.Text;
+            cmd.Parameters.Add("@composition", DbType.String).Value = comboBoxComposition.Text;
+            cmd.Parameters.Add("@image", DbType.String).Value = imgPath;
+
+            if (cmd.ExecuteNonQuery() == 1)
+                MessageBox.Show("Успішно!");
+            data.closeBase();
+
+            product = new Product();
+            product.Description(textBoxDescription.Text);
+            product.Popularity(0);
+            product.Name(textBoxName.Text);
+            product.Type(comboBoxType.Text);
+            product.Weight(weight);
+            product.Quantity(quantity);
+            product.ID(id);
+            product.PriceBuy(priceBuy);
+            product.PriceSell(priceSell);
+            product.MadeIn(textBoxCountry.Text);
+            product.Composition(comboBoxComposition.Text);
+            product.ImagePath(imgPath);
+
+            //if (newImgPath != "" && product != null)
+            //{
+            //    MessageBox.Show("1Ok");
+            //    if (File.Exists(delImg))
+            //    {
+            //        File.Delete(delImg);
+            //        MessageBox.Show("Ok");
+            //    }
+            //}
+
             this.DialogResult = DialogResult.OK;
+        }
+
+        private bool CheckPath(string path)
+        {
+            bool result = false;
+            if (path != "")
+            {
+               DataBase data = new DataBase();
+                data.openBase();
+                SQLiteCommand cmd = new SQLiteCommand("SELECT 1 FROM `Products` WHERE `Image` = @image LIMIT 1", data.getConnection());
+                cmd.Parameters.Add("@image", DbType.String).Value = path;
+                var check = cmd.ExecuteScalar();
+                result = check != null;
+                data.closeBase();
+            }
+            return result;
         }
         private void pictureBoxImg_MouseMove(object sender, MouseEventArgs e)
         {
@@ -179,5 +267,6 @@ namespace CoffeeApp
             buttonAdd.BackColor = SystemColors.Control;
             buttonAdd.ForeColor = SystemColors.ControlText;
         }
+        
     }
 }
