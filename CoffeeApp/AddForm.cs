@@ -165,6 +165,9 @@ namespace CoffeeApp
                 {
                     pictureBoxImg.Image.Save(imgPath);
                 }
+            }else if (product != null)
+            {
+                imgPath = product.ImagePath();
             }
 
             DataBase data = new DataBase();
