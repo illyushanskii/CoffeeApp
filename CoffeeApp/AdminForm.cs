@@ -28,8 +28,11 @@ namespace CoffeeApp
             MainForm = mainForm;
             MainForm.ReadProducts(products);
             FiltredProducts= new List<Product>(products);
-            id = products.Max(p => p.ID());
-            id++;
+            if (products.Count != 0)
+            {
+                id = products.Max(p => p.ID());
+                id++;
+            }
             this.UpdateForm();
         }
         public AdminForm(MainForm mainForm, List<Product> Products)
@@ -38,8 +41,11 @@ namespace CoffeeApp
             MainForm = mainForm;
             products = new List<Product>(Products);
             FiltredProducts = new List<Product>(Products);
-            id = Products.Max(p => p.ID());
-            id++;
+            if (products.Count != 0)
+            {
+                id = products.Max(p => p.ID());
+                id++;
+            }
             UpdateForm();
         }
         public List<Product> GetProducts()
@@ -396,6 +402,8 @@ namespace CoffeeApp
                 {
                     MessageBox.Show("База данних успішно скинута.");
                 }
+                cmd.CommandText = "DELETE FROM `Products`";
+                cmd.ExecuteNonQuery();
                 dataBase.closeBase();
                 Application.Exit();
             }

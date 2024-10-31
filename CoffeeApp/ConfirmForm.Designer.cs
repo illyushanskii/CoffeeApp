@@ -39,11 +39,11 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             label1.ForeColor = Color.Red;
-            label1.Location = new Point(33, 9);
+            label1.Location = new Point(3, 9);
             label1.Name = "label1";
-            label1.Size = new Size(356, 56);
+            label1.Size = new Size(418, 84);
             label1.TabIndex = 0;
-            label1.Text = "Ви підтверджуєте скидання \r\nЛогіну та Паролю Адміністратора?\r\n";
+            label1.Text = "Ви підтверджуєте скидання бази даних? \r\n(Вся інформація зникне)\r\n\r\n";
             label1.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // button1
