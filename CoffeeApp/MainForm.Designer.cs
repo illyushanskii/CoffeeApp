@@ -47,6 +47,7 @@
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
             panel1 = new Panel();
+            MenuItemSortPopularity = new ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,7 +59,7 @@
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
-            toolStrip1.Size = new Size(853, 30);
+            toolStrip1.Size = new Size(905, 30);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -100,6 +101,7 @@
             ButtonSearch.Size = new Size(29, 27);
             ButtonSearch.Text = "toolStripButton2";
             ButtonSearch.ToolTipText = "Пошук";
+            ButtonSearch.Click += ButtonSearch_Click;
             // 
             // TextBoxSearch
             // 
@@ -107,7 +109,10 @@
             TextBoxSearch.Name = "TextBoxSearch";
             TextBoxSearch.Size = new Size(270, 30);
             TextBoxSearch.Text = "Пошук...";
+            TextBoxSearch.Leave += TextBoxSearch_Leave;
+            TextBoxSearch.KeyPress += TextBoxSearch_KeyPress;
             TextBoxSearch.Click += TextBoxSearch_Click;
+            TextBoxSearch.TextChanged += TextBoxSearch_TextChanged;
             // 
             // toolStripSeparator2
             // 
@@ -116,30 +121,34 @@
             // 
             // ButtonSort
             // 
-            ButtonSort.DropDownItems.AddRange(new ToolStripItem[] { MenuItemSortName, MenuItemSortCheap, MenuItemSortExpensive });
+            ButtonSort.AutoSize = false;
+            ButtonSort.DropDownItems.AddRange(new ToolStripItem[] { MenuItemSortName, MenuItemSortPopularity, MenuItemSortCheap, MenuItemSortExpensive });
             ButtonSort.Image = (Image)resources.GetObject("ButtonSort.Image");
             ButtonSort.ImageTransparentColor = Color.Magenta;
             ButtonSort.Name = "ButtonSort";
-            ButtonSort.Size = new Size(142, 27);
-            ButtonSort.Text = "Сортування";
+            ButtonSort.Size = new Size(182, 27);
+            ButtonSort.Text = "За популярністю";
             // 
             // MenuItemSortName
             // 
             MenuItemSortName.Name = "MenuItemSortName";
             MenuItemSortName.Size = new Size(283, 28);
-            MenuItemSortName.Text = "Назва";
+            MenuItemSortName.Text = "За назвою";
+            MenuItemSortName.Click += MenuItemSortName_Click;
             // 
             // MenuItemSortCheap
             // 
             MenuItemSortCheap.Name = "MenuItemSortCheap";
             MenuItemSortCheap.Size = new Size(283, 28);
             MenuItemSortCheap.Text = "Від дешевих до дорогих";
+            MenuItemSortCheap.Click += MenuItemSortCheap_Click;
             // 
             // MenuItemSortExpensive
             // 
             MenuItemSortExpensive.Name = "MenuItemSortExpensive";
             MenuItemSortExpensive.Size = new Size(283, 28);
             MenuItemSortExpensive.Text = "Від дорогих до дешевих";
+            MenuItemSortExpensive.Click += MenuItemSortExpensive_Click;
             // 
             // toolStripSeparator4
             // 
@@ -172,14 +181,21 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 30);
             panel1.Name = "panel1";
-            panel1.Size = new Size(853, 445);
+            panel1.Size = new Size(905, 445);
             panel1.TabIndex = 1;
+            // 
+            // MenuItemSortPopularity
+            // 
+            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
+            MenuItemSortPopularity.Size = new Size(283, 28);
+            MenuItemSortPopularity.Text = "За популярністю";
+            MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(853, 475);
+            ClientSize = new Size(905, 475);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -211,5 +227,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
         private Panel panel1;
+        private ToolStripMenuItem MenuItemSortPopularity;
     }
 }

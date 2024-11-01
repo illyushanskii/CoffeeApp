@@ -19,31 +19,34 @@ namespace CoffeeApp
         int entry = 0;
         List<Product> products = new List<Product>();
         List<Product> FiltredProducts = new List<Product>();
+        Filter filterProd;
+        string sortProd = "pop";
         public MainForm()
         {
             InitializeComponent();
             ReadProducts(products);
+            FiltredProducts = new List<Product>(products);
             UpdateForm();
             DelImages();
         }
         public MainForm(string adm)
         {
             InitializeComponent();
+            DelImages();
             this.Visible = false;
-            AdminForm admin = new AdminForm(this);
+            ReadProducts(products);
+            AdminForm admin = new AdminForm(this,products);
             admin.ShowDialog();
-            products = admin.GetProducts();
-        }
-        public List<Product> GetList()
-        {
-            return products;
+            ReadProducts(products);
+            FiltredProducts = new List<Product>(products);
+            UpdateForm();
         }
         private void toolStripComboBox1_Click(object sender, EventArgs e)
         {
 
         }
 
-        public void ReadProducts(List<Product>read)
+        private void ReadProducts(List<Product> read)
         {
             read.Clear();
             DataBase data = new DataBase();
@@ -72,10 +75,8 @@ namespace CoffeeApp
             }
             data.closeBase();
         }
-        public void UpdateForm()
+        private void UpdateForm()
         {
-            
-            FiltredProducts = new List<Product>(products);
             panel1.Controls.Clear();
             int y = 30;
             if (FiltredProducts.Count == 0)
@@ -165,7 +166,7 @@ namespace CoffeeApp
         }
         private void TextBoxSearch_Click(object sender, EventArgs e)
         {
-
+            TextBoxSearch.Text = "";
         }
 
         private void LabelAdmin_MouseDown(object sender, MouseEventArgs e)
@@ -185,10 +186,11 @@ namespace CoffeeApp
                 if (login.DialogResult == DialogResult.OK)
                 {
                     this.Visible = false;
-                    AdminForm admin = new AdminForm(this, new List<Product>(products));
+                    AdminForm admin = new AdminForm(this,new List<Product>(products));
                     admin.ShowDialog();
-                    products = admin.GetProducts();
-                  
+                    ReadProducts(products);
+                    FiltredProducts = new List<Product>(products);
+                    UpdateForm();
                 }
                 else if (login.DialogResult == DialogResult.No)
                 {
@@ -196,7 +198,7 @@ namespace CoffeeApp
                     timer2.Start();
                 }
             }
-            else if(time >= 5)
+            else if (time >= 5)
             {
                 MessageBox.Show(entry.ToString());
             }
@@ -209,11 +211,15 @@ namespace CoffeeApp
 
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
-        }
-
-        private void ButtonSort_ButtonClick(object sender, EventArgs e)
-        {
-
+            using (FilterForm filterForm = new FilterForm(products, filterProd))
+            {
+                if (filterForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    filterProd = filterForm.GetFilter();
+                    Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+                    UpdateForm();
+                }
+            }
         }
 
         private void timer2_Tick(object sender, EventArgs e)
@@ -265,6 +271,75 @@ namespace CoffeeApp
                     }
                 }
             }
+        }
+
+        private void ButtonSearch_Click(object sender, EventArgs e)
+        {
+            if (TextBoxSearch.Text == "Пошук...")
+                return;
+
+        }
+
+        private void TextBoxSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+                UpdateForm();
+            }
+        }
+
+        private void TextBoxSearch_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
+            {
+                TextBoxSearch.Text = "Пошук...";
+                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+                UpdateForm();
+            }
+        }
+
+        private void TextBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
+            {
+                TextBoxSearch.Text = "";
+                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+                UpdateForm();
+            }
+        }
+
+        private void MenuItemSortName_Click(object sender, EventArgs e)
+        {
+            ButtonSort.Text = MenuItemSortName.Text;
+            sortProd = "nam";
+            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+            UpdateForm();
+        }
+
+        private void MenuItemSortPopularity_Click(object sender, EventArgs e)
+        {
+
+            ButtonSort.Text = MenuItemSortPopularity.Text;
+            sortProd = "pop";
+            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+            UpdateForm();
+        }
+
+        private void MenuItemSortCheap_Click(object sender, EventArgs e)
+        {
+            ButtonSort.Text = "Від дешевих до...";
+            sortProd = "chp";
+            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+            UpdateForm();
+        }
+
+        private void MenuItemSortExpensive_Click(object sender, EventArgs e)
+        {
+            ButtonSort.Text = "Від дорогих до...";
+            sortProd = "exp";
+            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+            UpdateForm();
         }
     }
 }
