@@ -64,7 +64,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            label1.Location = new Point(35, 9);
+            label1.Location = new Point(12, 9);
             label1.Name = "label1";
             label1.Size = new Size(292, 44);
             label1.TabIndex = 2;
@@ -74,11 +74,11 @@
             // buttonCancel
             // 
             buttonCancel.BackColor = SystemColors.ActiveCaption;
-            buttonCancel.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            buttonCancel.Location = new Point(48, 287);
+            buttonCancel.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            buttonCancel.Location = new Point(12, 271);
             buttonCancel.Margin = new Padding(3, 2, 3, 2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(115, 41);
+            buttonCancel.Size = new Size(128, 57);
             buttonCancel.TabIndex = 3;
             buttonCancel.Text = "Вийти";
             buttonCancel.UseVisualStyleBackColor = false;
@@ -87,11 +87,11 @@
             // buttonLogIn
             // 
             buttonLogIn.BackColor = SystemColors.ActiveCaption;
-            buttonLogIn.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            buttonLogIn.Location = new Point(198, 287);
+            buttonLogIn.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            buttonLogIn.Location = new Point(181, 271);
             buttonLogIn.Margin = new Padding(3, 2, 3, 2);
             buttonLogIn.Name = "buttonLogIn";
-            buttonLogIn.Size = new Size(115, 41);
+            buttonLogIn.Size = new Size(128, 57);
             buttonLogIn.TabIndex = 4;
             buttonLogIn.Text = "Увійти";
             buttonLogIn.UseVisualStyleBackColor = false;
@@ -101,10 +101,10 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = SystemColors.ActiveCaption;
-            label2.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label2.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label2.Location = new Point(9, 136);
             label2.Name = "label2";
-            label2.Size = new Size(114, 16);
+            label2.Size = new Size(141, 19);
             label2.TabIndex = 5;
             label2.Text = "Введіть пароль:";
             // 
@@ -112,10 +112,10 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = SystemColors.ActiveCaption;
-            label3.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label3.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label3.Location = new Point(12, 208);
             label3.Name = "label3";
-            label3.Size = new Size(128, 16);
+            label3.Size = new Size(160, 19);
             label3.TabIndex = 6;
             label3.Text = "Повторіть пароль:";
             // 
@@ -123,11 +123,11 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = SystemColors.ActiveCaption;
-            label4.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label4.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label4.ForeColor = SystemColors.ControlText;
             label4.Location = new Point(12, 67);
             label4.Name = "label4";
-            label4.Size = new Size(99, 16);
+            label4.Size = new Size(123, 19);
             label4.TabIndex = 8;
             label4.Text = "Введіть логін:";
             // 
@@ -146,7 +146,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(361, 354);
+            ClientSize = new Size(321, 341);
             Controls.Add(label4);
             Controls.Add(textBoxLogin);
             Controls.Add(label3);
