@@ -124,6 +124,7 @@
             label4.AutoSize = true;
             label4.BackColor = SystemColors.ActiveCaption;
             label4.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label4.ForeColor = SystemColors.ControlText;
             label4.Location = new Point(12, 67);
             label4.Name = "label4";
             label4.Size = new Size(99, 16);
@@ -144,6 +145,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(361, 354);
             Controls.Add(label4);
             Controls.Add(textBoxLogin);
