@@ -22,19 +22,6 @@ namespace CoffeeApp
         Filter filterProd;
         MainForm MainForm;
         string sortProd = "pop";
-        //public AdminForm(MainForm mainForm)
-        //{
-        //    InitializeComponent();
-        //    MainForm = mainForm;
-        //    MainForm.ReadProducts(products);
-        //    FiltredProducts = new List<Product>(products);
-        //    if (products.Count != 0)
-        //    {
-        //        id = products.Max(p => p.ID());
-        //        id++;
-        //    }
-        //    this.UpdateForm();
-        //}
         public AdminForm(MainForm mainForm, List<Product> Products)
         {
             InitializeComponent();
@@ -48,11 +35,6 @@ namespace CoffeeApp
             }
             UpdateForm();
         }
-        //public List<Product> GetProducts()
-        //{
-        //    MessageBox.Show(products.Count.ToString());
-        //    return new List<Product>(products);
-        //}
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             AddForm form = new AddForm(id);
@@ -61,13 +43,13 @@ namespace CoffeeApp
             {
                 products.Add(form.GetProduct());
                 id++;
-                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                 UpdateForm();
             }
         }
 
         private void UpdateForm()
         {
+            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             panel1.Controls.Clear();
             int y = 30;
             if (FiltredProducts.Count == 0)
@@ -177,7 +159,6 @@ namespace CoffeeApp
                     products.RemoveAt(i);
                 }
             }
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -198,7 +179,6 @@ namespace CoffeeApp
                     }
                 }
             }
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -225,7 +205,6 @@ namespace CoffeeApp
                 if (filterForm.ShowDialog(this) == DialogResult.OK)
                 {
                     filterProd = filterForm.GetFilter();
-                    Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                     UpdateForm();
                 }
             }
@@ -240,7 +219,6 @@ namespace CoffeeApp
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                 UpdateForm();
             }
         }
@@ -249,7 +227,6 @@ namespace CoffeeApp
         {
             if (TextBoxSearch.Text == "Пошук...")
                 return;
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -258,7 +235,6 @@ namespace CoffeeApp
             if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
             {
                 TextBoxSearch.Text = "";
-                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                 UpdateForm();
             }
         }
@@ -268,7 +244,6 @@ namespace CoffeeApp
             if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
             {
                 TextBoxSearch.Text = "Пошук...";
-                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                 UpdateForm();
             }
         }
@@ -277,7 +252,6 @@ namespace CoffeeApp
         {
             ButtonSort.Text = MenuItemSortName.Text;
             sortProd = "nam";
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -285,7 +259,6 @@ namespace CoffeeApp
         {
             ButtonSort.Text = MenuItemSortPopularity.Text;
             sortProd = "pop";
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -293,7 +266,6 @@ namespace CoffeeApp
         {
             ButtonSort.Text = "Від дешевих до...";
             sortProd = "chp";
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -301,7 +273,6 @@ namespace CoffeeApp
         {
             ButtonSort.Text = "Від дорогих до...";
             sortProd = "exp";
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
         
@@ -310,7 +281,6 @@ namespace CoffeeApp
         {
             if (MainForm != null)
             {
-                //MainForm.ReadProducts(MainForm.GetList());
                 MainForm.Visible = true;
             }
         }
@@ -329,6 +299,8 @@ namespace CoffeeApp
                     MessageBox.Show("База данних успішно скинута.");
                 }
                 cmd.CommandText = "DELETE FROM Products";
+                cmd.ExecuteNonQuery();
+                cmd.CommandText = "DELETE FROM Carts";
                 cmd.ExecuteNonQuery();
                 dataBase.closeBase();
                 Application.Restart();

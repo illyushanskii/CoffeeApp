@@ -8,18 +8,17 @@ namespace CoffeeApp
     {
         private int id;
         private int popularity;
-        private string description;
-        private string name;
+        private string description = "";
+        private string name = "";
         private double priceBuy;
         private double priceSell;
         private int quantity;
         private double weight;
-        private string type;
-        private string madeIn;
-        private string composition;
-        private string imagePath;
+        private string type = "";
+        private string madeIn = "";
+        private string composition = "";
+        private string imagePath = "";
 
-        public Product() { }
         public void ID(int ID){id = ID;}
         public int ID() { return id; }
         public void Popularity(int pop) { popularity = pop; }

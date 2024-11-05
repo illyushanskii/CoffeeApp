@@ -40,14 +40,14 @@
             toolStripSeparator2 = new ToolStripSeparator();
             ButtonSort = new ToolStripSplitButton();
             MenuItemSortName = new ToolStripMenuItem();
+            MenuItemSortPopularity = new ToolStripMenuItem();
             MenuItemSortCheap = new ToolStripMenuItem();
             MenuItemSortExpensive = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
-            toolStripButton1 = new ToolStripButton();
+            ButtonCart = new ToolStripButton();
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
             panel1 = new Panel();
-            MenuItemSortPopularity = new ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,7 +55,7 @@
             // 
             toolStrip1.Font = new Font("Segoe UI", 10F);
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { LabelAdmin, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { LabelAdmin, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, ButtonCart });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
@@ -105,6 +105,7 @@
             // 
             // TextBoxSearch
             // 
+            TextBoxSearch.BackColor = SystemColors.Window;
             TextBoxSearch.Font = new Font("Segoe UI", 10F);
             TextBoxSearch.Name = "TextBoxSearch";
             TextBoxSearch.Size = new Size(270, 30);
@@ -136,6 +137,13 @@
             MenuItemSortName.Text = "За назвою";
             MenuItemSortName.Click += MenuItemSortName_Click;
             // 
+            // MenuItemSortPopularity
+            // 
+            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
+            MenuItemSortPopularity.Size = new Size(283, 28);
+            MenuItemSortPopularity.Text = "За популярністю";
+            MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
+            // 
             // MenuItemSortCheap
             // 
             MenuItemSortCheap.Name = "MenuItemSortCheap";
@@ -155,14 +163,15 @@
             toolStripSeparator4.Name = "toolStripSeparator4";
             toolStripSeparator4.Size = new Size(6, 30);
             // 
-            // toolStripButton1
+            // ButtonCart
             // 
-            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
-            toolStripButton1.ImageTransparentColor = Color.Magenta;
-            toolStripButton1.Name = "toolStripButton1";
-            toolStripButton1.RightToLeft = RightToLeft.No;
-            toolStripButton1.Size = new Size(86, 27);
-            toolStripButton1.Text = "Кошик";
+            ButtonCart.Image = (Image)resources.GetObject("ButtonCart.Image");
+            ButtonCart.ImageTransparentColor = Color.Magenta;
+            ButtonCart.Name = "ButtonCart";
+            ButtonCart.RightToLeft = RightToLeft.No;
+            ButtonCart.Size = new Size(86, 27);
+            ButtonCart.Text = "Кошик";
+            ButtonCart.Click += ButtonCart_Click;
             // 
             // timer1
             // 
@@ -183,13 +192,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(905, 445);
             panel1.TabIndex = 1;
-            // 
-            // MenuItemSortPopularity
-            // 
-            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
-            MenuItemSortPopularity.Size = new Size(283, 28);
-            MenuItemSortPopularity.Text = "За популярністю";
-            MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
             // MainForm
             // 
@@ -222,7 +224,7 @@
         private ToolStripMenuItem MenuItemSortName;
         private ToolStripMenuItem MenuItemSortCheap;
         private ToolStripMenuItem MenuItemSortExpensive;
-        private ToolStripButton toolStripButton1;
+        public ToolStripButton ButtonCart;
         private ToolStripLabel LabelAdmin;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;

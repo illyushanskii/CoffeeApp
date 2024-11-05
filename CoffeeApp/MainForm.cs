@@ -19,6 +19,7 @@ namespace CoffeeApp
         int entry = 0;
         List<Product> products = new List<Product>();
         List<Product> FiltredProducts = new List<Product>();
+        List<Cart> carts = new List<Cart>();
         Filter filterProd;
         string sortProd = "pop";
         public MainForm()
@@ -28,6 +29,7 @@ namespace CoffeeApp
             FiltredProducts = new List<Product>(products);
             UpdateForm();
             DelImages();
+            
         }
         public MainForm(string adm)
         {
@@ -35,15 +37,11 @@ namespace CoffeeApp
             DelImages();
             this.Visible = false;
             ReadProducts(products);
-            AdminForm admin = new AdminForm(this,products);
+            AdminForm admin = new AdminForm(this, products);
             admin.ShowDialog();
             ReadProducts(products);
             FiltredProducts = new List<Product>(products);
             UpdateForm();
-        }
-        private void toolStripComboBox1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void ReadProducts(List<Product> read)
@@ -77,8 +75,10 @@ namespace CoffeeApp
         }
         private void UpdateForm()
         {
+            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             panel1.Controls.Clear();
             int y = 30;
+            Filter.EmptyProduct(FiltredProducts);
             if (FiltredProducts.Count == 0)
             {
                 Label noSearch = new Label();
@@ -95,10 +95,9 @@ namespace CoffeeApp
                 Product product = FiltredProducts[inx];
                 PictureBox pictureBox = new PictureBox();
                 System.Windows.Forms.TextBox textBoxInfo = new System.Windows.Forms.TextBox();
-                NumericUpDown numericUpDownQuantity = new NumericUpDown();
                 Label labelQuantity = new Label();
-                System.Windows.Forms.Button delButton = new System.Windows.Forms.Button();
-                System.Windows.Forms.Button editButton = new System.Windows.Forms.Button();
+                System.Windows.Forms.Button addCartButton = new System.Windows.Forms.Button();
+                System.Windows.Forms.Button infoButton = new System.Windows.Forms.Button();
 
                 pictureBox.Image = System.Drawing.Image.FromFile(product.ImagePath());
                 pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -114,56 +113,114 @@ namespace CoffeeApp
                 textBoxInfo.Width = 500;
                 textBoxInfo.Height = 100;
 
-                Font quantityFont = new Font("Arial", 12);
-                numericUpDownQuantity.Font = quantityFont;
-                numericUpDownQuantity.Location = new Point(630, y + 50);
-                numericUpDownQuantity.Width = 100;
-                numericUpDownQuantity.Tag = inx;
-                numericUpDownQuantity.Minimum = 0;
-                numericUpDownQuantity.Maximum = 9999999999;
-                numericUpDownQuantity.Value = product.Quantity();
-                numericUpDownQuantity.MouseWheel += NumericUpDownQuantity_MouseWheel;
-                //numericUpDownQuantity.ValueChanged += NumericUpDownQuantity_ValueChanged;
-
-
+                Font quantityFont = new Font("Arial", 11, FontStyle.Bold);
                 labelQuantity.Font = quantityFont;
-                labelQuantity.Text = "Кількість";
-                labelQuantity.Location = new Point(630, y + 20);
+                labelQuantity.Text = $"Ціна {product.PriceSell().ToString("F2")} грн.\nВ наявності";
+                labelQuantity.ForeColor = Color.Green;
+                labelQuantity.Location = new Point(630, y + 10);
                 labelQuantity.AutoSize = true;
+                labelQuantity.Width = 150;
+                labelQuantity.TextAlign = ContentAlignment.MiddleCenter;
 
                 Font buttonFont = new Font("Arial", 10, FontStyle.Bold);
-                delButton.Font = buttonFont;
-                delButton.Location = new Point(740, y + 5);
-                delButton.Tag = inx;
-                //delButton.Click += DelButton_Click;
-                delButton.Width = 110;
-                delButton.BackColor = Color.Red;
-                delButton.Height = 45;
-                delButton.Text = "Видалити";
 
-                editButton.Font = buttonFont;
-                editButton.Location = new Point(740, y + 55);
-                editButton.Tag = inx;
-                //editButton.Click += EditButton_Click;
-                editButton.Width = 110;
-                editButton.BackColor = Color.Yellow;
-                editButton.Height = 45;
-                editButton.Text = "Змінити";
+                addCartButton.Location = new Point(800, y + 10);
+                addCartButton.Tag = inx;
+                addCartButton.Click += addCartButton_Click;
+                addCartButton.Width = 80;
+                addCartButton.BackColor = Color.FromArgb(0, 241, 43);
+                addCartButton.Height = 80;
+                addCartButton.Image = Image.FromFile(".\\Icons\\addCart.png");   
+                addCartButton.Text = "";
 
+                infoButton.Font = buttonFont;
+                infoButton.Location = new Point(630, y + 55);
+                infoButton.Tag = inx;
+                infoButton.Click += InfoButton_Click;
+                infoButton.Width = 150;
+                infoButton.BackColor = Color.DeepSkyBlue;
+                infoButton.Height = 45;
+                infoButton.Text = "Характеристики";
+
+                if (product.Quantity() < 1)
+                {
+                    textBoxInfo.BackColor = Color.Silver;
+                    addCartButton.Enabled = false;
+                    labelQuantity.Text = $"Ціна {product.PriceSell().ToString("F2")} грн.\nНе в наявності";
+                    labelQuantity.ForeColor = Color.Red;
+                }
+                if(carts.Count != 0)
+                {
+                    foreach(Cart cart in carts)
+                    {
+                        if (cart.ProductId() == product.ID())
+                        {
+                            addCartButton.Image = Image.FromFile(".\\Icons\\inCart.png");
+                            addCartButton.BackColor = Control.DefaultBackColor;
+                        }
+                    }
+                }
                 panel1.Controls.Add(pictureBox);
                 panel1.Controls.Add(textBoxInfo);
-                panel1.Controls.Add(delButton);
-                panel1.Controls.Add(editButton);
-                panel1.Controls.Add(numericUpDownQuantity);
+                panel1.Controls.Add(addCartButton);
+                panel1.Controls.Add(infoButton);
                 panel1.Controls.Add(labelQuantity);
                 y += 110;
             }
         }
 
-        private void NumericUpDownQuantity_MouseWheel(object sender, MouseEventArgs e)
+        private void addCartButton_Click(object sender, EventArgs e)
         {
-            ((HandledMouseEventArgs)e).Handled = true;
+            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
+            int inx = (int)clickedButton.Tag;
+            Product check = FiltredProducts[inx];
+            if (carts.Count != 0)
+            {
+                foreach (Cart cart in carts)
+                {
+                    if (cart.ProductId() == check.ID())
+                    {
+                        CartForm cartForm = new CartForm(carts, this);
+                        cartForm.ShowDialog(this);
+                        UpdateForm();
+                        return;
+                    }
+                }
+            }
+            ButtonCart.Checked = true;
+            Cart newCart = new Cart();
+            newCart.Quantity(1);
+            newCart.Popularity(check.Popularity());
+            newCart.ProductQuantity(check.Quantity());
+            newCart.ProductId(check.ID());
+            newCart.Description(check.Description());
+            newCart.ImagePath(check.ImagePath());
+            newCart.PriceBuy(check.PriceBuy());
+            newCart.PriceSell(check.PriceSell());
+            carts.Add(newCart);
+            CartForm cartForm1 = new CartForm(carts, this);
+            cartForm1.ShowDialog(this);
+            if (cartForm1.DialogResult == DialogResult.OK)
+            {
+                ReadProducts(products);
+                FiltredProducts = new List<Product>(products);
+                TextBoxSearch.Text = "Пошук...";
+                ButtonSort.Text = "За популярністю";
+                sortProd = "pop";
+                filterProd = null;
+                ButtonFilter.Checked = false;
+            }
+            UpdateForm();
         }
+
+        private void InfoButton_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
+            int inx = (int)clickedButton.Tag;
+            InfoForm infoForm = new InfoForm(FiltredProducts[inx]);
+            infoForm.ShowDialog(this);
+        }
+
         private void TextBoxSearch_Click(object sender, EventArgs e)
         {
             TextBoxSearch.Text = "";
@@ -186,7 +243,7 @@ namespace CoffeeApp
                 if (login.DialogResult == DialogResult.OK)
                 {
                     this.Visible = false;
-                    AdminForm admin = new AdminForm(this,new List<Product>(products));
+                    AdminForm admin = new AdminForm(this, new List<Product>(products));
                     admin.ShowDialog();
                     ReadProducts(products);
                     FiltredProducts = new List<Product>(products);
@@ -216,7 +273,6 @@ namespace CoffeeApp
                 if (filterForm.ShowDialog(this) == DialogResult.OK)
                 {
                     filterProd = filterForm.GetFilter();
-                    Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                     UpdateForm();
                 }
             }
@@ -284,7 +340,6 @@ namespace CoffeeApp
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                 UpdateForm();
             }
         }
@@ -294,7 +349,6 @@ namespace CoffeeApp
             if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
             {
                 TextBoxSearch.Text = "Пошук...";
-                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                 UpdateForm();
             }
         }
@@ -304,7 +358,6 @@ namespace CoffeeApp
             if (string.IsNullOrWhiteSpace(TextBoxSearch.Text))
             {
                 TextBoxSearch.Text = "";
-                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
                 UpdateForm();
             }
         }
@@ -313,7 +366,6 @@ namespace CoffeeApp
         {
             ButtonSort.Text = MenuItemSortName.Text;
             sortProd = "nam";
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -322,7 +374,6 @@ namespace CoffeeApp
 
             ButtonSort.Text = MenuItemSortPopularity.Text;
             sortProd = "pop";
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -330,7 +381,6 @@ namespace CoffeeApp
         {
             ButtonSort.Text = "Від дешевих до...";
             sortProd = "chp";
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
             UpdateForm();
         }
 
@@ -338,7 +388,23 @@ namespace CoffeeApp
         {
             ButtonSort.Text = "Від дорогих до...";
             sortProd = "exp";
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+            UpdateForm();
+        }
+
+        private void ButtonCart_Click(object sender, EventArgs e)
+        {
+            CartForm cartForm = new CartForm(carts,this);
+            cartForm.ShowDialog(this);
+            if (cartForm.DialogResult == DialogResult.OK)
+            {
+                ReadProducts(products);
+                FiltredProducts = new List<Product>(products);
+                TextBoxSearch.Text = "Пошук...";
+                ButtonSort.Text = "За популярністю";
+                sortProd = "pop";
+                filterProd = null;
+                ButtonFilter.Checked = false;
+            }
             UpdateForm();
         }
     }

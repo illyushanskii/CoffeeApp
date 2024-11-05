@@ -14,6 +14,8 @@ using static System.Net.Mime.MediaTypeNames;
 using static System.Data.Entity.Infrastructure.Design.Executor;
 using System.IO;
 using System.Data.SqlClient;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CoffeeApp
 {
@@ -21,9 +23,9 @@ namespace CoffeeApp
     {
         Product product;
         int id;
-        string delImg;
         string imgPath = ".\\Icons\\image.png";
         string newImgPath = "";
+        string info = "";
         public AddForm(int Id)
         {
             InitializeComponent();
@@ -48,11 +50,10 @@ namespace CoffeeApp
             textBoxName.Text = productIn.Name();
             textBoxDescription.Text = productIn.Description();
             textBoxCountry.Text = productIn.MadeIn();
-            textBoxPriceBuy.Text = productIn.PriceBuy().ToString();
-            textBoxPriceSell.Text = productIn.PriceSell().ToString();
+            textBoxPriceBuy.Text = productIn.PriceBuy().ToString("F2");
+            textBoxPriceSell.Text = productIn.PriceSell().ToString("F2");
             textBoxQuantity.Text = productIn.Quantity().ToString();
             textBoxWeight.Text = productIn.Weight().ToString();
-            delImg = productIn.ImagePath();
             for (int i = 0; i < comboBoxType.Items.Count; i++)
             {
                 string text = comboBoxType.Items[i].ToString();
@@ -74,14 +75,12 @@ namespace CoffeeApp
             pictureBoxImg.Image = System.Drawing.Image.FromFile(productIn.ImagePath());
             timer1.Start();
         }
+
         public Product GetProduct()
         {
             return product;
         }
-        public string GetDelImgPath()
-        {
-            return delImg;
-        }
+
         private void pictureBoxImg_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -98,7 +97,7 @@ namespace CoffeeApp
             bool result = true;
             foreach (Control ctrl in groupBox1.Controls)
             {
-                if (ctrl is TextBox textBox && string.IsNullOrWhiteSpace(textBox.Text))
+                if (ctrl is System.Windows.Forms.TextBox textBox && string.IsNullOrWhiteSpace(textBox.Text))
                 {
                     result = false;
                 }
@@ -212,16 +211,6 @@ namespace CoffeeApp
             product.MadeIn(textBoxCountry.Text);
             product.Composition(comboBoxComposition.Text);
             product.ImagePath(imgPath);
-
-            //if (newImgPath != "" && product != null)
-            //{
-            //    MessageBox.Show("1Ok");
-            //    if (File.Exists(delImg))
-            //    {
-            //        File.Delete(delImg);
-            //        MessageBox.Show("Ok");
-            //    }
-            //}
 
             this.DialogResult = DialogResult.OK;
         }
