@@ -31,17 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfirmForm));
             label1 = new Label();
             button1 = new Button();
-            button2 = new Button();
+            confirm = new Button();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label1.ForeColor = Color.Red;
-            label1.Location = new Point(3, 9);
+            label1.ForeColor = Color.FromArgb(192, 0, 0);
+            label1.Location = new Point(12, 9);
             label1.Name = "label1";
-            label1.Size = new Size(418, 84);
+            label1.Size = new Size(334, 63);
             label1.TabIndex = 0;
             label1.Text = "Ви підтверджуєте скидання бази даних? \r\n(Вся інформація зникне)\r\n\r\n";
             label1.TextAlign = ContentAlignment.MiddleCenter;
@@ -50,38 +50,42 @@
             // 
             button1.DialogResult = DialogResult.Cancel;
             button1.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            button1.Location = new Point(12, 99);
+            button1.Location = new Point(12, 72);
+            button1.Margin = new Padding(3, 2, 3, 2);
             button1.Name = "button1";
-            button1.Size = new Size(142, 45);
+            button1.Size = new Size(124, 34);
             button1.TabIndex = 1;
             button1.Text = "Скасувати";
             button1.UseVisualStyleBackColor = true;
             button1.MouseEnter += button1_MouseEnter;
             button1.MouseLeave += button1_MouseLeave;
             // 
-            // button2
+            // confirm
             // 
-            button2.DialogResult = DialogResult.OK;
-            button2.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            button2.ForeColor = Color.Red;
-            button2.Location = new Point(238, 99);
-            button2.Name = "button2";
-            button2.Size = new Size(142, 45);
-            button2.TabIndex = 2;
-            button2.Text = "Підтвердити";
-            button2.UseVisualStyleBackColor = true;
-            button2.MouseEnter += button2_MouseEnter;
-            button2.MouseLeave += button2_MouseLeave;
+            confirm.DialogResult = DialogResult.OK;
+            confirm.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            confirm.ForeColor = Color.FromArgb(192, 0, 0);
+            confirm.Location = new Point(228, 72);
+            confirm.Margin = new Padding(3, 2, 3, 2);
+            confirm.Name = "confirm";
+            confirm.Size = new Size(124, 34);
+            confirm.TabIndex = 2;
+            confirm.Text = "Підтвердити";
+            confirm.UseVisualStyleBackColor = true;
+            confirm.MouseEnter += confirm_MouseEnter;
+            confirm.MouseLeave += confirm_MouseLeave;
             // 
             // ConfirmForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(416, 156);
-            Controls.Add(button2);
+            BackColor = SystemColors.ActiveCaption;
+            ClientSize = new Size(364, 117);
+            Controls.Add(confirm);
             Controls.Add(button1);
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "ConfirmForm";
@@ -95,6 +99,6 @@
 
         private Label label1;
         private Button button1;
-        private Button button2;
+        private Button confirm;
     }
 }

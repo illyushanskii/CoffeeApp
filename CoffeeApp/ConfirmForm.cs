@@ -18,17 +18,18 @@ namespace CoffeeApp
         }
 
 
-        private void button2_MouseEnter(object sender, EventArgs e)
+        private void confirm_MouseEnter(object sender, EventArgs e)
         {
-            button2.ForeColor = Color.White;
-            button2.BackColor = Color.Red;
+            confirm.BackColor = Color.Red;
+            confirm.ForeColor = Color.White;
         }
 
-        private void button2_MouseLeave(object sender, EventArgs e)
+        private void confirm_MouseLeave(object sender, EventArgs e)
         {
-            button2.ForeColor = Color.Red;
-            button2.BackColor = Control.DefaultBackColor;
+            confirm.BackColor = SystemColors.Control;
+            confirm.ForeColor = SystemColors.ControlText;
         }
+
 
         private void button1_MouseEnter(object sender, EventArgs e)
         {

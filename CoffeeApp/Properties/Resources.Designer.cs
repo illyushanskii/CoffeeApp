@@ -69,5 +69,15 @@ namespace CoffeeApp.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap istockphoto_1135341047_612x612 {
+            get {
+                object obj = ResourceManager.GetObject("istockphoto-1135341047-612x612", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
