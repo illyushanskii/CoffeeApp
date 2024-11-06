@@ -66,9 +66,9 @@
             label_ID.AutoSize = true;
             label_ID.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label_ID.ForeColor = Color.FromArgb(82, 38, 7);
-            label_ID.Location = new Point(9, 15);
+            label_ID.Location = new Point(8, 11);
             label_ID.Name = "label_ID";
-            label_ID.Size = new Size(48, 23);
+            label_ID.Size = new Size(39, 19);
             label_ID.TabIndex = 26;
             label_ID.Text = "ID: 0";
             label_ID.Visible = false;
@@ -78,9 +78,10 @@
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             buttonCancel.ForeColor = Color.FromArgb(82, 38, 7);
-            buttonCancel.Location = new Point(0, 420);
+            buttonCancel.Location = new Point(0, 315);
+            buttonCancel.Margin = new Padding(3, 2, 3, 2);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(150, 48);
+            buttonCancel.Size = new Size(131, 36);
             buttonCancel.TabIndex = 0;
             buttonCancel.Text = "Скасувати";
             buttonCancel.UseVisualStyleBackColor = true;
@@ -92,9 +93,10 @@
             buttonAdd.Enabled = false;
             buttonAdd.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             buttonAdd.ForeColor = Color.FromArgb(82, 38, 7);
-            buttonAdd.Location = new Point(160, 420);
+            buttonAdd.Location = new Point(140, 315);
+            buttonAdd.Margin = new Padding(3, 2, 3, 2);
             buttonAdd.Name = "buttonAdd";
-            buttonAdd.Size = new Size(145, 48);
+            buttonAdd.Size = new Size(127, 36);
             buttonAdd.TabIndex = 1;
             buttonAdd.Text = "Додати";
             buttonAdd.UseVisualStyleBackColor = true;
@@ -107,18 +109,20 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             label1.ForeColor = Color.FromArgb(82, 38, 7);
-            label1.Location = new Point(119, 9);
+            label1.Location = new Point(104, 7);
             label1.Name = "label1";
-            label1.Size = new Size(83, 32);
+            label1.Size = new Size(66, 25);
             label1.TabIndex = 3;
             label1.Text = "Товар";
             // 
             // pictureBoxImg
             // 
+            pictureBoxImg.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBoxImg.Image = (Image)resources.GetObject("pictureBoxImg.Image");
-            pictureBoxImg.Location = new Point(11, 48);
+            pictureBoxImg.Location = new Point(10, 36);
+            pictureBoxImg.Margin = new Padding(3, 2, 3, 2);
             pictureBoxImg.Name = "pictureBoxImg";
-            pictureBoxImg.Size = new Size(101, 101);
+            pictureBoxImg.Size = new Size(88, 76);
             pictureBoxImg.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBoxImg.TabIndex = 4;
             pictureBoxImg.TabStop = false;
@@ -131,9 +135,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label2.ForeColor = Color.FromArgb(82, 38, 7);
-            label2.Location = new Point(142, 87);
+            label2.Location = new Point(124, 65);
             label2.Name = "label2";
-            label2.Size = new Size(135, 28);
+            label2.Size = new Size(108, 21);
             label2.TabIndex = 5;
             label2.Text = "Фото товару";
             // 
@@ -142,9 +146,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label3.ForeColor = Color.FromArgb(82, 38, 7);
-            label3.Location = new Point(0, 20);
+            label3.Location = new Point(0, 15);
             label3.Name = "label3";
-            label3.Size = new Size(73, 22);
+            label3.Size = new Size(55, 18);
             label3.TabIndex = 6;
             label3.Text = "Назва:";
             // 
@@ -153,9 +157,9 @@
             label4.AutoSize = true;
             label4.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label4.ForeColor = Color.FromArgb(82, 38, 7);
-            label4.Location = new Point(0, 60);
+            label4.Location = new Point(0, 45);
             label4.Name = "label4";
-            label4.Size = new Size(137, 22);
+            label4.Size = new Size(104, 18);
             label4.TabIndex = 7;
             label4.Text = "Ціна закупки:";
             // 
@@ -164,9 +168,9 @@
             label5.AutoSize = true;
             label5.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label5.ForeColor = Color.FromArgb(82, 38, 7);
-            label5.Location = new Point(0, 100);
+            label5.Location = new Point(0, 75);
             label5.Name = "label5";
-            label5.Size = new Size(145, 22);
+            label5.Size = new Size(110, 18);
             label5.TabIndex = 8;
             label5.Text = "Ціна продажу:";
             // 
@@ -175,9 +179,9 @@
             label6.AutoSize = true;
             label6.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label6.ForeColor = Color.FromArgb(82, 38, 7);
-            label6.Location = new Point(0, 140);
+            label6.Location = new Point(0, 105);
             label6.Name = "label6";
-            label6.Size = new Size(105, 22);
+            label6.Size = new Size(79, 18);
             label6.TabIndex = 9;
             label6.Text = "Кількість:";
             // 
@@ -186,50 +190,55 @@
             label7.AutoSize = true;
             label7.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label7.ForeColor = Color.FromArgb(82, 38, 7);
-            label7.Location = new Point(0, 180);
+            label7.Location = new Point(0, 135);
             label7.Name = "label7";
-            label7.Size = new Size(124, 22);
+            label7.Size = new Size(92, 18);
             label7.TabIndex = 10;
             label7.Text = "Маса нетто:";
             // 
             // textBoxName
             // 
-            textBoxName.Location = new Point(73, 13);
+            textBoxName.Location = new Point(64, 10);
+            textBoxName.Margin = new Padding(3, 2, 3, 2);
             textBoxName.MaxLength = 32;
             textBoxName.Name = "textBoxName";
-            textBoxName.Size = new Size(234, 27);
+            textBoxName.Size = new Size(205, 23);
             textBoxName.TabIndex = 11;
             // 
             // textBoxPriceBuy
             // 
-            textBoxPriceBuy.Location = new Point(143, 53);
+            textBoxPriceBuy.Location = new Point(125, 40);
+            textBoxPriceBuy.Margin = new Padding(3, 2, 3, 2);
             textBoxPriceBuy.MaxLength = 10;
             textBoxPriceBuy.Name = "textBoxPriceBuy";
-            textBoxPriceBuy.Size = new Size(164, 27);
+            textBoxPriceBuy.Size = new Size(144, 23);
             textBoxPriceBuy.TabIndex = 12;
             // 
             // textBoxPriceSell
             // 
-            textBoxPriceSell.Location = new Point(151, 93);
+            textBoxPriceSell.Location = new Point(132, 70);
+            textBoxPriceSell.Margin = new Padding(3, 2, 3, 2);
             textBoxPriceSell.MaxLength = 10;
             textBoxPriceSell.Name = "textBoxPriceSell";
-            textBoxPriceSell.Size = new Size(156, 27);
+            textBoxPriceSell.Size = new Size(137, 23);
             textBoxPriceSell.TabIndex = 13;
             // 
             // textBoxQuantity
             // 
-            textBoxQuantity.Location = new Point(107, 133);
+            textBoxQuantity.Location = new Point(94, 100);
+            textBoxQuantity.Margin = new Padding(3, 2, 3, 2);
             textBoxQuantity.MaxLength = 10;
             textBoxQuantity.Name = "textBoxQuantity";
-            textBoxQuantity.Size = new Size(200, 27);
+            textBoxQuantity.Size = new Size(176, 23);
             textBoxQuantity.TabIndex = 14;
             // 
             // textBoxWeight
             // 
-            textBoxWeight.Location = new Point(130, 173);
+            textBoxWeight.Location = new Point(114, 130);
+            textBoxWeight.Margin = new Padding(3, 2, 3, 2);
             textBoxWeight.MaxLength = 10;
             textBoxWeight.Name = "textBoxWeight";
-            textBoxWeight.Size = new Size(176, 27);
+            textBoxWeight.Size = new Size(154, 23);
             textBoxWeight.TabIndex = 15;
             // 
             // label8
@@ -237,9 +246,9 @@
             label8.AutoSize = true;
             label8.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label8.ForeColor = Color.FromArgb(82, 38, 7);
-            label8.Location = new Point(0, 220);
+            label8.Location = new Point(0, 165);
             label8.Name = "label8";
-            label8.Size = new Size(102, 22);
+            label8.Size = new Size(77, 18);
             label8.TabIndex = 16;
             label8.Text = "Тип кави:";
             // 
@@ -248,18 +257,19 @@
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label9.ForeColor = Color.FromArgb(82, 38, 7);
-            label9.Location = new Point(0, 257);
+            label9.Location = new Point(0, 193);
             label9.Name = "label9";
-            label9.Size = new Size(181, 25);
+            label9.Size = new Size(138, 20);
             label9.TabIndex = 18;
             label9.Text = "Країна-виробник:";
             // 
             // textBoxCountry
             // 
-            textBoxCountry.Location = new Point(177, 255);
+            textBoxCountry.Location = new Point(155, 191);
+            textBoxCountry.Margin = new Padding(3, 2, 3, 2);
             textBoxCountry.MaxLength = 32;
             textBoxCountry.Name = "textBoxCountry";
-            textBoxCountry.Size = new Size(129, 27);
+            textBoxCountry.Size = new Size(113, 23);
             textBoxCountry.TabIndex = 19;
             // 
             // label10
@@ -267,9 +277,9 @@
             label10.AutoSize = true;
             label10.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label10.ForeColor = Color.FromArgb(82, 38, 7);
-            label10.Location = new Point(2, 297);
+            label10.Location = new Point(2, 223);
             label10.Name = "label10";
-            label10.Size = new Size(122, 25);
+            label10.Size = new Size(94, 20);
             label10.TabIndex = 20;
             label10.Text = "Склад кави:";
             // 
@@ -283,9 +293,10 @@
             comboBoxComposition.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxComposition.FormattingEnabled = true;
             comboBoxComposition.Items.AddRange(new object[] { "Арабіка", "Купаж", "Робуста", "Ліберіка", "Ексцельса" });
-            comboBoxComposition.Location = new Point(121, 293);
+            comboBoxComposition.Location = new Point(106, 220);
+            comboBoxComposition.Margin = new Padding(3, 2, 3, 2);
             comboBoxComposition.Name = "comboBoxComposition";
-            comboBoxComposition.Size = new Size(186, 28);
+            comboBoxComposition.Size = new Size(163, 23);
             comboBoxComposition.TabIndex = 21;
             // 
             // comboBoxType
@@ -293,18 +304,20 @@
             comboBoxType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxType.FormattingEnabled = true;
             comboBoxType.Items.AddRange(new object[] { "У зернах", "У капсулах", "Дріп-кава", "Кавовий напій", "Мелена ", "Розчинна", "Цикорій" });
-            comboBoxType.Location = new Point(107, 213);
+            comboBoxType.Location = new Point(94, 160);
+            comboBoxType.Margin = new Padding(3, 2, 3, 2);
             comboBoxType.Name = "comboBoxType";
-            comboBoxType.Size = new Size(200, 28);
+            comboBoxType.Size = new Size(176, 23);
             comboBoxType.TabIndex = 22;
             // 
             // textBoxDescription
             // 
-            textBoxDescription.Location = new Point(67, 331);
+            textBoxDescription.Location = new Point(59, 248);
+            textBoxDescription.Margin = new Padding(3, 2, 3, 2);
             textBoxDescription.MaxLength = 80;
             textBoxDescription.Multiline = true;
             textBoxDescription.Name = "textBoxDescription";
-            textBoxDescription.Size = new Size(239, 73);
+            textBoxDescription.Size = new Size(210, 56);
             textBoxDescription.TabIndex = 24;
             // 
             // label11
@@ -312,9 +325,9 @@
             label11.AutoSize = true;
             label11.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label11.ForeColor = Color.FromArgb(82, 38, 7);
-            label11.Location = new Point(2, 331);
+            label11.Location = new Point(2, 248);
             label11.Name = "label11";
-            label11.Size = new Size(66, 22);
+            label11.Size = new Size(50, 18);
             label11.TabIndex = 23;
             label11.Text = "Опис:";
             // 
@@ -341,9 +354,11 @@
             groupBox1.Controls.Add(textBoxWeight);
             groupBox1.Controls.Add(textBoxPriceSell);
             groupBox1.Controls.Add(textBoxQuantity);
-            groupBox1.Location = new Point(9, 155);
+            groupBox1.Location = new Point(8, 116);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(317, 477);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(277, 358);
             groupBox1.TabIndex = 25;
             groupBox1.TabStop = false;
             // 
@@ -352,19 +367,19 @@
             label_Pop.AutoSize = true;
             label_Pop.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             label_Pop.ForeColor = Color.FromArgb(82, 38, 7);
-            label_Pop.Location = new Point(253, 15);
+            label_Pop.Location = new Point(221, 11);
             label_Pop.Name = "label_Pop";
-            label_Pop.Size = new Size(63, 23);
+            label_Pop.Size = new Size(54, 19);
             label_Pop.TabIndex = 27;
             label_Pop.Text = "Поп: 0";
             label_Pop.Visible = false;
             // 
             // AddForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(246, 221, 199);
-            ClientSize = new Size(325, 632);
+            ClientSize = new Size(284, 474);
             Controls.Add(label_Pop);
             Controls.Add(label_ID);
             Controls.Add(groupBox1);
@@ -372,6 +387,7 @@
             Controls.Add(pictureBoxImg);
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AddForm";
             Text = "Додати товар";
             ((System.ComponentModel.ISupportInitialize)pictureBoxImg).EndInit();

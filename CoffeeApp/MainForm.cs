@@ -35,7 +35,7 @@ namespace CoffeeApp
             DelImages();
             this.Visible = false;
             ReadProducts(products);
-            AdminForm admin = new AdminForm(this,products);
+            AdminForm admin = new AdminForm(this, products);
             admin.ShowDialog();
             ReadProducts(products);
             FiltredProducts = new List<Product>(products);
@@ -186,7 +186,7 @@ namespace CoffeeApp
                 if (login.DialogResult == DialogResult.OK)
                 {
                     this.Visible = false;
-                    AdminForm admin = new AdminForm(this,new List<Product>(products));
+                    AdminForm admin = new AdminForm(this, new List<Product>(products));
                     admin.ShowDialog();
                     ReadProducts(products);
                     FiltredProducts = new List<Product>(products);

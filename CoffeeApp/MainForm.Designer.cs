@@ -40,6 +40,7 @@
             toolStripSeparator2 = new ToolStripSeparator();
             ButtonSort = new ToolStripSplitButton();
             MenuItemSortName = new ToolStripMenuItem();
+            MenuItemSortPopularity = new ToolStripMenuItem();
             MenuItemSortCheap = new ToolStripMenuItem();
             MenuItemSortExpensive = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
@@ -47,29 +48,30 @@
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
             panel1 = new Panel();
-            MenuItemSortPopularity = new ToolStripMenuItem();
             toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // toolStrip1
             // 
+            toolStrip1.BackColor = Color.Beige;
             toolStrip1.Font = new Font("Segoe UI", 10F);
             toolStrip1.ImageScalingSize = new Size(20, 20);
             toolStrip1.Items.AddRange(new ToolStripItem[] { LabelAdmin, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, toolStripButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
-            toolStrip1.Size = new Size(905, 30);
+            toolStrip1.Size = new Size(805, 30);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
             // LabelAdmin
             // 
-            LabelAdmin.Font = new Font("Imprint MT Shadow", 12F, FontStyle.Bold);
+            LabelAdmin.BackColor = Color.FromArgb(224, 224, 224);
+            LabelAdmin.Font = new Font("Jokerman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelAdmin.Image = (Image)resources.GetObject("LabelAdmin.Image");
             LabelAdmin.Name = "LabelAdmin";
-            LabelAdmin.Size = new Size(172, 27);
-            LabelAdmin.Text = "Okovitiy Beans";
+            LabelAdmin.Size = new Size(135, 27);
+            LabelAdmin.Text = "Coffee Vibe";
             LabelAdmin.MouseDown += LabelAdmin_MouseDown;
             LabelAdmin.MouseUp += LabelAdmin_MouseUp;
             // 
@@ -80,10 +82,12 @@
             // 
             // ButtonFilter
             // 
+            ButtonFilter.BackColor = Color.Beige;
+            ButtonFilter.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonFilter.Image = (Image)resources.GetObject("ButtonFilter.Image");
             ButtonFilter.ImageTransparentColor = Color.Magenta;
             ButtonFilter.Name = "ButtonFilter";
-            ButtonFilter.Size = new Size(128, 27);
+            ButtonFilter.Size = new Size(113, 27);
             ButtonFilter.Text = "Фільтрувати";
             ButtonFilter.Click += ButtonFilter_Click;
             // 
@@ -98,16 +102,17 @@
             ButtonSearch.Image = (Image)resources.GetObject("ButtonSearch.Image");
             ButtonSearch.ImageTransparentColor = Color.Magenta;
             ButtonSearch.Name = "ButtonSearch";
-            ButtonSearch.Size = new Size(29, 27);
+            ButtonSearch.Size = new Size(24, 27);
             ButtonSearch.Text = "toolStripButton2";
             ButtonSearch.ToolTipText = "Пошук";
             ButtonSearch.Click += ButtonSearch_Click;
             // 
             // TextBoxSearch
             // 
-            TextBoxSearch.Font = new Font("Segoe UI", 10F);
+            TextBoxSearch.BackColor = Color.Tan;
+            TextBoxSearch.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             TextBoxSearch.Name = "TextBoxSearch";
-            TextBoxSearch.Size = new Size(270, 30);
+            TextBoxSearch.Size = new Size(237, 30);
             TextBoxSearch.Text = "Пошук...";
             TextBoxSearch.Leave += TextBoxSearch_Leave;
             TextBoxSearch.KeyPress += TextBoxSearch_KeyPress;
@@ -122,7 +127,9 @@
             // ButtonSort
             // 
             ButtonSort.AutoSize = false;
+            ButtonSort.BackColor = Color.Wheat;
             ButtonSort.DropDownItems.AddRange(new ToolStripItem[] { MenuItemSortName, MenuItemSortPopularity, MenuItemSortCheap, MenuItemSortExpensive });
+            ButtonSort.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonSort.Image = (Image)resources.GetObject("ButtonSort.Image");
             ButtonSort.ImageTransparentColor = Color.Magenta;
             ButtonSort.Name = "ButtonSort";
@@ -131,22 +138,33 @@
             // 
             // MenuItemSortName
             // 
+            MenuItemSortName.BackColor = Color.PeachPuff;
             MenuItemSortName.Name = "MenuItemSortName";
-            MenuItemSortName.Size = new Size(283, 28);
+            MenuItemSortName.Size = new Size(234, 22);
             MenuItemSortName.Text = "За назвою";
             MenuItemSortName.Click += MenuItemSortName_Click;
             // 
+            // MenuItemSortPopularity
+            // 
+            MenuItemSortPopularity.BackColor = Color.PeachPuff;
+            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
+            MenuItemSortPopularity.Size = new Size(234, 22);
+            MenuItemSortPopularity.Text = "За популярністю";
+            MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
+            // 
             // MenuItemSortCheap
             // 
+            MenuItemSortCheap.BackColor = Color.PeachPuff;
             MenuItemSortCheap.Name = "MenuItemSortCheap";
-            MenuItemSortCheap.Size = new Size(283, 28);
+            MenuItemSortCheap.Size = new Size(234, 22);
             MenuItemSortCheap.Text = "Від дешевих до дорогих";
             MenuItemSortCheap.Click += MenuItemSortCheap_Click;
             // 
             // MenuItemSortExpensive
             // 
+            MenuItemSortExpensive.BackColor = Color.PeachPuff;
             MenuItemSortExpensive.Name = "MenuItemSortExpensive";
-            MenuItemSortExpensive.Size = new Size(283, 28);
+            MenuItemSortExpensive.Size = new Size(234, 22);
             MenuItemSortExpensive.Text = "Від дорогих до дешевих";
             MenuItemSortExpensive.Click += MenuItemSortExpensive_Click;
             // 
@@ -157,11 +175,12 @@
             // 
             // toolStripButton1
             // 
+            toolStripButton1.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
             toolStripButton1.Name = "toolStripButton1";
             toolStripButton1.RightToLeft = RightToLeft.No;
-            toolStripButton1.Size = new Size(86, 27);
+            toolStripButton1.Size = new Size(72, 27);
             toolStripButton1.Text = "Кошик";
             // 
             // timer1
@@ -177,29 +196,23 @@
             // panel1
             // 
             panel1.AutoScroll = true;
-            panel1.BackColor = SystemColors.Control;
+            panel1.BackColor = Color.Tan;
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 30);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(905, 445);
+            panel1.Size = new Size(805, 326);
             panel1.TabIndex = 1;
-            // 
-            // MenuItemSortPopularity
-            // 
-            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
-            MenuItemSortPopularity.Size = new Size(283, 28);
-            MenuItemSortPopularity.Text = "За популярністю";
-            MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(905, 475);
+            ClientSize = new Size(805, 356);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(5, 4, 5, 4);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "MainForm";
             Text = "Coffee...";
             toolStrip1.ResumeLayout(false);
