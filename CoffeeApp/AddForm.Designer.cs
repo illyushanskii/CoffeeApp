@@ -387,8 +387,14 @@
             Controls.Add(pictureBoxImg);
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+<<<<<<< HEAD
             Margin = new Padding(3, 2, 3, 2);
+=======
+            MaximizeBox = false;
+            MinimizeBox = false;
+>>>>>>> ee67272f7045aba8c11503da935f1ba92febfd5a
             Name = "AddForm";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Додати товар";
             ((System.ComponentModel.ISupportInitialize)pictureBoxImg).EndInit();
             groupBox1.ResumeLayout(false);

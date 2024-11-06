@@ -44,7 +44,7 @@
             MenuItemSortCheap = new ToolStripMenuItem();
             MenuItemSortExpensive = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
-            toolStripButton1 = new ToolStripButton();
+            ButtonCart = new ToolStripButton();
             timer1 = new System.Windows.Forms.Timer(components);
             timer2 = new System.Windows.Forms.Timer(components);
             panel1 = new Panel();
@@ -56,7 +56,7 @@
             toolStrip1.BackColor = Color.Beige;
             toolStrip1.Font = new Font("Segoe UI", 10F);
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { LabelAdmin, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, toolStripButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { LabelAdmin, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, ButtonCart });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
@@ -109,8 +109,13 @@
             // 
             // TextBoxSearch
             // 
+<<<<<<< HEAD
             TextBoxSearch.BackColor = Color.Tan;
             TextBoxSearch.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+=======
+            TextBoxSearch.BackColor = SystemColors.Window;
+            TextBoxSearch.Font = new Font("Segoe UI", 10F);
+>>>>>>> ee67272f7045aba8c11503da935f1ba92febfd5a
             TextBoxSearch.Name = "TextBoxSearch";
             TextBoxSearch.Size = new Size(237, 30);
             TextBoxSearch.Text = "Пошук...";
@@ -146,9 +151,14 @@
             // 
             // MenuItemSortPopularity
             // 
+<<<<<<< HEAD
             MenuItemSortPopularity.BackColor = Color.PeachPuff;
             MenuItemSortPopularity.Name = "MenuItemSortPopularity";
             MenuItemSortPopularity.Size = new Size(234, 22);
+=======
+            MenuItemSortPopularity.Name = "MenuItemSortPopularity";
+            MenuItemSortPopularity.Size = new Size(283, 28);
+>>>>>>> ee67272f7045aba8c11503da935f1ba92febfd5a
             MenuItemSortPopularity.Text = "За популярністю";
             MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
@@ -173,8 +183,9 @@
             toolStripSeparator4.Name = "toolStripSeparator4";
             toolStripSeparator4.Size = new Size(6, 30);
             // 
-            // toolStripButton1
+            // ButtonCart
             // 
+<<<<<<< HEAD
             toolStripButton1.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
             toolStripButton1.ImageTransparentColor = Color.Magenta;
@@ -182,6 +193,15 @@
             toolStripButton1.RightToLeft = RightToLeft.No;
             toolStripButton1.Size = new Size(72, 27);
             toolStripButton1.Text = "Кошик";
+=======
+            ButtonCart.Image = (Image)resources.GetObject("ButtonCart.Image");
+            ButtonCart.ImageTransparentColor = Color.Magenta;
+            ButtonCart.Name = "ButtonCart";
+            ButtonCart.RightToLeft = RightToLeft.No;
+            ButtonCart.Size = new Size(86, 27);
+            ButtonCart.Text = "Кошик";
+            ButtonCart.Click += ButtonCart_Click;
+>>>>>>> ee67272f7045aba8c11503da935f1ba92febfd5a
             // 
             // timer1
             // 
@@ -235,7 +255,7 @@
         private ToolStripMenuItem MenuItemSortName;
         private ToolStripMenuItem MenuItemSortCheap;
         private ToolStripMenuItem MenuItemSortExpensive;
-        private ToolStripButton toolStripButton1;
+        public ToolStripButton ButtonCart;
         private ToolStripLabel LabelAdmin;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;

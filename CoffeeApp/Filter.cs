@@ -8,16 +8,15 @@ namespace CoffeeApp
 {
     public class Filter
     {
-        private string name;
+        private string name = "";
         private double priceStart;
         private double priceFinish;
         private double weightStart;
         private double weightFinish;
-        private string type;
-        private string madeIn;
-        private string composition;
+        private string type = "";
+        private string madeIn = "";
+        private string composition = "";
 
-        public Filter(){}
         public void Name(string nam){ name = nam; }
         public string Name() { return name; }
         public void PriceStart(double start) { priceStart = start; }
@@ -120,5 +119,15 @@ namespace CoffeeApp
 
         }
 
+        public static void EmptyProduct(List<Product> Filtred)
+        {
+            List<Product> sort = Filtred
+            .OrderBy(p => p.Quantity() == 0)
+            .ToList();
+
+            Filtred.Clear();
+            foreach(Product items in sort)
+                Filtred.Add(items);
+        }
     }
 }
