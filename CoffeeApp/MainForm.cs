@@ -77,8 +77,14 @@ namespace CoffeeApp
         }
         private void UpdateForm()
         {
-            Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
-
+            try
+            {
+                Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+            }
+            catch (ObjectDisposedException ex)
+            {
+                MessageBox.Show($"Помилка: {ex.Message}");
+            }
             panel1.Controls.Clear();
             int y = 30;
             Filter.EmptyProduct(FiltredProducts);
@@ -395,7 +401,7 @@ namespace CoffeeApp
         {
             if (TextBoxSearch.Text == "Пошук...")
                 return;
-
+            UpdateForm();
         }
 
         private void TextBoxSearch_KeyPress(object sender, KeyPressEventArgs e)
