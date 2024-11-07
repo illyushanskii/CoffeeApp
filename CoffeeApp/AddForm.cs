@@ -112,35 +112,36 @@ namespace CoffeeApp
             double weight;
             int quantity;
 
-            if (!double.TryParse(textBoxPriceBuy.Text, out priceBuy)||Convert.ToDouble(textBoxPriceBuy.Text) <= 0)
+            if (!double.TryParse(textBoxPriceBuy.Text, out priceBuy) || Convert.ToDouble(textBoxPriceBuy.Text) <= 0)
             {
                 MessageBox.Show("Неправильне введення поля \"Ціна закупки\"");
                 textBoxPriceBuy.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            else if (!double.TryParse(textBoxPriceSell.Text, out priceSell)||Convert.ToDouble(textBoxPriceSell.Text) <= 0)
+            else if (!double.TryParse(textBoxPriceSell.Text, out priceSell) || Convert.ToDouble(textBoxPriceSell.Text) <= 0)
             {
                 MessageBox.Show("Неправильне введення поля \"Ціна продажу\"");
                 textBoxPriceSell.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            else if (!double.TryParse(textBoxWeight.Text, out weight)||Convert.ToDouble(textBoxWeight.Text) <= 0)
+            else if (!double.TryParse(textBoxWeight.Text, out weight) || Convert.ToDouble(textBoxWeight.Text) <= 0)
             {
                 MessageBox.Show("Неправильне введення поля \"Маса нетто\"");
                 textBoxWeight.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            else if (!int.TryParse(textBoxQuantity.Text, out quantity)||Convert.ToInt32(textBoxQuantity.Text) <= 0)
+            else if (!int.TryParse(textBoxQuantity.Text, out quantity) || Convert.ToInt32(textBoxQuantity.Text) <= 0)
             {
                 MessageBox.Show("Неправильне введення поля \"Кількість\"");
                 textBoxQuantity.Text = "";
                 this.DialogResult = DialogResult.None;
                 return;
             }
-            else if(textBoxName.Text.Any(c => !Char.IsLetter(c))){
+            else if (textBoxName.Text.Any(c => !Char.IsLetter(c)))
+            {
                 MessageBox.Show("Введіть лише літери в поле \"Назва\"");
                 this.DialogResult = DialogResult.None;
                 return;
@@ -164,43 +165,52 @@ namespace CoffeeApp
                 {
                     pictureBoxImg.Image.Save(imgPath);
                 }
-            }else if (product != null)
+            }
+            else if (product != null)
             {
                 imgPath = product.ImagePath();
             }
 
             DataBase data = new DataBase();
-            SQLiteCommand cmd = null;
             data.openBase();
-            if (product == null)
-            {
-                cmd = new SQLiteCommand("INSERT INTO `Products` (`ID`, `Name`,`Popularity`,`Description`,`PriceBuy`,`PriceSell`,`Quantity`,`Weight`,`Type`,`MadeIn`,`Composition`,`Image`) VALUES (@id, @name, @popularity, @description, @priceBuy, @priceSell, @quantity, @weight, @type, @madeIn, @composition, @image)", data.getConnection());
-                cmd.Parameters.Add("@popularity", DbType.Int32).Value = 0;
-            }
-            else
-            {
-                cmd = new SQLiteCommand("UPDATE `Products` SET `Name` = @name, `Description` = @description,`PriceBuy` = @priceBuy, `PriceSell` = @priceSell, `Quantity` = @quantity, `Weight` = @weight, `Type` = @type, `MadeIn` = @madeIn, `Composition` = @composition, `Image` = @image WHERE id = @id", data.getConnection());
-            }
-        
-            cmd.Parameters.Add("@id", DbType.Int32).Value = id;
-            cmd.Parameters.Add("@name", DbType.String).Value = textBoxName.Text;
-            cmd.Parameters.Add("@description", DbType.String).Value = textBoxDescription.Text;
-            cmd.Parameters.Add("@priceBuy", DbType.Double).Value = priceBuy;
-            cmd.Parameters.Add("@priceSell", DbType.Double).Value = priceSell;
-            cmd.Parameters.Add("@quantity", DbType.Int32).Value = quantity;
-            cmd.Parameters.Add("@weight", DbType.Double).Value = weight;
-            cmd.Parameters.Add("@type", DbType.String).Value = comboBoxType.Text;
-            cmd.Parameters.Add("@madeIn", DbType.String).Value = textBoxCountry.Text;
-            cmd.Parameters.Add("@composition", DbType.String).Value = comboBoxComposition.Text;
-            cmd.Parameters.Add("@image", DbType.String).Value = imgPath;
 
-            if (cmd.ExecuteNonQuery() == 1)
-                MessageBox.Show("Успішно!");
+            using (SQLiteCommand cmd = product == null
+                ? new SQLiteCommand("INSERT INTO `Products` (`ID`, `Name`,`Popularity`,`Description`,`PriceBuy`,`PriceSell`,`Quantity`,`Weight`,`Type`,`MadeIn`,`Composition`,`Image`) VALUES (@id, @name, @popularity, @description, @priceBuy, @priceSell, @quantity, @weight, @type, @madeIn, @composition, @image)", data.getConnection())
+                : new SQLiteCommand("UPDATE `Products` SET `Name` = @name, `Description` = @description, `PriceBuy` = @priceBuy, `PriceSell` = @priceSell, `Quantity` = @quantity, `Weight` = @weight, `Type` = @type, `MadeIn` = @madeIn, `Composition` = @composition, `Image` = @image WHERE id = @id", data.getConnection()))
+            {
+                cmd.Parameters.Add("@id", DbType.Int32).Value = id;
+                cmd.Parameters.Add("@name", DbType.String).Value = textBoxName.Text;
+                cmd.Parameters.Add("@description", DbType.String).Value = textBoxDescription.Text;
+                cmd.Parameters.Add("@priceBuy", DbType.Double).Value = priceBuy;
+                cmd.Parameters.Add("@priceSell", DbType.Double).Value = priceSell;
+                cmd.Parameters.Add("@quantity", DbType.Int32).Value = quantity;
+                cmd.Parameters.Add("@weight", DbType.Double).Value = weight;
+                cmd.Parameters.Add("@type", DbType.String).Value = comboBoxType.Text;
+                cmd.Parameters.Add("@madeIn", DbType.String).Value = textBoxCountry.Text;
+                cmd.Parameters.Add("@composition", DbType.String).Value = comboBoxComposition.Text;
+                cmd.Parameters.Add("@image", DbType.String).Value = imgPath;
+
+                if (product == null)
+                {
+                    cmd.Parameters.Add("@popularity", DbType.Int32).Value = 0;
+                }
+
+                if (cmd.ExecuteNonQuery() == 1)
+                {
+                    MessageBox.Show("Успішно!");
+                }
+            }
+
             data.closeBase();
 
+            int pop = 0;
+            if (product != null)
+            {
+                pop = product.Popularity();
+            }
             product = new Product();
             product.Description(textBoxDescription.Text);
-            product.Popularity(0);
+            product.Popularity(pop);
             product.Name(textBoxName.Text);
             product.Type(comboBoxType.Text);
             product.Weight(weight);
@@ -220,12 +230,15 @@ namespace CoffeeApp
             bool result = false;
             if (path != "")
             {
-               DataBase data = new DataBase();
+                DataBase data = new DataBase();
                 data.openBase();
-                SQLiteCommand cmd = new SQLiteCommand("SELECT 1 FROM `Products` WHERE `Image` = @image LIMIT 1", data.getConnection());
-                cmd.Parameters.Add("@image", DbType.String).Value = path;
-                var check = cmd.ExecuteScalar();
-                result = check != null;
+
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT 1 FROM `Products` WHERE `Image` = @image LIMIT 1", data.getConnection()))
+                {
+                    cmd.Parameters.Add("@image", DbType.String).Value = path;
+                    var check = cmd.ExecuteScalar();
+                    result = check != null;
+                }
                 data.closeBase();
             }
             return result;
@@ -241,7 +254,7 @@ namespace CoffeeApp
         }
         private void buttonCancel_MouseHover(object sender, EventArgs e)
         {
-            buttonCancel.BackColor = Color.FromArgb(82, 38, 7); 
+            buttonCancel.BackColor = Color.FromArgb(82, 38, 7);
             buttonCancel.ForeColor = Color.FromArgb(246, 221, 199);
         }
         private void buttonCancel_MouseLeave(object sender, EventArgs e)
@@ -259,6 +272,6 @@ namespace CoffeeApp
             buttonAdd.BackColor = SystemColors.Control;
             buttonAdd.ForeColor = SystemColors.ControlText;
         }
-        
+
     }
 }

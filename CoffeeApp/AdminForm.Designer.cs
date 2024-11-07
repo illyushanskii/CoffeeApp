@@ -43,9 +43,13 @@
             MenuItemSortCheap = new ToolStripMenuItem();
             MenuItemSortExpensive = new ToolStripMenuItem();
             toolStripSeparator4 = new ToolStripSeparator();
-            ButtonCasa = new ToolStripButton();
+            ButtonList = new ToolStripButton();
+            toolStripSeparator7 = new ToolStripSeparator();
+            ButtonDeleted = new ToolStripButton();
             toolStripSeparator5 = new ToolStripSeparator();
             ButtonDropDB = new ToolStripButton();
+            toolStripSeparator6 = new ToolStripSeparator();
+            ButtonCasa = new ToolStripButton();
             panel1 = new Panel();
             toolStrip1.SuspendLayout();
             SuspendLayout();
@@ -55,12 +59,12 @@
             toolStrip1.BackColor = Color.FromArgb(246, 221, 199);
             toolStrip1.Font = new Font("Segoe UI", 10F);
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { ButtonAdd, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, ButtonCasa, toolStripSeparator5, ButtonDropDB });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { ButtonAdd, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, ButtonList, toolStripSeparator7, ButtonDeleted, toolStripSeparator5, ButtonDropDB, toolStripSeparator6, ButtonCasa });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
             toolStrip1.RightToLeft = RightToLeft.No;
-            toolStrip1.Size = new Size(898, 30);
+            toolStrip1.Size = new Size(914, 30);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -183,16 +187,30 @@
             toolStripSeparator4.Name = "toolStripSeparator4";
             toolStripSeparator4.Size = new Size(6, 30);
             // 
-            // ButtonCasa
+            // ButtonList
             // 
-            ButtonCasa.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonCasa.ForeColor = Color.FromArgb(82, 38, 7);
-            ButtonCasa.Image = (Image)resources.GetObject("ButtonCasa.Image");
-            ButtonCasa.ImageTransparentColor = Color.Magenta;
-            ButtonCasa.Name = "ButtonCasa";
-            ButtonCasa.RightToLeft = RightToLeft.No;
-            ButtonCasa.Size = new Size(70, 27);
-            ButtonCasa.Text = "Каса";
+            ButtonList.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            ButtonList.Image = (Image)resources.GetObject("ButtonList.Image");
+            ButtonList.ImageTransparentColor = Color.Magenta;
+            ButtonList.Name = "ButtonList";
+            ButtonList.Size = new Size(29, 27);
+            ButtonList.ToolTipText = "Журнал входів";
+            ButtonList.Click += ButtonList_Click;
+            // 
+            // toolStripSeparator7
+            // 
+            toolStripSeparator7.Name = "toolStripSeparator7";
+            toolStripSeparator7.Size = new Size(6, 30);
+            // 
+            // ButtonDeleted
+            // 
+            ButtonDeleted.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            ButtonDeleted.Image = (Image)resources.GetObject("ButtonDeleted.Image");
+            ButtonDeleted.ImageTransparentColor = Color.Magenta;
+            ButtonDeleted.Name = "ButtonDeleted";
+            ButtonDeleted.Size = new Size(29, 27);
+            ButtonDeleted.ToolTipText = "Видалені товари";
+            ButtonDeleted.Click += ButtonDeleted_Click;
             // 
             // toolStripSeparator5
             // 
@@ -210,6 +228,23 @@
             ButtonDropDB.ToolTipText = "Скидання БД";
             ButtonDropDB.Click += ButtonDropDB_Click;
             // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new Size(6, 30);
+            // 
+            // ButtonCasa
+            // 
+            ButtonCasa.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonCasa.ForeColor = Color.FromArgb(82, 38, 7);
+            ButtonCasa.Image = (Image)resources.GetObject("ButtonCasa.Image");
+            ButtonCasa.ImageTransparentColor = Color.Magenta;
+            ButtonCasa.Name = "ButtonCasa";
+            ButtonCasa.RightToLeft = RightToLeft.No;
+            ButtonCasa.Size = new Size(70, 27);
+            ButtonCasa.Text = "Каса";
+            ButtonCasa.Click += ButtonCasa_Click;
+            // 
             // panel1
             // 
             panel1.AutoScroll = true;
@@ -217,14 +252,14 @@
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 30);
             panel1.Name = "panel1";
-            panel1.Size = new Size(898, 465);
+            panel1.Size = new Size(914, 465);
             panel1.TabIndex = 2;
             // 
             // AdminForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(898, 495);
+            ClientSize = new Size(914, 495);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -257,5 +292,9 @@
         private ToolStripButton ButtonDropDB;
         private ToolStripMenuItem MenuItemSortExpensive;
         private ToolStripMenuItem MenuItemSortPopularity;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripButton ButtonList;
+        private ToolStripSeparator toolStripSeparator7;
+        private ToolStripButton ButtonDeleted;
     }
 }

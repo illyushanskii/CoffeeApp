@@ -151,7 +151,6 @@ namespace CoffeeApp
                 DataBase db = new DataBase();
                 db.openBase();
 
-                // Обновляем количество и популярность в таблице Products
                 foreach (Cart cart in carts)
                 {
                     using (SQLiteCommand cmd = new SQLiteCommand("UPDATE Products SET Quantity = @quantity, Popularity = @popularity WHERE ID = @id", db.getConnection()))
@@ -165,7 +164,6 @@ namespace CoffeeApp
 
                 foreach (Cart cart in carts)
                 {
-                    // Проверяем, существует ли уже продукт в таблице Carts
                     using (SQLiteCommand cmd1 = new SQLiteCommand("SELECT EXISTS(SELECT 1 FROM Carts WHERE ProductId = @id)", db.getConnection()))
                     {
                         cmd1.Parameters.Add("@id", DbType.Int32).Value = cart.ProductId();
@@ -173,7 +171,6 @@ namespace CoffeeApp
 
                         if (exists != 1)
                         {
-                            // Добавляем новую запись в Carts, если её нет
                             using (SQLiteCommand cmd2 = new SQLiteCommand("INSERT INTO Carts (ProductId, Description, PriceBuy, PriceSell, Quantity, Image) VALUES (@id, @description, @priceBuy, @priceSell, @quantity, @image)", db.getConnection()))
                             {
                                 cmd2.Parameters.Add("@id", DbType.Int32).Value = cart.ProductId();
@@ -187,7 +184,6 @@ namespace CoffeeApp
                         }
                         else
                         {
-                            // Если продукт уже есть в Carts, то обновляем его данные
                             int allQuantity = 0;
                             double allBuy = 0;
                             double allSell = 0;
@@ -224,7 +220,8 @@ namespace CoffeeApp
 
                 db.closeBase();
                 carts.Clear();
-                MessageBox.Show("Спасибо за покупку");
+                mainForm.ButtonCart.Checked = false;
+                MessageBox.Show("Дякуємо за покупку!");
                 this.DialogResult = DialogResult.OK;
             }
         }

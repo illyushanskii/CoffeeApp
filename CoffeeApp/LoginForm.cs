@@ -14,16 +14,27 @@ namespace CoffeeApp
     public partial class LoginForm : Form
     {
         private string login;
+        private string loginIn;
         private string password;
+        private string passwordIn;
         int count = 0;
         public LoginForm()
         {
             InitializeComponent();
         }
-
+        public string GetLogin()
+        {
+            return loginIn;
+        }
+        public string GetPassword() {
+            return passwordIn;
+        }
         private void buttonLogIn_Click(object sender, EventArgs e)
         {
-            if (textBoxLogin.Text != login || textBoxPass.Text != password)
+            loginIn = textBoxLogin.Text;
+            passwordIn = textBoxPass.Text;
+
+            if (loginIn != login || passwordIn != password)
             {
                 switch (count)
                 {

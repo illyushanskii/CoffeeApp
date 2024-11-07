@@ -35,6 +35,10 @@ namespace CoffeeApp
             }
             UpdateForm();
         }
+        public List<Product> GetProducts()
+        {
+            return new List<Product>(products);
+        }
         private void ButtonAdd_Click(object sender, EventArgs e)
         {
             AddForm form = new AddForm(id);
@@ -86,6 +90,7 @@ namespace CoffeeApp
                 textBoxInfo.Multiline = true;
                 textBoxInfo.Width = 500;
                 textBoxInfo.Height = 100;
+                textBoxInfo.MouseWheel += TextBoxInfo_MouseWheel;
 
                 Font quantityFont = new Font("Arial", 12);
                 numericUpDownQuantity.Font = quantityFont;
@@ -132,7 +137,14 @@ namespace CoffeeApp
                 y += 110;
             }
         }
+        private void TextBoxInfo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            int position = panel1.VerticalScroll.Value - e.Delta;
 
+            position = Math.Max(0, Math.Min(position, panel1.VerticalScroll.Maximum));
+            panel1.VerticalScroll.Value = position;
+            panel1.PerformLayout();
+        }
         private void NumericUpDownQuantity_MouseWheel(object sender, MouseEventArgs e)
         {
             ((HandledMouseEventArgs)e).Handled = true;
@@ -149,12 +161,20 @@ namespace CoffeeApp
                 {
                     DataBase data = new DataBase();
                     data.openBase();
-                    SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Products WHERE ID = @id;", data.getConnection());
-                    cmd.Parameters.Add("@id", DbType.Int32).Value = products[i].ID();
 
-                    if (cmd.ExecuteNonQuery() == 1)
-                        MessageBox.Show("Видалення успішне!");
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO `DeletedProducts` (`ID`, `Name`,`Popularity`,`Description`,`PriceBuy`,`PriceSell`,`Quantity`,`Weight`,`Type`,`MadeIn`,`Composition`,`Image`) SELECT `ID`, `Name`,`Popularity`,`Description`,`PriceBuy`,`PriceSell`,`Quantity`,`Weight`,`Type`,`MadeIn`,`Composition`,`Image` FROM `Products` WHERE id = @id;", data.getConnection()))
+                    {
+                        cmd.Parameters.Add("@id", DbType.Int32).Value = products[i].ID();
+                        cmd.ExecuteNonQuery();
+                    }
 
+                    using (SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Products WHERE ID = @id;", data.getConnection()))
+                    {
+                        cmd.Parameters.Add("@id", DbType.Int32).Value = products[i].ID();
+
+                        if (cmd.ExecuteNonQuery() == 1)
+                            MessageBox.Show("Видалення успішне!");
+                    }
                     data.closeBase();
                     products.RemoveAt(i);
                 }
@@ -189,15 +209,17 @@ namespace CoffeeApp
 
             DataBase data = new DataBase();
             data.openBase();
-            SQLiteCommand cmd = new SQLiteCommand("UPDATE Products SET Quantity = @quantity WHERE ID = @id", data.getConnection());
-            cmd.Parameters.Add("@id", DbType.Int32).Value = FiltredProducts[inx].ID();
-            cmd.Parameters.Add("@quantity", DbType.Int32).Value = (int)numeric.Value;
-            cmd.ExecuteNonQuery();
+            using (SQLiteCommand cmd = new SQLiteCommand("UPDATE Products SET Quantity = @quantity WHERE ID = @id", data.getConnection()))
+            {
+                cmd.Parameters.Add("@id", DbType.Int32).Value = FiltredProducts[inx].ID();
+                cmd.Parameters.Add("@quantity", DbType.Int32).Value = (int)numeric.Value;
+                cmd.ExecuteNonQuery();
+            }
             data.closeBase();
             FiltredProducts[inx].Quantity((int)numeric.Value);
             UpdateForm();
         }
-        
+
         private void ButtonFilter_Click(object sender, EventArgs e)
         {
             using (FilterForm filterForm = new FilterForm(products, filterProd))
@@ -275,7 +297,7 @@ namespace CoffeeApp
             sortProd = "exp";
             UpdateForm();
         }
-        
+
 
         private void AdminForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -287,24 +309,28 @@ namespace CoffeeApp
 
         private void ButtonDropDB_Click(object sender, EventArgs e)
         {
-            ConfirmForm confirm = new ConfirmForm();
-            if (confirm.ShowDialog(this) == DialogResult.OK)
-            {
-                DataBase dataBase = new DataBase();
-                dataBase.openBase();
-                SQLiteCommand cmd = new SQLiteCommand("DELETE FROM Admin", dataBase.getConnection());
+            DropForm confirm = new DropForm();
+            confirm.ShowDialog(this);  
+        }
 
-                if (cmd.ExecuteNonQuery() > 0)
-                {
-                    MessageBox.Show("База данних успішно скинута.");
-                }
-                cmd.CommandText = "DELETE FROM Products";
-                cmd.ExecuteNonQuery();
-                cmd.CommandText = "DELETE FROM Carts";
-                cmd.ExecuteNonQuery();
-                dataBase.closeBase();
-                Application.Restart();
-            }
+        private void ButtonCasa_Click(object sender, EventArgs e)
+        {
+            CasaForm casa = new CasaForm();
+            casa.ShowDialog(this);
+        }
+
+        private void ButtonList_Click(object sender, EventArgs e)
+        {
+            ListForm listForm = new ListForm();
+            listForm.ShowDialog(this);
+        }
+
+        private void ButtonDeleted_Click(object sender, EventArgs e)
+        {
+            DeletedForm deletedForm = new DeletedForm(products);
+            deletedForm.ShowDialog(this);
+            FiltredProducts = new List<Product>(products);
+            UpdateForm();
         }
     }
 }

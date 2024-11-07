@@ -27,7 +27,14 @@ namespace CoffeeApp
                 regForm.ShowDialog();
                 if(regForm.DialogResult == DialogResult.OK)
                 {
-                    Application.Run(new MainForm("cv"));
+                    try
+                    {
+                        Application.Run(new MainForm("cv"));
+                    }
+                    catch (ObjectDisposedException ex)
+                    {
+                        MessageBox.Show($"Помилка: {ex.Message}");
+                    }
                 }
             }
         }

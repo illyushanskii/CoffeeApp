@@ -39,7 +39,7 @@ namespace CoffeeApp
             ReadProducts(products);
             AdminForm admin = new AdminForm(this, products);
             admin.ShowDialog();
-            ReadProducts(products);
+            products = admin.GetProducts();
             FiltredProducts = new List<Product>(products);
             UpdateForm();
         }
@@ -50,25 +50,27 @@ namespace CoffeeApp
             DataBase data = new DataBase();
             data.openBase();
 
-            SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Products", data.getConnection());
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            using (SQLiteCommand cmd = new SQLiteCommand("SELECT * FROM Products", data.getConnection()))
             {
-                while (reader.Read())
+                using (SQLiteDataReader reader = cmd.ExecuteReader())
                 {
-                    Product newProd = new Product();
-                    newProd.ID(reader.GetInt32(reader.GetOrdinal("ID")));
-                    newProd.Name(reader.GetString(reader.GetOrdinal("Name")));
-                    newProd.Popularity(reader.GetInt32(reader.GetOrdinal("Popularity")));
-                    newProd.Description(reader.GetString(reader.GetOrdinal("Description")));
-                    newProd.PriceBuy(reader.GetDouble(reader.GetOrdinal("PriceBuy")));
-                    newProd.PriceSell(reader.GetDouble(reader.GetOrdinal("PriceSell")));
-                    newProd.Quantity(reader.GetInt32(reader.GetOrdinal("Quantity")));
-                    newProd.Weight(reader.GetDouble(reader.GetOrdinal("Weight")));
-                    newProd.Type(reader.GetString(reader.GetOrdinal("Type")));
-                    newProd.MadeIn(reader.GetString(reader.GetOrdinal("MadeIn")));
-                    newProd.Composition(reader.GetString(reader.GetOrdinal("Composition")));
-                    newProd.ImagePath(reader.GetString(reader.GetOrdinal("Image")));
-                    read.Add(newProd);
+                    while (reader.Read())
+                    {
+                        Product newProd = new Product();
+                        newProd.ID(reader.GetInt32(reader.GetOrdinal("ID")));
+                        newProd.Name(reader.GetString(reader.GetOrdinal("Name")));
+                        newProd.Popularity(reader.GetInt32(reader.GetOrdinal("Popularity")));
+                        newProd.Description(reader.GetString(reader.GetOrdinal("Description")));
+                        newProd.PriceBuy(reader.GetDouble(reader.GetOrdinal("PriceBuy")));
+                        newProd.PriceSell(reader.GetDouble(reader.GetOrdinal("PriceSell")));
+                        newProd.Quantity(reader.GetInt32(reader.GetOrdinal("Quantity")));
+                        newProd.Weight(reader.GetDouble(reader.GetOrdinal("Weight")));
+                        newProd.Type(reader.GetString(reader.GetOrdinal("Type")));
+                        newProd.MadeIn(reader.GetString(reader.GetOrdinal("MadeIn")));
+                        newProd.Composition(reader.GetString(reader.GetOrdinal("Composition")));
+                        newProd.ImagePath(reader.GetString(reader.GetOrdinal("Image")));
+                        read.Add(newProd);
+                    }
                 }
             }
             data.closeBase();
@@ -76,6 +78,7 @@ namespace CoffeeApp
         private void UpdateForm()
         {
             Filter.Filtering(filterProd, products, FiltredProducts, ButtonFilter, TextBoxSearch.Text, sortProd);
+
             panel1.Controls.Clear();
             int y = 30;
             Filter.EmptyProduct(FiltredProducts);
@@ -112,6 +115,7 @@ namespace CoffeeApp
                 textBoxInfo.Multiline = true;
                 textBoxInfo.Width = 500;
                 textBoxInfo.Height = 100;
+                textBoxInfo.MouseWheel += TextBoxInfo_MouseWheel;
 
                 Font quantityFont = new Font("Arial", 11, FontStyle.Bold);
                 labelQuantity.Font = quantityFont;
@@ -167,6 +171,14 @@ namespace CoffeeApp
                 panel1.Controls.Add(labelQuantity);
                 y += 110;
             }
+        }
+        private void TextBoxInfo_MouseWheel(object sender, MouseEventArgs e)
+        {
+            int position = panel1.VerticalScroll.Value - e.Delta;
+
+            position = Math.Max(0, Math.Min(position, panel1.VerticalScroll.Maximum));
+            panel1.VerticalScroll.Value = position;
+            panel1.PerformLayout();
         }
 
         private void addCartButton_Click(object sender, EventArgs e)
@@ -238,27 +250,55 @@ namespace CoffeeApp
             timer1.Stop();
             if (time >= 5 && entry == 0)
             {
+                this.FormClosing -= MainForm_FormClosing;
                 LoginForm login = new LoginForm();
                 login.ShowDialog();
                 if (login.DialogResult == DialogResult.OK)
                 {
                     this.Visible = false;
+
+                    DataBase data = new DataBase();
+                    data.openBase();
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO `LoginHistory` (`Time`, `Result`, `Password`, `Login`) VALUES (@time, @res, @pass, @log)", data.getConnection()))
+                    {
+                        DateTime currentTime = DateTime.Now;
+                        cmd.Parameters.Add("@time", DbType.String).Value = currentTime;
+                        cmd.Parameters.Add("@res", DbType.String).Value = "Успішно";
+                        cmd.Parameters.Add("@pass", DbType.String).Value = login.GetPassword();
+                        cmd.Parameters.Add("@log", DbType.String).Value = login.GetLogin();
+                        cmd.ExecuteNonQuery();
+                    }
+                    data.closeBase();
+
                     AdminForm admin = new AdminForm(this, new List<Product>(products));
                     admin.ShowDialog();
-                    ReadProducts(products);
+                    products = admin.GetProducts();
                     FiltredProducts = new List<Product>(products);
                     UpdateForm();
                 }
                 else if (login.DialogResult == DialogResult.No)
                 {
-                    MessageBox.Show("No");
+                    DataBase data = new DataBase();
+                    data.openBase();
+                    using (SQLiteCommand cmd = new SQLiteCommand("INSERT INTO `LoginHistory` (`Time`, `Result`, `Password`, `Login`) VALUES (@time, @res, @pass, @log)", data.getConnection()))
+                    {
+                        DateTime currentTime = DateTime.Now;
+                        cmd.Parameters.Add("@time", DbType.String).Value = currentTime;
+                        cmd.Parameters.Add("@res", DbType.String).Value = "Не успішно";
+                        cmd.Parameters.Add("@pass", DbType.String).Value = login.GetPassword();
+                        cmd.Parameters.Add("@log", DbType.String).Value = login.GetLogin();
+                        cmd.ExecuteNonQuery();
+                    }
+                    data.closeBase();
+                    this.FormClosing += MainForm_FormClosing;
                     timer2.Start();
                 }
             }
-            else if (time >= 5)
-            {
-                MessageBox.Show(entry.ToString());
-            }
+        }
+
+        private void MainForm_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -298,15 +338,37 @@ namespace CoffeeApp
             {
                 string[] files = Directory.GetFiles(path);
 
-                List<string> temp = new List<string>();
+                HashSet<string> temp = new HashSet<string>();
                 DataBase data = new DataBase();
                 data.openBase();
-                SQLiteCommand cmd = new SQLiteCommand("SELECT `Image` FROM `Products`", data.getConnection());
-                using (SQLiteDataReader reader = cmd.ExecuteReader())
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT `Image` FROM `Products`", data.getConnection()))
                 {
-                    while (reader.Read())
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
                     {
-                        temp.Add(reader.GetString(reader.GetOrdinal("Image")));
+                        while (reader.Read())
+                        {
+                            temp.Add(reader.GetString(reader.GetOrdinal("Image")));
+                        }
+                    }
+                }
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT `Image` FROM `DeletedProducts`", data.getConnection()))
+                {
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            temp.Add(reader.GetString(reader.GetOrdinal("Image")));
+                        }
+                    }
+                }
+                using (SQLiteCommand cmd = new SQLiteCommand("SELECT `Image` FROM `Carts`", data.getConnection()))
+                {
+                    using (SQLiteDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            temp.Add(reader.GetString(reader.GetOrdinal("Image")));
+                        }
                     }
                 }
                 data.closeBase();
