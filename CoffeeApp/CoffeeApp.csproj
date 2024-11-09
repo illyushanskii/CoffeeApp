@@ -52,6 +52,9 @@
     <None Update="Icons\emptyCasa.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Icons\image.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Icons\inCart.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
