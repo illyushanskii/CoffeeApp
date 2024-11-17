@@ -56,7 +56,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.BackColor = Color.SaddleBrown;
+            toolStrip1.BackColor = Color.Beige;
             toolStrip1.Font = new Font("Segoe UI", 10F);
             toolStrip1.ImageScalingSize = new Size(20, 20);
             toolStrip1.Items.AddRange(new ToolStripItem[] { ButtonAdd, toolStripSeparator1, ButtonFilter, toolStripSeparator3, ButtonSearch, TextBoxSearch, toolStripSeparator2, ButtonSort, toolStripSeparator4, ButtonList, toolStripSeparator7, ButtonDeleted, toolStripSeparator5, ButtonDropDB, toolStripSeparator6, ButtonCasa });
@@ -64,19 +64,19 @@
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
             toolStrip1.RightToLeft = RightToLeft.No;
-            toolStrip1.Size = new Size(923, 30);
+            toolStrip1.Size = new Size(845, 30);
             toolStrip1.TabIndex = 1;
             toolStrip1.Text = "toolStrip1";
             // 
             // ButtonAdd
             // 
-            ButtonAdd.BackColor = Color.SaddleBrown;
-            ButtonAdd.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonAdd.ForeColor = Color.FromArgb(224, 224, 224);
+            ButtonAdd.BackColor = Color.Beige;
+            ButtonAdd.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonAdd.ForeColor = Color.FromArgb(82, 38, 7);
             ButtonAdd.Image = (Image)resources.GetObject("ButtonAdd.Image");
             ButtonAdd.ImageTransparentColor = Color.Magenta;
             ButtonAdd.Name = "ButtonAdd";
-            ButtonAdd.Size = new Size(93, 27);
+            ButtonAdd.Size = new Size(85, 27);
             ButtonAdd.Text = "Додати";
             ButtonAdd.Click += ButtonAdd_Click;
             // 
@@ -87,13 +87,13 @@
             // 
             // ButtonFilter
             // 
-            ButtonFilter.BackColor = Color.SaddleBrown;
-            ButtonFilter.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonFilter.ForeColor = Color.FromArgb(224, 224, 224);
+            ButtonFilter.BackColor = Color.Beige;
+            ButtonFilter.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonFilter.ForeColor = Color.FromArgb(82, 38, 7);
             ButtonFilter.Image = (Image)resources.GetObject("ButtonFilter.Image");
             ButtonFilter.ImageTransparentColor = Color.Magenta;
             ButtonFilter.Name = "ButtonFilter";
-            ButtonFilter.Size = new Size(135, 27);
+            ButtonFilter.Size = new Size(122, 27);
             ButtonFilter.Text = "Фільтрувати";
             ButtonFilter.Click += ButtonFilter_Click;
             // 
@@ -104,13 +104,13 @@
             // 
             // ButtonSearch
             // 
-            ButtonSearch.BackColor = Color.SaddleBrown;
+            ButtonSearch.BackColor = Color.Beige;
             ButtonSearch.DisplayStyle = ToolStripItemDisplayStyle.Image;
             ButtonSearch.ForeColor = Color.FromArgb(82, 38, 7);
             ButtonSearch.Image = (Image)resources.GetObject("ButtonSearch.Image");
             ButtonSearch.ImageTransparentColor = Color.Magenta;
             ButtonSearch.Name = "ButtonSearch";
-            ButtonSearch.Size = new Size(29, 27);
+            ButtonSearch.Size = new Size(24, 27);
             ButtonSearch.Text = "toolStripButton2";
             ButtonSearch.ToolTipText = "Пошук";
             ButtonSearch.Click += ButtonSearch_Click;
@@ -119,9 +119,9 @@
             // 
             TextBoxSearch.BackColor = Color.LightGray;
             TextBoxSearch.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            TextBoxSearch.ForeColor = Color.SaddleBrown;
+            TextBoxSearch.ForeColor = Color.Black;
             TextBoxSearch.Name = "TextBoxSearch";
-            TextBoxSearch.Size = new Size(270, 30);
+            TextBoxSearch.Size = new Size(237, 30);
             TextBoxSearch.Text = "Пошук...";
             TextBoxSearch.Leave += TextBoxSearch_Leave;
             TextBoxSearch.KeyPress += TextBoxSearch_KeyPress;
@@ -136,10 +136,10 @@
             // ButtonSort
             // 
             ButtonSort.AutoSize = false;
-            ButtonSort.BackColor = Color.SaddleBrown;
+            ButtonSort.BackColor = Color.Beige;
             ButtonSort.DropDownItems.AddRange(new ToolStripItem[] { MenuItemSortName, MenuItemSortPopularity, MenuItemSortCheap, MenuItemSortExpensive });
-            ButtonSort.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            ButtonSort.ForeColor = Color.FromArgb(224, 224, 224);
+            ButtonSort.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonSort.ForeColor = Color.FromArgb(82, 38, 7);
             ButtonSort.Image = (Image)resources.GetObject("ButtonSort.Image");
             ButtonSort.ImageTransparentColor = Color.Magenta;
             ButtonSort.Name = "ButtonSort";
@@ -148,41 +148,41 @@
             // 
             // MenuItemSortName
             // 
-            MenuItemSortName.BackColor = Color.SaddleBrown;
-            MenuItemSortName.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            MenuItemSortName.ForeColor = Color.FromArgb(224, 224, 224);
+            MenuItemSortName.BackColor = Color.Beige;
+            MenuItemSortName.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            MenuItemSortName.ForeColor = Color.FromArgb(82, 38, 7);
             MenuItemSortName.Name = "MenuItemSortName";
-            MenuItemSortName.Size = new Size(294, 26);
+            MenuItemSortName.Size = new Size(258, 22);
             MenuItemSortName.Text = "За назвою";
             MenuItemSortName.Click += MenuItemSortName_Click;
             // 
             // MenuItemSortPopularity
             // 
-            MenuItemSortPopularity.BackColor = Color.SaddleBrown;
-            MenuItemSortPopularity.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            MenuItemSortPopularity.ForeColor = Color.FromArgb(224, 224, 224);
+            MenuItemSortPopularity.BackColor = Color.Beige;
+            MenuItemSortPopularity.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            MenuItemSortPopularity.ForeColor = Color.FromArgb(82, 38, 7);
             MenuItemSortPopularity.Name = "MenuItemSortPopularity";
-            MenuItemSortPopularity.Size = new Size(294, 26);
+            MenuItemSortPopularity.Size = new Size(258, 22);
             MenuItemSortPopularity.Text = "За популярністю";
             MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
             // MenuItemSortCheap
             // 
-            MenuItemSortCheap.BackColor = Color.SaddleBrown;
-            MenuItemSortCheap.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            MenuItemSortCheap.ForeColor = Color.FromArgb(224, 224, 224);
+            MenuItemSortCheap.BackColor = Color.Beige;
+            MenuItemSortCheap.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            MenuItemSortCheap.ForeColor = Color.FromArgb(82, 38, 7);
             MenuItemSortCheap.Name = "MenuItemSortCheap";
-            MenuItemSortCheap.Size = new Size(294, 26);
+            MenuItemSortCheap.Size = new Size(258, 22);
             MenuItemSortCheap.Text = "Від дешевих до дорогих";
             MenuItemSortCheap.Click += MenuItemSortCheap_Click;
             // 
             // MenuItemSortExpensive
             // 
-            MenuItemSortExpensive.BackColor = Color.SaddleBrown;
-            MenuItemSortExpensive.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            MenuItemSortExpensive.ForeColor = Color.FromArgb(224, 224, 224);
+            MenuItemSortExpensive.BackColor = Color.Beige;
+            MenuItemSortExpensive.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            MenuItemSortExpensive.ForeColor = Color.FromArgb(82, 38, 7);
             MenuItemSortExpensive.Name = "MenuItemSortExpensive";
-            MenuItemSortExpensive.Size = new Size(294, 26);
+            MenuItemSortExpensive.Size = new Size(258, 22);
             MenuItemSortExpensive.Text = "Від дорогих до дешевих";
             MenuItemSortExpensive.Click += MenuItemSortExpensive_Click;
             // 
@@ -195,7 +195,7 @@
             // 
             ButtonList.Image = (Image)resources.GetObject("ButtonList.Image");
             ButtonList.Name = "ButtonList";
-            ButtonList.Size = new Size(29, 27);
+            ButtonList.Size = new Size(24, 27);
             ButtonList.Click += ButtonList_Click;
             // 
             // toolStripSeparator7
@@ -207,7 +207,7 @@
             // 
             ButtonDeleted.Image = (Image)resources.GetObject("ButtonDeleted.Image");
             ButtonDeleted.Name = "ButtonDeleted";
-            ButtonDeleted.Size = new Size(29, 27);
+            ButtonDeleted.Size = new Size(24, 27);
             ButtonDeleted.Click += ButtonDeleted_Click;
             // 
             // toolStripSeparator5
@@ -217,13 +217,13 @@
             // 
             // ButtonDropDB
             // 
-            ButtonDropDB.BackColor = Color.SaddleBrown;
+            ButtonDropDB.BackColor = Color.Beige;
             ButtonDropDB.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonDropDB.ForeColor = Color.FromArgb(82, 38, 7);
             ButtonDropDB.Image = (Image)resources.GetObject("ButtonDropDB.Image");
             ButtonDropDB.ImageTransparentColor = Color.Magenta;
             ButtonDropDB.Name = "ButtonDropDB";
-            ButtonDropDB.Size = new Size(29, 27);
+            ButtonDropDB.Size = new Size(24, 27);
             ButtonDropDB.ToolTipText = "Скидання БД";
             ButtonDropDB.Click += ButtonDropDB_Click;
             // 
@@ -234,35 +234,37 @@
             // 
             // ButtonCasa
             // 
-            ButtonCasa.BackColor = Color.SaddleBrown;
-            ButtonCasa.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            ButtonCasa.BackColor = Color.Beige;
+            ButtonCasa.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonCasa.ForeColor = Color.FromArgb(82, 38, 7);
             ButtonCasa.Image = (Image)resources.GetObject("ButtonCasa.Image");
             ButtonCasa.ImageTransparentColor = Color.Magenta;
             ButtonCasa.Name = "ButtonCasa";
             ButtonCasa.RightToLeft = RightToLeft.No;
-            ButtonCasa.Size = new Size(70, 27);
+            ButtonCasa.Size = new Size(65, 27);
             ButtonCasa.Text = "Каса";
             ButtonCasa.Click += ButtonCasa_Click;
             // 
             // panel1
             // 
             panel1.AutoScroll = true;
-            panel1.BackColor = Color.Beige;
+            panel1.BackColor = Color.Tan;
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 30);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(923, 465);
+            panel1.Size = new Size(845, 341);
             panel1.TabIndex = 2;
             // 
             // AdminForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(923, 495);
+            ClientSize = new Size(845, 371);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AdminForm";
             Text = "Адміністратор";
             FormClosed += AdminForm_FormClosed;

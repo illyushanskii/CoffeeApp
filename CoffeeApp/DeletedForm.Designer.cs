@@ -37,17 +37,20 @@
             panel1.AutoScroll = true;
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(800, 408);
+            panel1.Size = new Size(700, 306);
             panel1.TabIndex = 0;
             // 
             // DeletedForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 408);
+            BackColor = Color.Beige;
+            ClientSize = new Size(700, 306);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "DeletedForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Видалені товари";

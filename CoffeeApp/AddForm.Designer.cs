@@ -78,7 +78,7 @@
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             buttonCancel.ForeColor = Color.FromArgb(82, 38, 7);
-            buttonCancel.Location = new Point(0, 315);
+            buttonCancel.Location = new Point(12, 315);
             buttonCancel.Margin = new Padding(3, 2, 3, 2);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(131, 36);
@@ -93,7 +93,7 @@
             buttonAdd.Enabled = false;
             buttonAdd.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             buttonAdd.ForeColor = Color.FromArgb(82, 38, 7);
-            buttonAdd.Location = new Point(140, 315);
+            buttonAdd.Location = new Point(147, 315);
             buttonAdd.Margin = new Padding(3, 2, 3, 2);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(127, 36);
@@ -333,7 +333,7 @@
             // 
             // groupBox1
             // 
-            groupBox1.BackColor = Color.FromArgb(246, 221, 199);
+            groupBox1.BackColor = Color.Beige;
             groupBox1.Controls.Add(textBoxName);
             groupBox1.Controls.Add(textBoxDescription);
             groupBox1.Controls.Add(label11);
@@ -354,11 +354,11 @@
             groupBox1.Controls.Add(textBoxWeight);
             groupBox1.Controls.Add(textBoxPriceSell);
             groupBox1.Controls.Add(textBoxQuantity);
-            groupBox1.Location = new Point(8, 116);
+            groupBox1.Location = new Point(-2, 116);
             groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(277, 358);
+            groupBox1.Size = new Size(287, 358);
             groupBox1.TabIndex = 25;
             groupBox1.TabStop = false;
             // 
@@ -378,7 +378,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(246, 221, 199);
+            BackColor = Color.Beige;
             ClientSize = new Size(284, 474);
             Controls.Add(label_Pop);
             Controls.Add(label_ID);

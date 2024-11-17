@@ -35,19 +35,22 @@
             // panel1
             // 
             panel1.AutoScroll = true;
+            panel1.BackColor = Color.Beige;
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(582, 553);
+            panel1.Size = new Size(509, 415);
             panel1.TabIndex = 0;
             // 
             // ListForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(582, 553);
+            ClientSize = new Size(509, 415);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ListForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Журнал входу в Адмін меню";

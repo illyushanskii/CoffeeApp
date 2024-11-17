@@ -188,7 +188,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.FromArgb(246, 221, 199);
+            panel2.BackColor = Color.Beige;
             panel2.Controls.Add(label13);
             panel2.Controls.Add(label12);
             panel2.Controls.Add(label6);

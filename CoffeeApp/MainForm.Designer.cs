@@ -66,7 +66,7 @@
             // 
             // LabelAdmin
             // 
-            LabelAdmin.BackColor = Color.FromArgb(224, 224, 224);
+            LabelAdmin.BackColor = Color.Beige;
             LabelAdmin.Font = new Font("Jokerman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelAdmin.Image = (Image)resources.GetObject("LabelAdmin.Image");
             LabelAdmin.Name = "LabelAdmin";
@@ -127,7 +127,7 @@
             // ButtonSort
             // 
             ButtonSort.AutoSize = false;
-            ButtonSort.BackColor = Color.Wheat;
+            ButtonSort.BackColor = Color.Beige;
             ButtonSort.DropDownItems.AddRange(new ToolStripItem[] { MenuItemSortName, MenuItemSortPopularity, MenuItemSortCheap, MenuItemSortExpensive });
             ButtonSort.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             ButtonSort.Image = (Image)resources.GetObject("ButtonSort.Image");
@@ -138,7 +138,7 @@
             // 
             // MenuItemSortName
             // 
-            MenuItemSortName.BackColor = Color.PeachPuff;
+            MenuItemSortName.BackColor = Color.Beige;
             MenuItemSortName.Name = "MenuItemSortName";
             MenuItemSortName.Size = new Size(234, 22);
             MenuItemSortName.Text = "За назвою";
@@ -146,15 +146,15 @@
             // 
             // MenuItemSortPopularity
             // 
-            MenuItemSortPopularity.BackColor = Color.PeachPuff;
+            MenuItemSortPopularity.BackColor = Color.Beige;
             MenuItemSortPopularity.Name = "MenuItemSortPopularity";
-            MenuItemSortPopularity.Size = new Size(283, 28);
+            MenuItemSortPopularity.Size = new Size(234, 22);
             MenuItemSortPopularity.Text = "За популярністю";
             MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
             // MenuItemSortCheap
             // 
-            MenuItemSortCheap.BackColor = Color.PeachPuff;
+            MenuItemSortCheap.BackColor = Color.Beige;
             MenuItemSortCheap.Name = "MenuItemSortCheap";
             MenuItemSortCheap.Size = new Size(234, 22);
             MenuItemSortCheap.Text = "Від дешевих до дорогих";
@@ -162,7 +162,7 @@
             // 
             // MenuItemSortExpensive
             // 
-            MenuItemSortExpensive.BackColor = Color.PeachPuff;
+            MenuItemSortExpensive.BackColor = Color.Beige;
             MenuItemSortExpensive.Name = "MenuItemSortExpensive";
             MenuItemSortExpensive.Size = new Size(234, 22);
             MenuItemSortExpensive.Text = "Від дорогих до дешевих";
@@ -175,11 +175,12 @@
             // 
             // ButtonCart
             // 
+            ButtonCart.BackColor = Color.Beige;
             ButtonCart.Image = (Image)resources.GetObject("ButtonCart.Image");
             ButtonCart.ImageTransparentColor = Color.Magenta;
             ButtonCart.Name = "ButtonCart";
             ButtonCart.RightToLeft = RightToLeft.No;
-            ButtonCart.Size = new Size(86, 27);
+            ButtonCart.Size = new Size(75, 27);
             ButtonCart.Text = "Кошик";
             ButtonCart.Click += ButtonCart_Click;
             // 
