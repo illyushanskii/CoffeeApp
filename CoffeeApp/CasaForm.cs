@@ -57,19 +57,28 @@ namespace CoffeeApp
             {
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Image = System.Drawing.Image.FromFile(".\\Icons\\emptyCasa.png");
-                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                pictureBox.Location = new Point(320, y);
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox.Location = new Point(320, 50);
                 pictureBox.Size = new Size(250, 250);
 
                 Label message = new Label();
                 message.Text = "Нажаль каса порожня!";
-                message.Location = new Point(360, 280);
+                message.Location = new Point(320, 310);
                 message.AutoSize = true;
+                message.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+                message.ForeColor = Color.FromArgb(82, 38, 7);
 
                 Button button = new Button();
                 button.Text = "Закрити";
                 button.AutoSize = true;
-                button.Location = new Point(405, 320);
+                button.Location = new Point(405, 350);
+                button.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                button.BackColor = Color.Tan;
+                button.ForeColor = Color.FromArgb(82, 38, 7);
+                button.FlatStyle = FlatStyle.Flat;
+                button.FlatAppearance.BorderSize = 1;
+                button.FlatAppearance.BorderColor = Color.FromArgb(82, 38, 7); 
+                button.Cursor = Cursors.Hand; 
                 button.DialogResult = DialogResult.Cancel;
 
                 panel1.Dock = DockStyle.Fill;

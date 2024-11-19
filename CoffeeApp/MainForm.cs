@@ -123,7 +123,7 @@ namespace CoffeeApp
                 textBoxInfo.Height = 100;
                 textBoxInfo.MouseWheel += TextBoxInfo_MouseWheel;
 
-                Font quantityFont = new Font("Arial", 11, FontStyle.Bold);
+                Font quantityFont = new Font("Arial", 12, FontStyle.Bold);
                 labelQuantity.Font = quantityFont;
                 labelQuantity.Text = $"Ціна {product.PriceSell().ToString("F2")} грн.\nВ наявності";
                 labelQuantity.ForeColor = Color.Green;
@@ -143,7 +143,7 @@ namespace CoffeeApp
                 addCartButton.Image = Image.FromFile(".\\Icons\\addCart.png");   
                 addCartButton.Text = "";
 
-                infoButton.Font = buttonFont;
+                infoButton.Font = new Font("Arial", 12, FontStyle.Bold); // Шрифт Arial, розмір 12, жирний стиль
                 infoButton.Location = new Point(630, y + 55);
                 infoButton.Tag = inx;
                 infoButton.Click += InfoButton_Click;
@@ -151,6 +151,7 @@ namespace CoffeeApp
                 infoButton.BackColor = Color.DeepSkyBlue;
                 infoButton.Height = 45;
                 infoButton.Text = "Характеристики";
+                infoButton.ForeColor = Color.Yellow;
 
                 if (product.Quantity() < 1)
                 {

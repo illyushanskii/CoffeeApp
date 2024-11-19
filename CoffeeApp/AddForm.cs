@@ -252,7 +252,7 @@ namespace CoffeeApp
         {
             pictureBoxImg.BackColor = Color.Transparent;
         }
-        private void buttonCancel_MouseHover(object sender, EventArgs e)
+        private void buttonCancel_MouseEnter(object sender, EventArgs e)
         {
             buttonCancel.BackColor = Color.FromArgb(82, 38, 7);
             buttonCancel.ForeColor = Color.FromArgb(246, 221, 199);
@@ -262,7 +262,7 @@ namespace CoffeeApp
             buttonCancel.BackColor = SystemColors.Control;
             buttonCancel.ForeColor = SystemColors.ControlText;
         }
-        private void buttonAdd_MouseHover(object sender, EventArgs e)
+        private void buttonAdd_MouseEnter(object sender, EventArgs e)
         {
             buttonAdd.BackColor = Color.FromArgb(82, 38, 7);
             buttonAdd.ForeColor = Color.FromArgb(246, 221, 199);
@@ -272,6 +272,5 @@ namespace CoffeeApp
             buttonAdd.BackColor = SystemColors.Control;
             buttonAdd.ForeColor = SystemColors.ControlText;
         }
-
     }
 }

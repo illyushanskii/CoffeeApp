@@ -34,22 +34,31 @@ namespace CoffeeApp
             double allPrice = 0;
             if (carts.Count == 0)
             {
-                mainForm.ButtonCart.Checked = false;
+                // Іконка кошика
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Image = System.Drawing.Image.FromFile(".\\Icons\\EmptyCart.png");
-                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 pictureBox.Location = new Point(274, y);
                 pictureBox.Size = new Size(250, 250);
 
                 Label message = new Label();
-                message.Text = "Нажаль кошик порожній,поповніть його:)";
+                message.Text = "Нажаль кошик порожній, поповніть його :)";
                 message.Location = new Point(260, 280);
                 message.AutoSize = true;
+                message.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+                message.ForeColor = Color.FromArgb(82, 38, 7);
 
                 Button button = new Button();
                 button.Text = "За покупками";
                 button.AutoSize = true;
                 button.Location = new Point(365, 320);
+                button.BackColor = Color.Tan;
+                button.ForeColor = Color.FromArgb(82, 38, 7);
+                button.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                button.FlatStyle = FlatStyle.Flat;
+                button.FlatAppearance.BorderSize = 1;
+                button.FlatAppearance.BorderColor = Color.FromArgb(82, 38, 7);
+                button.Cursor = Cursors.Hand;
                 button.DialogResult = DialogResult.Cancel;
 
                 this.Height -= 60;
@@ -57,7 +66,6 @@ namespace CoffeeApp
                 panel1.Controls.Add(pictureBox);
                 panel1.Controls.Add(message);
                 panel1.Controls.Add(button);
-                return;
             }
             for (int inx = 0; inx < carts.Count; inx++)
             {

@@ -85,8 +85,8 @@
             buttonCancel.TabIndex = 0;
             buttonCancel.Text = "Скасувати";
             buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.MouseEnter += buttonCancel_MouseEnter;
             buttonCancel.MouseLeave += buttonCancel_MouseLeave;
-            buttonCancel.MouseHover += buttonCancel_MouseHover;
             // 
             // buttonAdd
             // 
@@ -101,8 +101,8 @@
             buttonAdd.Text = "Додати";
             buttonAdd.UseVisualStyleBackColor = true;
             buttonAdd.Click += buttonAdd_Click;
+            buttonAdd.MouseEnter += buttonAdd_MouseEnter;
             buttonAdd.MouseLeave += buttonAdd_MouseLeave;
-            buttonAdd.MouseHover += buttonAdd_MouseHover;
             // 
             // label1
             // 
