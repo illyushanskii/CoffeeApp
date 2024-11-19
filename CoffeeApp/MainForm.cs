@@ -143,7 +143,7 @@ namespace CoffeeApp
                 addCartButton.Image = Image.FromFile(".\\Icons\\addCart.png");   
                 addCartButton.Text = "";
 
-                infoButton.Font = new Font("Arial", 12, FontStyle.Bold); // Шрифт Arial, розмір 12, жирний стиль
+                infoButton.Font = new Font("Arial", 11, FontStyle.Bold); // Шрифт Arial, розмір 12, жирний стиль
                 infoButton.Location = new Point(630, y + 55);
                 infoButton.Tag = inx;
                 infoButton.Click += InfoButton_Click;

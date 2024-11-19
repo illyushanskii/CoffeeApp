@@ -34,7 +34,6 @@ namespace CoffeeApp
             double allPrice = 0;
             if (carts.Count == 0)
             {
-                // Іконка кошика
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Image = System.Drawing.Image.FromFile(".\\Icons\\EmptyCart.png");
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
