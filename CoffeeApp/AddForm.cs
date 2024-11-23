@@ -87,9 +87,15 @@ namespace CoffeeApp
             open.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif|All Files|*.*";
             if (open.ShowDialog() == DialogResult.OK)
             {
-                newImgPath = open.FileName;
-                System.Drawing.Image img = System.Drawing.Image.FromFile(newImgPath);
-                pictureBoxImg.Image = img;
+                try
+                {
+                    newImgPath = open.FileName;
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(newImgPath);
+                    pictureBoxImg.Image = img;
+                }
+                catch {
+                    MessageBox.Show("Тип обраного файлу не підходить для зображенння!!!\nОберіть інший файл.");
+                }
             }
         }
         private void timer1_Tick(object sender, EventArgs e)
