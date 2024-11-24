@@ -34,6 +34,7 @@ namespace CoffeeApp
             double allPrice = 0;
             if (carts.Count == 0)
             {
+                mainForm.ButtonCart.Checked = false;
                 this.AutoScroll = false;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Image = System.Drawing.Image.FromFile(".\\Icons\\EmptyCart.png");

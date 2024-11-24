@@ -324,7 +324,6 @@ namespace CoffeeApp
                 }
             }
         }
-        //sdcds
         private void timer2_Tick(object sender, EventArgs e)
         {
             if (entry == 60)

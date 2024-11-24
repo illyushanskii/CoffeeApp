@@ -58,7 +58,7 @@
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(221, 52);
             buttonCancel.TabIndex = 1;
-            buttonCancel.Text = "Продовжити покупки";
+            buttonCancel.Text = "Продовжити";
             buttonCancel.UseVisualStyleBackColor = false;
             // 
             // buttonPay
