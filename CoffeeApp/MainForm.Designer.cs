@@ -60,7 +60,7 @@
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Padding = new Padding(0);
-            toolStrip1.Size = new Size(805, 30);
+            toolStrip1.Size = new Size(920, 32);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -70,7 +70,7 @@
             LabelAdmin.Font = new Font("Jokerman", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             LabelAdmin.Image = (Image)resources.GetObject("LabelAdmin.Image");
             LabelAdmin.Name = "LabelAdmin";
-            LabelAdmin.Size = new Size(135, 27);
+            LabelAdmin.Size = new Size(158, 29);
             LabelAdmin.Text = "Coffee Vibe";
             LabelAdmin.MouseDown += LabelAdmin_MouseDown;
             LabelAdmin.MouseUp += LabelAdmin_MouseUp;
@@ -78,7 +78,7 @@
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
-            toolStripSeparator1.Size = new Size(6, 30);
+            toolStripSeparator1.Size = new Size(6, 32);
             // 
             // ButtonFilter
             // 
@@ -87,14 +87,14 @@
             ButtonFilter.Image = (Image)resources.GetObject("ButtonFilter.Image");
             ButtonFilter.ImageTransparentColor = Color.Magenta;
             ButtonFilter.Name = "ButtonFilter";
-            ButtonFilter.Size = new Size(113, 27);
+            ButtonFilter.Size = new Size(135, 29);
             ButtonFilter.Text = "Фільтрувати";
             ButtonFilter.Click += ButtonFilter_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(6, 30);
+            toolStripSeparator3.Size = new Size(6, 32);
             // 
             // ButtonSearch
             // 
@@ -102,7 +102,7 @@
             ButtonSearch.Image = (Image)resources.GetObject("ButtonSearch.Image");
             ButtonSearch.ImageTransparentColor = Color.Magenta;
             ButtonSearch.Name = "ButtonSearch";
-            ButtonSearch.Size = new Size(24, 27);
+            ButtonSearch.Size = new Size(29, 29);
             ButtonSearch.Text = "toolStripButton2";
             ButtonSearch.ToolTipText = "Пошук";
             ButtonSearch.Click += ButtonSearch_Click;
@@ -112,7 +112,7 @@
             TextBoxSearch.BackColor = SystemColors.Window;
             TextBoxSearch.Font = new Font("Segoe UI", 10F);
             TextBoxSearch.Name = "TextBoxSearch";
-            TextBoxSearch.Size = new Size(237, 30);
+            TextBoxSearch.Size = new Size(270, 32);
             TextBoxSearch.Text = "Пошук...";
             TextBoxSearch.Leave += TextBoxSearch_Leave;
             TextBoxSearch.KeyPress += TextBoxSearch_KeyPress;
@@ -122,7 +122,7 @@
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(6, 30);
+            toolStripSeparator2.Size = new Size(6, 32);
             // 
             // ButtonSort
             // 
@@ -140,7 +140,7 @@
             // 
             MenuItemSortName.BackColor = Color.Beige;
             MenuItemSortName.Name = "MenuItemSortName";
-            MenuItemSortName.Size = new Size(234, 22);
+            MenuItemSortName.Size = new Size(294, 26);
             MenuItemSortName.Text = "За назвою";
             MenuItemSortName.Click += MenuItemSortName_Click;
             // 
@@ -148,7 +148,7 @@
             // 
             MenuItemSortPopularity.BackColor = Color.Beige;
             MenuItemSortPopularity.Name = "MenuItemSortPopularity";
-            MenuItemSortPopularity.Size = new Size(234, 22);
+            MenuItemSortPopularity.Size = new Size(294, 26);
             MenuItemSortPopularity.Text = "За популярністю";
             MenuItemSortPopularity.Click += MenuItemSortPopularity_Click;
             // 
@@ -156,7 +156,7 @@
             // 
             MenuItemSortCheap.BackColor = Color.Beige;
             MenuItemSortCheap.Name = "MenuItemSortCheap";
-            MenuItemSortCheap.Size = new Size(234, 22);
+            MenuItemSortCheap.Size = new Size(294, 26);
             MenuItemSortCheap.Text = "Від дешевих до дорогих";
             MenuItemSortCheap.Click += MenuItemSortCheap_Click;
             // 
@@ -164,14 +164,14 @@
             // 
             MenuItemSortExpensive.BackColor = Color.Beige;
             MenuItemSortExpensive.Name = "MenuItemSortExpensive";
-            MenuItemSortExpensive.Size = new Size(234, 22);
+            MenuItemSortExpensive.Size = new Size(294, 26);
             MenuItemSortExpensive.Text = "Від дорогих до дешевих";
             MenuItemSortExpensive.Click += MenuItemSortExpensive_Click;
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(6, 30);
+            toolStripSeparator4.Size = new Size(6, 32);
             // 
             // ButtonCart
             // 
@@ -180,7 +180,7 @@
             ButtonCart.ImageTransparentColor = Color.Magenta;
             ButtonCart.Name = "ButtonCart";
             ButtonCart.RightToLeft = RightToLeft.No;
-            ButtonCart.Size = new Size(75, 27);
+            ButtonCart.Size = new Size(86, 29);
             ButtonCart.Text = "Кошик";
             ButtonCart.Click += ButtonCart_Click;
             // 
@@ -199,21 +199,20 @@
             panel1.AutoScroll = true;
             panel1.BackColor = Color.Tan;
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 30);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(0, 32);
             panel1.Name = "panel1";
-            panel1.Size = new Size(805, 326);
+            panel1.Size = new Size(920, 443);
             panel1.TabIndex = 1;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(805, 356);
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(920, 475);
             Controls.Add(panel1);
             Controls.Add(toolStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(5, 4, 5, 4);
             Name = "MainForm";
             Text = "Coffee...";
             toolStrip1.ResumeLayout(false);

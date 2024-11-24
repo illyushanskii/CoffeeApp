@@ -43,9 +43,8 @@
             panel1.AutoScroll = true;
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(772, 255);
+            panel1.Size = new Size(882, 340);
             panel1.TabIndex = 7;
             // 
             // labelCosts
@@ -53,9 +52,9 @@
             labelCosts.AutoSize = true;
             labelCosts.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             labelCosts.ForeColor = Color.Red;
-            labelCosts.Location = new Point(3, 33);
+            labelCosts.Location = new Point(3, 44);
             labelCosts.Name = "labelCosts";
-            labelCosts.Size = new Size(299, 19);
+            labelCosts.Size = new Size(365, 24);
             labelCosts.TabIndex = 5;
             labelCosts.Text = "Витрати на  товари: 1000000000 грн.";
             // 
@@ -65,10 +64,9 @@
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             buttonCancel.ForeColor = SystemColors.ButtonFace;
-            buttonCancel.Location = new Point(605, 23);
-            buttonCancel.Margin = new Padding(3, 2, 3, 2);
+            buttonCancel.Location = new Point(691, 31);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(119, 36);
+            buttonCancel.Size = new Size(136, 48);
             buttonCancel.TabIndex = 1;
             buttonCancel.Text = "Закрити";
             buttonCancel.UseVisualStyleBackColor = false;
@@ -78,9 +76,9 @@
             labelCasa.AutoSize = true;
             labelCasa.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             labelCasa.ForeColor = Color.Blue;
-            labelCasa.Location = new Point(3, 7);
+            labelCasa.Location = new Point(3, 9);
             labelCasa.Name = "labelCasa";
-            labelCasa.Size = new Size(249, 19);
+            labelCasa.Size = new Size(308, 24);
             labelCasa.TabIndex = 4;
             labelCasa.Text = "Каса загалом: 1000000000 грн.";
             labelCasa.TextAlign = ContentAlignment.MiddleCenter;
@@ -91,11 +89,11 @@
             groupBox1.Controls.Add(labelCosts);
             groupBox1.Controls.Add(buttonCancel);
             groupBox1.Controls.Add(labelCasa);
-            groupBox1.Location = new Point(1, 257);
+            groupBox1.Location = new Point(1, 343);
             groupBox1.Margin = new Padding(0);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(0);
-            groupBox1.Size = new Size(771, 82);
+            groupBox1.Size = new Size(881, 109);
             groupBox1.TabIndex = 8;
             groupBox1.TabStop = false;
             // 
@@ -104,22 +102,21 @@
             labelIncome.AutoSize = true;
             labelIncome.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             labelIncome.ForeColor = Color.Green;
-            labelIncome.Location = new Point(3, 59);
+            labelIncome.Location = new Point(3, 79);
             labelIncome.Name = "labelIncome";
-            labelIncome.Size = new Size(179, 19);
+            labelIncome.Size = new Size(221, 24);
             labelIncome.TabIndex = 6;
             labelIncome.Text = "Дохід: 100000000 грн.";
             // 
             // CasaForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Beige;
-            ClientSize = new Size(772, 340);
+            ClientSize = new Size(882, 453);
             Controls.Add(panel1);
             Controls.Add(groupBox1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             Name = "CasaForm";
             Text = "Каса";
             groupBox1.ResumeLayout(false);
