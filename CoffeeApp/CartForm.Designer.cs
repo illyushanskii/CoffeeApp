@@ -43,10 +43,9 @@
             // 
             panel1.AutoScroll = true;
             panel1.BackColor = Color.Beige;
-            panel1.Location = new Point(1, -2);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(1, -3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(698, 302);
+            panel1.Size = new Size(798, 403);
             panel1.TabIndex = 0;
             // 
             // buttonCancel
@@ -55,10 +54,9 @@
             buttonCancel.DialogResult = DialogResult.Cancel;
             buttonCancel.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             buttonCancel.ForeColor = Color.FromArgb(82, 38, 7);
-            buttonCancel.Location = new Point(22, 6);
-            buttonCancel.Margin = new Padding(3, 2, 3, 2);
+            buttonCancel.Location = new Point(25, 8);
             buttonCancel.Name = "buttonCancel";
-            buttonCancel.Size = new Size(193, 39);
+            buttonCancel.Size = new Size(221, 52);
             buttonCancel.TabIndex = 1;
             buttonCancel.Text = "Продовжити покупки";
             buttonCancel.UseVisualStyleBackColor = false;
@@ -69,10 +67,9 @@
             buttonPay.DialogResult = DialogResult.OK;
             buttonPay.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
             buttonPay.ForeColor = Color.Brown;
-            buttonPay.Location = new Point(557, 6);
-            buttonPay.Margin = new Padding(3, 2, 3, 2);
+            buttonPay.Location = new Point(637, 8);
             buttonPay.Name = "buttonPay";
-            buttonPay.Size = new Size(113, 39);
+            buttonPay.Size = new Size(129, 52);
             buttonPay.TabIndex = 2;
             buttonPay.Text = "Сплатити";
             buttonPay.UseVisualStyleBackColor = false;
@@ -84,9 +81,9 @@
             label1.BackColor = Color.Beige;
             label1.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label1.ForeColor = Color.FromArgb(82, 38, 7);
-            label1.Location = new Point(318, 18);
+            label1.Location = new Point(363, 24);
             label1.Name = "label1";
-            label1.Size = new Size(86, 18);
+            label1.Size = new Size(114, 22);
             label1.TabIndex = 3;
             label1.Text = "До сплати:";
             // 
@@ -94,9 +91,9 @@
             // 
             labelAllPrice.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             labelAllPrice.ForeColor = Color.Red;
-            labelAllPrice.Location = new Point(410, 18);
+            labelAllPrice.Location = new Point(469, 24);
             labelAllPrice.Name = "labelAllPrice";
-            labelAllPrice.Size = new Size(88, 19);
+            labelAllPrice.Size = new Size(101, 25);
             labelAllPrice.TabIndex = 4;
             labelAllPrice.Text = "1000000000";
             labelAllPrice.TextAlign = ContentAlignment.MiddleCenter;
@@ -106,9 +103,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Arial", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label2.ForeColor = Color.FromArgb(82, 38, 7);
-            label2.Location = new Point(494, 20);
+            label2.Location = new Point(565, 27);
             label2.Name = "label2";
-            label2.Size = new Size(36, 18);
+            label2.Size = new Size(46, 22);
             label2.TabIndex = 5;
             label2.Text = "грн.";
             // 
@@ -120,24 +117,21 @@
             groupBox1.Controls.Add(labelAllPrice);
             groupBox1.Controls.Add(buttonPay);
             groupBox1.Controls.Add(label1);
-            groupBox1.Location = new Point(1, 278);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
+            groupBox1.Location = new Point(1, 371);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(698, 49);
+            groupBox1.Size = new Size(798, 65);
             groupBox1.TabIndex = 6;
             groupBox1.TabStop = false;
             // 
             // CartForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.Beige;
-            ClientSize = new Size(700, 328);
+            ClientSize = new Size(800, 437);
             Controls.Add(groupBox1);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(3, 2, 3, 2);
             Name = "CartForm";
             Text = "Кошик";
             groupBox1.ResumeLayout(false);

@@ -34,6 +34,7 @@ namespace CoffeeApp
             double allPrice = 0;
             if (carts.Count == 0)
             {
+                this.AutoScroll = false;
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Image = System.Drawing.Image.FromFile(".\\Icons\\EmptyCart.png");
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
@@ -42,15 +43,17 @@ namespace CoffeeApp
 
                 Label message = new Label();
                 message.Text = "Нажаль кошик порожній, поповніть його :)";
-                message.Location = new Point(260, 280);
-                message.AutoSize = true;
+                message.Location = new Point(0, 280);
+                message.Width = this.Width - 20;
+                message.Height = 30;
+                message.TextAlign = ContentAlignment.MiddleCenter;
                 message.Font = new Font("Segoe UI", 14, FontStyle.Bold);
                 message.ForeColor = Color.FromArgb(82, 38, 7);
 
                 Button button = new Button();
                 button.Text = "За покупками";
                 button.AutoSize = true;
-                button.Location = new Point(365, 320);
+                button.Location = new Point(345, 330);
                 button.BackColor = Color.Tan;
                 button.ForeColor = Color.FromArgb(82, 38, 7);
                 button.Font = new Font("Segoe UI", 12, FontStyle.Regular);
@@ -60,7 +63,7 @@ namespace CoffeeApp
                 button.Cursor = Cursors.Hand;
                 button.DialogResult = DialogResult.Cancel;
 
-                this.Height -= 60;
+                this.Height -= 40;
                 groupBox1.Visible = false;
                 panel1.Controls.Add(pictureBox);
                 panel1.Controls.Add(message);
@@ -68,6 +71,7 @@ namespace CoffeeApp
             }
             for (int inx = 0; inx < carts.Count; inx++)
             {
+                this.AutoScroll = true;
                 allPrice += (carts[inx].PriceSell() * carts[inx].Quantity());
                 mainForm.ButtonCart.Checked = true;
                 Cart product = carts[inx];

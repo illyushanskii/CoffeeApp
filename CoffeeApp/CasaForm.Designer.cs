@@ -110,8 +110,8 @@
             // 
             // CasaForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
             BackColor = Color.Beige;
             ClientSize = new Size(882, 453);
             Controls.Add(panel1);
