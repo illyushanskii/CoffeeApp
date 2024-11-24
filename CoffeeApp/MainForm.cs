@@ -134,7 +134,7 @@ namespace CoffeeApp
 
                 Font buttonFont = new Font("Arial", 10, FontStyle.Bold);
 
-                addCartButton.Location = new Point(800, y + 10);
+                addCartButton.Location = new Point(815, y + 10);
                 addCartButton.Tag = inx;
                 addCartButton.Click += addCartButton_Click;
                 addCartButton.Width = 80;
@@ -147,7 +147,7 @@ namespace CoffeeApp
                 infoButton.Location = new Point(630, y + 55);
                 infoButton.Tag = inx;
                 infoButton.Click += InfoButton_Click;
-                infoButton.Width = 150;
+                infoButton.Width = 180;
                 infoButton.BackColor = Color.DeepSkyBlue;
                 infoButton.Height = 45;
                 infoButton.Text = "Характеристики";
