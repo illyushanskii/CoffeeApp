@@ -29,93 +29,111 @@ namespace CoffeeApp
 
         private void UpdateForm()
         {
-            // Очищуємо панель перед додаванням нових елементів
             panel1.Controls.Clear();
-            int y = 10; // Початкова позиція для вертикального розташування
+            int y = 10;
             double allPrice = 0;
-
-            // Відображення повідомлення, якщо кошик порожній
             if (carts.Count == 0)
             {
-                ShowEmptyCartMessage();
-                return;
-            }
+                PictureBox pictureBox = new PictureBox();
+                pictureBox.Image = System.Drawing.Image.FromFile(".\\Icons\\EmptyCart.png");
+                pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox.Location = new Point(274, y);
+                pictureBox.Size = new Size(250, 250);
 
-            // Додаємо товари з кошика
-            foreach (var (cart, index) in carts.Select((cart, index) => (cart, index)))
+                Label message = new Label();
+                message.Text = "Нажаль кошик порожній, поповніть його :)";
+                message.Location = new Point(260, 280);
+                message.AutoSize = true;
+                message.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+                message.ForeColor = Color.FromArgb(82, 38, 7);
+
+                Button button = new Button();
+                button.Text = "За покупками";
+                button.AutoSize = true;
+                button.Location = new Point(365, 320);
+                button.BackColor = Color.Tan;
+                button.ForeColor = Color.FromArgb(82, 38, 7);
+                button.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+                button.FlatStyle = FlatStyle.Flat;
+                button.FlatAppearance.BorderSize = 1;
+                button.FlatAppearance.BorderColor = Color.FromArgb(82, 38, 7);
+                button.Cursor = Cursors.Hand;
+                button.DialogResult = DialogResult.Cancel;
+
+                this.Height -= 60;
+                groupBox1.Visible = false;
+                panel1.Controls.Add(pictureBox);
+                panel1.Controls.Add(message);
+                panel1.Controls.Add(button);
+            }
+            for (int inx = 0; inx < carts.Count; inx++)
             {
-                allPrice += cart.PriceSell() * cart.Quantity();
+                allPrice += (carts[inx].PriceSell() * carts[inx].Quantity());
+                mainForm.ButtonCart.Checked = true;
+                Cart product = carts[inx];
+                PictureBox pictureBox = new PictureBox();
+                System.Windows.Forms.TextBox textBoxInfo = new System.Windows.Forms.TextBox();
+                NumericUpDown numericUpDownQuantity = new NumericUpDown();
+                Label labelQuantity = new Label();
+                Label labelPrice = new Label();
+                System.Windows.Forms.Button delButton = new System.Windows.Forms.Button();
 
-                // Додаємо картинку товару
-                PictureBox pictureBox = CreatePictureBox(cart.ImagePath(), new Point(10, y));
+                pictureBox.Image = System.Drawing.Image.FromFile(product.ImagePath());
+                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox.Location = new Point(10, y);
+                pictureBox.Size = new Size(100, 100);
 
-                // Інформація про товар
-                TextBox textBoxInfo = CreateTextBox(cart.Description(), new Point(120, y + 5));
+                Font textFont = new Font("Arial", 15);
+                textBoxInfo.Text = $"{product.Description()}";
+                textBoxInfo.Font = textFont;
+                textBoxInfo.Location = new Point(120, y + 5);
+                textBoxInfo.ReadOnly = true;
+                textBoxInfo.Multiline = true;
+                textBoxInfo.Width = 500;
+                textBoxInfo.Height = 100;
 
-                // Лічильник кількості товару
-                NumericUpDown numericUpDownQuantity = CreateNumericUpDown(cart.Quantity(), cart.ProductQuantity(), index, new Point(630, y + 35));
+                Font quantityFont = new Font("Arial", 12);
+                numericUpDownQuantity.Font = quantityFont;
+                numericUpDownQuantity.Location = new Point(630, y + 35);
+                numericUpDownQuantity.Width = 100;
+                numericUpDownQuantity.Tag = inx;
+                numericUpDownQuantity.Minimum = 1;
+                numericUpDownQuantity.Maximum = product.ProductQuantity();
+                numericUpDownQuantity.Value = product.Quantity();
+                numericUpDownQuantity.ValueChanged += NumericUpDownQuantity_ValueChanged;
 
-                // Лейбли для кількості та ціни
-                Label labelQuantity = CreateLabel("Кількість", new Point(630, y + 5));
-                Label labelPrice = CreateLabel($"Ціна {cart.PriceSell():F2} грн.", new Point(630, y + 75), Color.Red);
 
-                // Кнопка видалення товару
-                Button delButton = CreateDeleteButton(index, new Point(740, y + 30));
+                labelQuantity.Font = quantityFont;
+                labelQuantity.Text = "Кількість";
+                labelQuantity.Location = new Point(630, y + 5);
+                labelQuantity.AutoSize = true;
 
-                // Додаємо всі елементи до панелі
-                panel1.Controls.AddRange(new Control[] { pictureBox, textBoxInfo, numericUpDownQuantity, labelQuantity, labelPrice, delButton });
+                labelPrice.Font = quantityFont;
+                labelPrice.Text = $"Ціна {product.PriceSell().ToString("F2")} грн.";
+                labelPrice.Location = new Point(630, y + 75);
+                labelPrice.AutoSize = true;
+                labelPrice.ForeColor = Color.Red;
 
-                y += 110; // Зсув для наступного товару
+                Font buttonFont = new Font("Arial", 10, FontStyle.Bold);
+                delButton.Font = buttonFont;
+                delButton.Location = new Point(740, y + 30);
+                delButton.Tag = inx;
+                delButton.Click += DelButton_Click;
+                delButton.Size = new Size(50, 50);
+                delButton.BackColor = Color.Red;
+                delButton.Image = new Bitmap(".\\Icons\\trash.png");
+                delButton.Text = "";
+
+                panel1.Controls.Add(pictureBox);
+                panel1.Controls.Add(textBoxInfo);
+                panel1.Controls.Add(delButton);
+                panel1.Controls.Add(numericUpDownQuantity);
+                panel1.Controls.Add(labelQuantity);
+                panel1.Controls.Add(labelPrice);
+                y += 110;
             }
-
-            // Оновлюємо загальну суму
             labelAllPrice.Text = allPrice.ToString("F2");
         }
-
-        private void ShowEmptyCartMessage()
-        {
-            panel1.Controls.Clear();
-
-            // Встановлення зображення
-            PictureBox pictureBox = new PictureBox
-            {
-                Image = Image.FromFile(".\\Icons\\EmptyCart.png"),
-                SizeMode = PictureBoxSizeMode.Zoom,
-                Size = new Size(panel1.Width / 3, panel1.Width / 3), // Розмір залежить від ширини панелі
-                Location = new Point(panel1.Width / 2 - (panel1.Width / 6), 10) // Центр зображення
-            };
-
-            // Повідомлення
-            Label message = new Label
-            {
-                Text = "Нажаль кошик порожній, поповніть його :)",
-                Font = new Font("Segoe UI", 14, FontStyle.Bold),
-                ForeColor = Color.FromArgb(82, 38, 7),
-                AutoSize = true,
-                Location = new Point(panel1.Width / 2 - 200, pictureBox.Bottom + 10)
-            };
-
-            // Кнопка
-            Button button = new Button
-            {
-                Text = "За покупками",
-                AutoSize = true,
-                BackColor = Color.Tan,
-                ForeColor = Color.FromArgb(82, 38, 7),
-                Font = new Font("Segoe UI", 12, FontStyle.Regular),
-                FlatStyle = FlatStyle.Flat,
-                Location = new Point(panel1.Width / 2 - 75, message.Bottom + 20)
-            };
-
-            groupBox1.Visible = false;
-
-            // Додаємо елементи на панель
-            panel1.Controls.AddRange(new Control[] { pictureBox, message, button });
-
-            // Адаптивність при зміні розмірів
-            this.Resize += (s, e) => ShowEmptyCartMessage();
-        }
-
 
         private PictureBox CreatePictureBox(string imagePath, Point location)
         {
